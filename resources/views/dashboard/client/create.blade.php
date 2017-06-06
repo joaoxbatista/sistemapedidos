@@ -1,75 +1,87 @@
-@extends('template.simple')
+@extends('template.dashboard')
 @section('title') Dashboard | Home @endsection
 @section('content')
-	<div class="container">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="row">
-				<h3>Dashboard - Cliente - Create</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				<a href="/dashboard/clients/" class="btn btn-default">Voltar</a>
-			</div>
-
-			<div class="row">
-				{{ Form::open(['method' => 'post', 'route' => 'clients.store'])}}
-					<div class="form-group">
-						{{ Form::label('name', 'Name') }}
-						{{ Form::text('name', '', ['class' => 'form-control', 'required' => true]) }}
-					</div>
-
-					<div class="form-group">
-						{{ Form::label('cpf', 'CPF')}}
-						{{ Form::text('cpf', '', ['class' => 'form-control', 'required' => true]) }}
-						
-					</div>
-
-					<div class="form-group">
-						{{ Form::label('phone', 'Telefone')}}
-						{{ Form::text('phone', '', ['class' => 'form-control', 'required' => true]) }}
-					</div>
-
-					<div class="form-group">
-						{{ Form::label('email', 'E-mail')}}
-						{{ Form::text('email', '', ['class' => 'form-control', 'required' => true]) }}
-						
-					</div>
-
-					<div class="form-group">
-						{{ Form::label('cep', 'CEP')}}
-						{{ Form::text('cep', '', ['class' => 'form-control']) }}
-						
-					</div>
-
-					<div class="form-group">
-						{{ Form::label('street', 'Bairro')}}
-						{{ Form::text('street', '', ['class' => 'form-control']) }}
-						
-					</div>
 
 
-					<div class="form-group">
-						{{ Form::label('district', 'Rua')}}
-						{{ Form::text('district', '', ['class' => 'form-control']) }}
-					</div>
-					
-					<div class="form-group">
-						{{ Form::label('city', 'Cidade')}}
-						{{ Form::text('city', '', ['class' => 'form-control', 'required' => true]) }}
-					</div>
+<h3>Dashboard - Cliente - Create</h3>
 
-					<div class="form-group">
-						{{ Form::label('state', 'Estado')}}
-						{{ Form::text('state', '', ['class' => 'form-control', 'required' => true]) }}
-					</div>
+<a href="/dashboard/clients/" class="btn btn-default">Voltar</a><br><br>
 
-					{{ Form::hidden('user_id', 1)}}
-					{{ Form::submit('Save', ['class' => 'btn btn-success'])}}
-				{{ Form::close()}}
-			</div>
+{{ Form::open(['method' => 'post', 'route' => 'clients.store'])}}
+	
+	<h3>Documentos</h3>
+	<p>Área reservada para documentos e informações importantes.</p>
+	<div class="row">
+		
+		<div class="form-group col-md-4">
+			{{ Form::label('name', 'Name') }}
+			{{ Form::text('name', '', ['class' => 'form-control', 'required' => true]) }}
+		</div>
+
+		<div class="form-group col-md-4">
+			{{ Form::label('cpf', 'CPF')}}
+			{{ Form::text('cpf', '', ['class' => 'form-control', 'required' => true]) }}
+
+		</div>
+
+		
+	</div>
+
+	<h3>Contato</h3>
+	<p>Área reservada para informações relativas a formas de contato.</p>
+	<div class="row">
+		<div class="form-group col-md-4">
+			{{ Form::label('phone', 'Telefone')}}
+			{{ Form::text('phone', '', ['class' => 'form-control', 'required' => true]) }}
+		</div>
+
+		<div class="form-group col-md-4">
+			{{ Form::label('email', 'E-mail')}}
+			{{ Form::text('email', '', ['class' => 'form-control', 'required' => true]) }}
+
 		</div>
 	</div>
+
+	<h3>Endereço</h3>
+	<p>Área reservada para informações relativas ao endereço.</p>
+	<div class="row">
+		<div class="form-group col-md-2">
+			{{ Form::label('cep', 'CEP')}}
+			{{ Form::text('cep', '', ['class' => 'form-control']) }}
+
+		</div>
+
+		<div class="form-group col-md-3">
+			{{ Form::label('street', 'Bairro')}}
+			{{ Form::text('street', '', ['class' => 'form-control']) }}
+
+		</div>
+
+
+		<div class="form-group col-md-3">
+			{{ Form::label('district', 'Rua')}}
+			{{ Form::text('district', '', ['class' => 'form-control']) }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="form-group col-md-4">
+			{{ Form::label('city', 'Cidade')}}
+			{{ Form::text('city', '', ['class' => 'form-control', 'required' => true]) }}
+		</div>
+
+		<div class="form-group col-md-4">
+			{{ Form::label('state', 'Estado')}}
+			{{ Form::text('state', '', ['class' => 'form-control', 'required' => true]) }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="form-group col-md-4">
+			{{ Form::hidden('user_id', 1)}}
+			{{ Form::submit('Salvar', ['class' => 'btn btn-success'])}}
+		</div>
+	</div>
+{{ Form::close()}}
+
 @endsection

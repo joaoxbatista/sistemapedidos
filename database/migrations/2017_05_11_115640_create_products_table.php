@@ -20,10 +20,11 @@ class CreateProductsTable extends Migration
             $table->date('expiration');
             $table->double('weight');
             $table->text('desc');
+            $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->integer('provider_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('provider_id')->references('id')->on('providers');
+            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

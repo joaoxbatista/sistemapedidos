@@ -1,55 +1,46 @@
-@extends('template.simple')
+@extends('template.dashboard')
 @section('title') Dashboard | Home @endsection
 @section('content')
-	<div class="container">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="row">
-				<h3>Dashboard - Cliente - Home</h3>
-				<a href="/dashboard/" class="btn btn-default">Voltar</a>
-			</div>
-			
 
-			<div class="row">
-				<h3>Clientes Cadastrados</h3>
+<h3>Dashboard - Cliente - Home</h3>
+<a href="/dashboard/" class="btn btn-default">Voltar</a>
 
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						
-						<thead>
-							<tr>
-								<th>name</th>
-								<th>cpf</th>
-								<th>phone</th>
-								<th>email</th>
-								<th>cep</th>
-								<th>ações</th>
-							</tr>
-						</thead>
+<a href="/dashboard/clients/create" class="btn btn-success">Novo <i class="fa fa-plus"></i></a><br><br>
 
-						<tbody>
-							@foreach($clients as $client)
-								<tr>
-									<td>{{ $client->name }}</td>
-									<td>{{ $client->cpf }}</td>
-									<td>{{ $client->phone }}</td>
-									<td>{{ $client->email }}</td>
-									<td>{{ $client->cep }}</td>
-									<td>
-										<a href="/dashboard/clients/{{$client->id}}" class="btn btn-info">Show</a>
-										<a href="/dashboard/clients/{{$client->id}}/edit" class="btn btn-warning">Edit</a>
-										<a href="/dashboard/clients/{{$client->id}}/delete" class="btn btn-danger">Delete</a>
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		
+		<thead>
+			<tr>
+				<th>name</th>
+				<th>cpf</th>
+				<th>phone</th>
+				<th>email</th>
+				<th>cep</th>
+				<th width="15%">ações</th>
+			</tr>
+		</thead>
 
-				<a href="/dashboard/clients/create" class="btn btn-success">Create + </a>
-			</div>
-
-		</div>
+		<tbody>
+			@foreach($clients as $client)
+			<tr>
+				<td>{{ $client->name }}</td>
+				<td>{{ $client->cpf }}</td>
+				<td>{{ $client->phone }}</td>
+				<td>{{ $client->email }}</td>
+				<td>{{ $client->cep }}</td>
+				<td>
+					<a href="/dashboard/clients/{{$client->id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+					<a href="/dashboard/clients/{{$client->id}}/edit" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+					<a href="/dashboard/clients/{{$client->id}}/delete" class="btn btn-success"><i class="fa fa-trash"></i></a>
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+</div>
 
 
-	</div>
+
+
 @endsection
