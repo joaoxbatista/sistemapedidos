@@ -1,0 +1,49 @@
+/* Colors */
+/* line 3, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table-content {
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* line 10, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table-content .table-search {
+  display: block;
+  float: right;
+  color: #757575;
+}
+
+/* line 15, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table-content .table-search label {
+  padding-right: 10px;
+}
+
+/* line 18, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table-content .table-search input[type=search] {
+  border: none;
+  border-right: 4px solid #757575;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  min-width: 200px;
+  transition: all .3s;
+}
+
+/* line 29, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table-content .table-search input[type=search]:focus {
+  border-color: #00C853;
+}
+
+/* line 32, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table-content .table thead {
+  background-color: #F5F5F5;
+  color: #4CAF50;
+  font-weight: bold;
+  font-family: Rubik;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=../../../public/css/table.map */

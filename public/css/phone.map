@@ -1,0 +1,14 @@
+{
+	"version": 3,
+	"file": "../../resources/assets/sass/phone.css",
+	"sources": [
+		"../../resources/assets/sass/phone.sass",
+		"../../resources/assets/sass/variable.sass"
+	],
+	"sourcesContent": [
+		"@import \"variable\";\n$size: 360px;\n\n@media (max-width: 360px) {\n    .show {\n        display: none; }\n\n    #app {\n\n        box-sizing: border-box;\n        padding: 0px;\n\n        #button-menu {\n            height: 30px;\n            width: 30px;\n            line-height: 30px;\n            font-size: .8em;\n            background-color: $grey-dark; }\n\n\n        #side-menu {\n            position: relative;\n            width: 100vw;\n            margin-left: 0px; }\n\n\n        #content {\n            position: relative;\n            float: none;\n            width: 100vw;\n            padding: 1em; } } }\n",
+		"/* Colors */\n\n$green: #4CAF50;\n$green-light: #81C784;\n$green-neon: #00C853;\n$white: #F5F5F5;\n$grey: #F5F5F5;\n$black: #757575;\n$grey-dark: #212121;\n$red: #F44336;\n\n$yellow: #FFC107;\n$yellow-dark: #FF9800;\n$blue: #0288D1;\n$blue-light: #03A9F4;\n$blue-neon: #03A9F4;\n"
+	],
+	"mappings": "ACAA,YAAY;ADGZ,MAAM,EAAL,SAAS,EAAE,KAAK;;EACb,AAAA,KAAK,CAAC;IACF,OAAO,EAAE,IAAK;GAAG;;EAErB,AAAA,IAAI,CAAC;IAED,UAAU,EAAE,UAAW;IACvB,OAAO,EAAE,GAAI;GAoBS;;EAvB1B,AAKI,IALA,CAKA,YAAY,CAAC;IACT,MAAM,EAAE,IAAK;IACb,KAAK,EAAE,IAAK;IACZ,WAAW,EAAE,IAAK;IAClB,SAAS,EAAE,IAAK;IAChB,gBAAgB,ECThB,OAAO;GDSwB;;EAVvC,AAaI,IAbA,CAaA,UAAU,CAAC;IACP,QAAQ,EAAE,QAAS;IACnB,KAAK,EAAE,KAAM;IACb,WAAW,EAAE,GAAI;GAAG;;EAhB5B,AAmBI,IAnBA,CAmBA,QAAQ,CAAC;IACL,QAAQ,EAAE,QAAS;IACnB,KAAK,EAAE,IAAK;IACZ,KAAK,EAAE,KAAM;IACb,OAAO,EAAE,GAAI;GAAG",
+	"names": []
+}

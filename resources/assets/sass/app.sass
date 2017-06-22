@@ -1,0 +1,156 @@
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap'
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables'
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins'
+
+@import '../node_modules/font-awesome/scss/font-awesome'
+
+@import 'variable'
+@import 'animation'
+@import 'font'
+@import 'table'
+@import 'images'
+@import 'titles'
+
+*
+    box-sizing: border-box
+    font-family: Quicksand
+a
+    text-decoration: none
+    color: $blue-light
+    font-weight: bold
+    
+    &:hover
+        color: $blue-neon
+
+.content-expand
+    width: 100vw !important
+    transition: all .3s
+.show
+    margin-left: -20vw
+    transition: all .3s
+    
+#app
+    
+    position: relative
+    
+    #button-menu
+        border: none
+        border-radius: 50px
+        width: 50px
+        height: 50px
+        padding: 0px
+        background-color: $yellow-dark
+        color: $white
+        font-weight: bold
+        text-align: center
+        line-height: 50px
+        box-sizing: border-box
+        position: fixed
+        right: 10px
+        margin-top: 15px
+        transition: all .3
+        z-index: 400
+
+    #side-menu
+        background-color: $blue
+        overflow: hidden
+        height: 100vh
+        width: 20vw
+        z-index: 10
+        transition: all .3s
+        
+        position: fixed
+        padding: 10px
+        
+        &::-webkit-scrollbar
+            width: 0px
+        
+        
+            
+            
+        #profile-menu
+            background: linear-gradient(rgba(0,0,0, .6), rgba(0, 0, 0, .7)), url('../imgs/bg-profile.jpg')
+            background-size: cover
+            position: absolute
+            width: 100%
+            left: 0px
+            top: 0px
+            height: 100px
+            z-index: 1
+            padding: 0px 10px
+            color: $grey
+            
+            #content-profile-menu
+                margin-top: 20px
+                float: right
+                display: block
+                width: 200px
+                #profile-username
+                    line-height: 0px
+                #last-visit
+                    line-height: 5px
+                    font-size: .8em
+                    
+            #profile-image
+                margin-top: 20px
+                height: 50px
+                width: 50px
+                border-radius: 50px
+                float: left
+                display: block
+            
+        #content-side-menu
+            margin-top: 100px
+            display: block
+            
+            .group-menu
+                border-bottom: 1px solid rgba(0, 0, 0, .1)
+                padding: 6px 4px 20px 10px
+                margin-bottom: 5px
+                
+                &:last-of-type
+                    border-bottom: none
+                
+                h3
+                    color: $white
+                    font-family: Rubik
+                    background: rgba(0, 0, 0, .09)
+                    padding-left: 10px
+                    padding-top: 5px
+                    padding-bottom: 5px
+                    border-radius: 5px
+                    font-size: 18px
+                nav
+                    list-style: none
+                    
+                    li
+                        a
+                            color: $grey-dark
+                            font-family: Rubik
+                            font-weight: lighter
+                            padding: 6px 6px
+                            display: inline-block
+                            display: block
+                            margin-bottom: 8px
+                            border-radius: 2px
+                            color: $white
+                        i
+                            width: 30px
+           
+    #content
+        background-color: $white
+        overflow: hidden
+        position: relative
+        padding: 4em 4em 4em 6em
+        height: 100vh
+        width: 80vw
+        float: right
+        transition: all .3s
+        margin-top: 0px
+        color: $grey-dark
+        z-index: 4
+        
+       
+@import 'phone'
+
+        

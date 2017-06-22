@@ -17,7 +17,7 @@
 				<th>phone</th>
 				<th>email</th>
 				<th>cep</th>
-				<th width="15%">ações</th>
+				<th width="18%">ações</th>
 			</tr>
 		</thead>
 

@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('unit_price');
-            $table->date('expiration');
             $table->double('weight');
             $table->text('desc');
             $table->timestamps();

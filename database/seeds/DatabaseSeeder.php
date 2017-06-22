@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        
+
         DB::table('users')->insert([
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
@@ -113,6 +115,26 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-      DB::table('clients')->insert($clients);
+
+        DB::table('clients')->insert($clients);
+
+        $faker = Faker\Factory::create();
+        $i = 0;
+        for($i; $i < 9; $i++){
+          $product = [
+            'name' => $faker->word,
+            'unit_price' => $faker->randomFloat,
+            'weight' => $faker->randomFloat,
+            'desc' => $faker->text(300),
+            'provider_id' => 1,
+            'user_id' => 1,
+            'created_at' => $faker->dateTime,
+            'updated_at' => $faker->dateTime
+          ];
+
+          DB::table('products')->insert($product);
+
+          $product = null;
+        }
     }
 }

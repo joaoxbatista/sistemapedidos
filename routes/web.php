@@ -114,6 +114,8 @@ Route::group(['prefix' => 'dashboard'], function(){
 	*/
 		Route::get('cart', 'Dashboard\CartController@index')->name('cart');
 		Route::get('cart/add/{id}', 'Dashboard\CartController@add')->name('cart.add');
+		Route::post('cart/add', 'Dashboard\CartController@addPost')->name('cart.add');
+		Route::get('cart/remove/{id}', 'Dashboard\CartController@remove')->name('cart.remove');
 
 
 });

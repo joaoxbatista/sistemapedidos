@@ -1,0 +1,14 @@
+{
+	"version": 3,
+	"file": "../../resources/assets/sass/table.css",
+	"sources": [
+		"../../resources/assets/sass/table.sass",
+		"../../resources/assets/sass/variable.sass"
+	],
+	"sourcesContent": [
+		"@import \"variable\";\n\n.table-content {\n    background: #fff;\n    padding: 10px;\n    margin-top: 10px;\n    border-radius: 4px;\n    box-shadow: 1px 1px 4px rgba(0, 0, 0, .1);\n\n    .table-search {\n        display: block;\n        float: right;\n        color: $black;\n\n        label {\n            padding-right: 10px; }\n\n        input[type=search] {\n            border: none;\n            border-right: 4px solid $black;\n            height: 30px;\n            padding-left: 10px;\n            padding-right: 10px;\n\n            margin-bottom: 10px;\n            min-width: 200px;\n            transition: all .3s;\n\n            &:focus {\n                border-color: $green-neon; } } }\n    .table {\n        thead {\n            background-color: $grey;\n            color: $green;\n            font-weight: bold;\n            font-family: Rubik;\n            font-size: 16px; } } }\n\n\n",
+		"/* Colors */\n\n$green: #4CAF50;\n$green-light: #81C784;\n$green-neon: #00C853;\n$white: #F5F5F5;\n$grey: #F5F5F5;\n$black: #757575;\n$grey-dark: #212121;\n$red: #F44336;\n\n$yellow: #FFC107;\n$yellow-dark: #FF9800;\n$blue: #0288D1;\n$blue-light: #03A9F4;\n$blue-neon: #03A9F4;\n"
+	],
+	"mappings": "ACAA,YAAY;;ADEZ,AAAA,cAAc,CAAC;EACX,UAAU,EAAE,IAAK;EACjB,OAAO,EAAE,IAAK;EACd,UAAU,EAAE,IAAK;EACjB,aAAa,EAAE,GAAI;EACnB,UAAU,EAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,kBAAI;CA6BG;;;AAlCnC,AAOI,cAPU,CAOV,aAAa,CAAC;EACV,OAAO,EAAE,KAAM;EACf,KAAK,EAAE,KAAM;EACb,KAAK,ECLL,OAAO;CDsBiC;;;AA3BhD,AAYQ,cAZM,CAOV,aAAa,CAKT,KAAK,CAAC;EACF,aAAa,EAAE,IAAK;CAAG;;;AAbnC,AAeyB,cAfX,CAOV,aAAa,CAQT,KAAK,CAAA,AAAA,IAAC,CAAD,MAAC,AAAA,EAAa;EACf,MAAM,EAAE,IAAK;EACb,YAAY,EAAE,GAAG,CAAC,KAAK,CCZ3B,OAAO;EDaH,MAAM,EAAE,IAAK;EACb,YAAY,EAAE,IAAK;EACnB,aAAa,EAAE,IAAK;EAEpB,aAAa,EAAE,IAAK;EACpB,SAAS,EAAE,KAAM;EACjB,UAAU,EAAE,OAAQ;CAGc;;;AA3B9C,AAeyB,cAfX,CAOV,aAAa,CAQT,KAAK,CAAA,AAAA,IAAC,CAAD,MAAC,AAAA,CAWD,MAAM,CAAC;EACJ,YAAY,ECzBf,OAAO;CDyBwB;;;AA3B5C,AA6BQ,cA7BM,CA4BV,MAAM,CACF,KAAK,CAAC;EACF,gBAAgB,EC1BrB,OAAO;ED2BF,KAAK,EC/BT,OAAO;EDgCH,WAAW,EAAE,IAAK;EAClB,WAAW,EAAE,KAAM;EACnB,SAAS,EAAE,IAAK;CAAG",
+	"names": []
+}

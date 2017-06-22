@@ -12,7 +12,7 @@
 		}
 
 		public function order(){
-			return $this->belongsToMany('App\Models\Order');
+			return $this->belongsToMany('App\Models\Product', 'order_product', 'product_id', 'order_id');
 		}
 
 	}
