@@ -123,7 +123,7 @@ class DatabaseSeeder extends Seeder
         for($i; $i < 9; $i++){
           $product = [
             'name' => $faker->word,
-            'unit_price' => $faker->randomFloat,
+            'unit_price' => $faker->randomFloat(4),
             'weight' => $faker->randomFloat,
             'desc' => $faker->text(300),
             'provider_id' => 1,

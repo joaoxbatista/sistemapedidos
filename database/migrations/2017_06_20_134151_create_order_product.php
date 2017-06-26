@@ -15,11 +15,13 @@ class CreateOrderProduct extends Migration
     {
         Schema::create('order_product', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('buy_date');
-            $table->date('pay_date')->nullable();
-            $table->decimal('total');
-            $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->double('total');
+            $table->integer('qtd_itens');
+            $table->integer('order_id')->unsigned();
+            $table->integer('product_id')->unsigned();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

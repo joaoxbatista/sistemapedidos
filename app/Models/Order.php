@@ -13,6 +13,7 @@
 		}
 
 		public function items(){
-			return $this->belongsToMany('App\Models\Product', 'order_product', 'order_id', 'product_id');
+			return $this->belongsToMany('App\Models\Product', 'order_product', 'order_id', 'product_id')
+			->withPivot('total', 'qtd_itens');
 		}
 	}

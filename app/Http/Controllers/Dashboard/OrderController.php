@@ -34,12 +34,34 @@ class OrderController extends Controller{
 	{
 
 		$order = Order::create($request->only('client_id', 'buy_date', 'total'));
+
 		$oldCart = Session::has('cart') ? Session::get('cart') : null;
 		$cart = new Cart($oldCart);
-		$cart->clear();
-		$request->session()->put('cart', $cart);
 
-		return redirect()->back()->with('success-message', 'Pedido finalizado com sucesso!');
+		
+
+		foreach ($cart->items as $item) {
+			$order->total += $item['price'];
+			$order->save();
+			$order->items()->save($item['item'], ['total' => $item['price'],
+				'qtd_itens' => $item['qty']]);
+
+			//var_dump($item);
+			// echo "<br><br><br><br>";
+			// echo "Id do produto: ".$item['item']['id'];
+			// echo "<br>";
+			// echo "Quantidade: ".$item['qty'];
+			// echo "<br>";
+			// echo "Preço do item:".$item['item']['unit_price'];
+			// echo "<br>";
+			// echo "Valor total do item: ".$item['price'];
+		}
+		
+		echo "sucesso!";
+		// $cart->clear();
+		// $request->session()->put('cart', $cart);
+
+		// return redirect()->back()->with('success-message', 'Pedido finalizado com sucesso!');
 	}
 
 	public function show($id)
