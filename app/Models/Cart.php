@@ -1,70 +1,114 @@
 <?php
-	
-	/*
-	|	Classe responsável por gerênciar as compras e armazenar na sessão
-	*/
-	namespace App\Models;
 
-	class Cart{
+/**
+ * Classe para armazernar items no carrinho. A mesma é utilizada na sessão e possui 
+ * uma lista de items, o preço total e sua quantidade total
+ */
 
-	
-		public $items = null;
+namespace App\Models;
 
-		/*Valor total da compras*/
-		public $totalPrice = 0;
+class Cart {
 
-		/*Quantidade de itens*/
-		public $totalQty = 0;
+    private $items;
+    private $totalPrice;
+    private $totalQuantity;
+
+    public function __construct($oldCart = null) {
+        if ($oldCart) {
+            $this->items = $oldCart->items;
+            $this->totalPrice = $oldCart->totalPrice;
+            $this->totalQuantity = $oldCart->totalQuantity;
+        } else {
+            $this->items = null;
+            $this->totalPrice = 0;
+            $this->totalQuantity = 0;
+        }
+    }
+    
+    public function addItem(Item $item) {
+
+        if ($this->items) {
+            if (array_key_exists($item->product->id, $this->items)) {
+
+                $this->totalPrice -= $this->items[$item->product->id]->price;
+                $this->totalQuantity -= $this->items[$item->product->id]->quantity;
+                $item->addQuantity($this->items[$item->product->id]->quantity);
+            }
+        }
+
+        $this->items[$item->product->id] = $item;
+        $this->totalPrice += $item->price;
+        $this->totalQuantity += $item->quantity;
+
+        echo "Item adicionado com sucesso!";
+    }
+
+    public function updateItem(Item $item) {
+        if($item->price > 0 and $item->quantity > 0){
+           if (array_key_exists($item->product->id, $this->items)) {
+            
+                $this->totalPrice -= $this->items[$item->product->id]->price;
+                $this->totalQuantity -= $this->items[$item->product->id]->quantity;
+
+                $this->items[$item->product->id]->quantity = $item->quantity;
+                $this->items[$item->product->id]->price = $item->price;
+
+                $this->totalPrice += $item->price;
+                $this->totalQuantity += $item->quantity;
+                echo "item atualizado com sucesso";
+            
+            
+            
+            } else {
+                echo "item não existe";
+            }
+        } else {
+            echo "quantidade e preços não podem ser negativos";
+        }
+        
+    }
+
+    public function removeItem(int $id) {
+        if (array_key_exists($id, $this->items)) {
+            $item = $this->items[$id];
+            array_pull($this->items, $id);
+            $this->totalPrice -= $item->price;
+            $this->totalQuantity -= $item->quantity;
+            echo "item removido com sucesso";
+        } else {
+            echo "item não existe";
+        }
+    }
+    
+    /**
+     * Getters And Setters 
+     **/
+    
+   function getItems() {
+       return $this->items;
+   }
+
+   function getTotalPrice() {
+       return round($this->totalPrice, 2);
+   }
+
+   function getTotalQuantity() {
+       return $this->totalQuantity;
+   }
+
+   function setItems($items) {
+       $this->items = $items;
+   }
+
+   function setTotalPrice($totalPrice) {
+       $this->totalPrice = $totalPrice;
+   }
+
+   function setTotalQuantity($totalQuantity) {
+       $this->totalQuantity = $totalQuantity;
+   }
 
 
-		public function __construct($oldCart){
+    
 
-			/*Caso já exista algum valor em oldCart, então usar esse valor*/
-			if($oldCart):
-				$this->items = $oldCart->items;
-				$this->totalPrice = $oldCart->totalPrice;
-				$this->totalQty = $oldCart->totalQty;
-			endif;
-		}
-
-
-		public function add($item, $id){
-			$storedItem = ['qty' => 0, 'price' => $item->unit_price, 'item' => $item];
-			
-			/*Caso existam itens e se existir o item com o id igual ao do produto então pegar o que já existe*/
-			if($this->items):
-			
-				if(array_key_exists($id, $this->items)): 
-					$storedItem = $this->items[$id];
-				endif;
-
-			endif;
-
-			/*Adiciona mais 1 a quantidade do produto*/
-			$storedItem['qty']++;
-
-			/*Adiciona o preço do produto baseado na quantidade*/
-			$storedItem['price'] = $item->unit_price * $storedItem['qty'];
-
-			/*Atualiza as informações do carrinho com as alterações do item*/
-			$this->items[$id] = $storedItem;
-			$this->totalPrice += $item->unit_price;
-			$this->totalQty++;
-		}
-
-		public function remove($id){
-			if($this->items[$id]){
-				$this->totalQty -= $this->items[$id]['qty'];
-				unset($this->items[$id]);
-			}
-		}
-
-		public function clear(){
-			$this->items = null;
-			$this->totalQty = 0;
-			$this->totalPrice = 0;
-		}
-
-
-		
-	}
+}

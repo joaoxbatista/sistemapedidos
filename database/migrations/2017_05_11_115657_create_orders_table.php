@@ -15,9 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('buy_date');
-            $table->date('pay_date')->nullable();
-            $table->double('total');
+            $table->dateTime('buy_date');
+            $table->dateTime('pay_date')->nullable();
+            $table->decimal('total', 10, 2);
             $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
         });

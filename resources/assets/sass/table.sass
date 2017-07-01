@@ -28,12 +28,34 @@
             
             &:focus
                 border-color: $green-neon
-    .table
-        thead
-            background-color: $grey
-            color: $green
-            font-weight: bold
-            font-family: Rubik
-            font-size: 16px
-                
-              
+
+
+.table
+   
+    thead
+        background: $grey-dark
+        border-radius: 4px
+        th
+            color: $white 
+    .option-table-header
+        width: 130px
+
+    .option-table
+        list-style: none
+        padding: 0px
+        
+        .opt
+            float: left
+            border-radius: 4px
+            margin: 0px 2px
+            padding: 4px 8px
+            color: $white
+
+
+        .opt-view
+            background-color: $blue
+
+        .opt-edit
+            background-color: $yellow-dark
+        .opt-delete
+            background-color: $red

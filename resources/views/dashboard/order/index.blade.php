@@ -7,38 +7,45 @@
 <a href="/dashboard/orders/create" class="btn btn-success">Novo <i class="fa fa-plus"></i> </a> <br> <br>
 
 <div class="table-responsive">
-	<table class="table table-bordered">
-		
-		<thead>
-			<tr>
-				<th>Data da compra</th>
-				<th>Data de pagamento</th>
-				<th>Cliente</th>
-				<th>Total</th>
-				<th width="18%">ações</th>
-			</tr>
-		</thead>
+    <table id="data-table" class="table table-bordered">
 
-		<tbody>
-			@foreach($orders as $order)
-			<tr>
-				<td>{{ $order->buy_date }}</td>
-				<td>{{ $order->pay_date }}</td>
-				<td>{{ $order->client->name }}</td>
-				<td>R$ {{ $order->total}}</td>
-				<td>
-					<a href="/dashboard/orders/{{$order->id}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
-					<a href="/dashboard/orders/{{$order->id}}/edit" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-					<a href="/dashboard/orders/{{$order->id}}/delete" class="btn btn-success"><i class="fa fa-trash"></i></a>
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
+        <thead>
+            <tr>
+                <th>Data da compra</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th class="option-table-header"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach($orders as $order)
+            <tr>
+                <td>{{ $order->buy_date }}</td>
+                <td>{{ $order->client->name }}</td>
+                <td>R$ {{ $order->total}}</td>
+                <td>
+
+                    <ul class="option-table">
+                        <li><a href="/dashboard/orders/{{$order->id}}" class="opt opt-view"><i class="fa fa-eye"></i></a></li>
+                        <!--<li><a href="/dashboard/orders/{{$order->id}}/edit" class="opt opt-edit"><i class="fa fa-pencil"></i></a></li>-->
+                        <li><a href="/dashboard/orders/{{$order->id}}/delete" class="opt opt-delete"><i class="fa fa-trash"></i></a></li>
+                    </ul>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
 
 
 
 </div>
+@endsection
+
+
+@section('scripts')
+<script src="{{ asset('js/jquery.dataTables.js')}}"></script>
+<script src="{{ asset('js/custom-dataTables.js')}}"></script>
 @endsection

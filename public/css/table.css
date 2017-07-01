@@ -37,13 +37,50 @@
   border-color: #00C853;
 }
 
-/* line 32, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
-.table-content .table thead {
-  background-color: #F5F5F5;
-  color: #4CAF50;
-  font-weight: bold;
-  font-family: Rubik;
-  font-size: 16px;
+/* line 35, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table thead {
+  background: #212121;
+  border-radius: 4px;
+}
+
+/* line 38, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table thead th {
+  color: #F5F5F5;
+}
+
+/* line 40, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table .option-table-header {
+  width: 130px;
+}
+
+/* line 43, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table .option-table {
+  list-style: none;
+  padding: 0px;
+}
+
+/* line 47, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table .option-table .opt {
+  float: left;
+  border-radius: 4px;
+  margin: 0px 2px;
+  padding: 4px 8px;
+  color: #F5F5F5;
+}
+
+/* line 55, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table .option-table .opt-view {
+  background-color: #0288D1;
+}
+
+/* line 58, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table .option-table .opt-edit {
+  background-color: #FF9800;
+}
+
+/* line 60, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+.table .option-table .opt-delete {
+  background-color: #F44336;
 }
 
 /*# sourceMappingURL=../../../public/css/table.map */

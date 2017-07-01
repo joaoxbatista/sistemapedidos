@@ -28,7 +28,7 @@
                         Mr. Administrator
                     </h3>
                     
-                    <i class="fa fa-shopping-cart"></i> {{ Session::has('cart') ? Session::get('cart')->totalQty : 0 }} produtos
+                    <i class="fa fa-shopping-cart"></i> {{ Session::has('cart') ? Session::get('cart')->getTotalQuantity() : 0 }} produtos
                    
                 </div>
                 
