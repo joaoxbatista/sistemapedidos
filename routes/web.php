@@ -1,10 +1,11 @@
 <?php
 
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-/*
-  | Rotas responsáveis por testes
+/**
+ *  Rotas responsáveis por testes
  */
 
 Route::get('test/cart', function(Request $request) {
@@ -47,7 +48,12 @@ Route::get('test/cart/delete/{id}', function(Request $request, int $id){
     
 });
 
-
+Route::get('test/pdf', function(Request $request){
+    $order = Order::all()->first();
+    
+    $pdf = PDF::loadView('dashboard.order.pdf', compact('order'));
+    return $pdf->stream('invoice.pdf');
+});
 /*
   | Rotas responsáveis pelas páginas estáticas
   | Para modificar as informações diriga-se ao controller StaticPAgesController em Http/Controllers
