@@ -12,12 +12,22 @@ use Session;
 
 class OrderController extends Controller {
 
-    public function index() {
+    /**
+     * Método para retornar a view com a lista de pedidos cadastrados no banco
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
         $orders = Order::all();
         return view('dashboard.order.index', compact('orders'));
     }
 
-    public function create() {
+    /**
+     * Método para retornar a view de criação dos pedidos
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
         $products = Product::all();
         $clients = Client::all();
         $clients = array_pluck($clients, 'name', 'id');
@@ -27,7 +37,13 @@ class OrderController extends Controller {
         return view('dashboard.order.create', compact(['products', 'clients', 'cart']));
     }
 
-    public function store(Request $request) {
+    /**
+     * Método para salvar informações do pedido.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
         $client_id = $request->get('client_id') != 0 ?  $request->get('client_id') : 1;
         
@@ -45,22 +61,39 @@ class OrderController extends Controller {
 
         $cart = null;
 
-        /* Adiciona o carrinho na sessão, caso já exista o mesmo é atualizado */
         $request->session()->put('cart', $cart);
         return redirect()->route('orders')->with('success-message', 'Pedido registrado com sucesso!');
     }
 
-    public function show($id) {
+    /**
+     * Método para retornar a view de visualização do pedido passando uma id.
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
         $order = Order::find($id);
         return view('dashboard.order.view', compact('order'));
     }
 
-    public function edit($id) {
+    /**
+     * Método para retornar a view de edição do pedido.
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
         $order = Order::find($id);
         return view('dashboard.order.edit', compact('order'));
     }
 
-    public function update(Request $request) {
+    /**
+     * Método para atualização das informações do pedido.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request)
+    {
         $order = Order::find($request->get('id'));
 
 
@@ -68,10 +101,37 @@ class OrderController extends Controller {
         return redirect()->back()->with('success-message', 'Pedido atualizado com sucesso!');
     }
 
-    public function destroy($id) {
+    /**
+     * Método para remoção do pedido.
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
         $order = Order::find($id);
         $order->delete();
         return redirect()->back()->with('success-message', 'Pedido removido com sucesso!');
     }
 
+    /**
+     * Método para gerar pdf de impressão do pedido.
+     * @param $id
+     * @return mixed
+     */
+    public function print($id){
+        $order = Order::find($id);
+
+        $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'))
+                ->setPaper('a4', 'landscape');
+
+        return $pdf->stream($order->client->name.'_'.$order->id.'.pdf');
+    }
+
+
+    public function download($id){
+        $order  = Order::find($id);
+        $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'));
+        return $pdf->download($order->client->name.'_'.$order->id.'.pdf')
+            ->setPaper('a4', 'landscape');
+    }
 }

@@ -36,7 +36,7 @@
             </tr>
         </tfoot>
     </table>
-    <a href="" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
-    <a href="" class="btn btn-success"><i class="fa fa-file"></i> Salvar</a>
+    <a href="{{ route('orders.print', ['id' => $order->id]) }}" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
+    <a href="{{ route('orders.download', ['id' => $order->id]) }}" class="btn btn-success"><i class="fa fa-file"></i> Salvar</a>
 </div>
 @endsection

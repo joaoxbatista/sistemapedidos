@@ -156,6 +156,13 @@ Route::group(['prefix' => 'dashboard'], function() {
     /* Deletar */
     Route::get('orders/{id}/delete', 'Dashboard\OrderController@destroy')->name('orders.destroy');
 
+    /* Imprimir */
+    Route::get('orders/{id}/print', 'Dashboard\OrderController@print')->name('orders.print');
+
+    /* Download */
+    Route::get('orders/{id}/download', 'Dashboard\OrderController@download')->name('orders.download');
+
+
     /*
       | Área reservada para o Carrinho de Compras
      */
