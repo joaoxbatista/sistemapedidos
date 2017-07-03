@@ -5,7 +5,7 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	class Product extends Model{
-		protected $fillable = ['name', 'unit_price', 'expiration', 'weight', 'desc', 'user_id', 'provider_id'];
+		protected $fillable = ['name', 'unit_price', 'weight', 'desc', 'user_id', 'provider_id', 'image'];
 
 		public function provider(){
 			return $this->belongsTo('App\Models\Provider');

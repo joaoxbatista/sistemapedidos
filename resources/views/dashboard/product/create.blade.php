@@ -5,7 +5,7 @@
 
 <a href="/dashboard/products/" class="btn btn-default">Voltar</a><br><br>
 
-{{ Form::open(['method' => 'post', 'route' => 'products.store'])}}
+{{ Form::open(['method' => 'post', 'route' => 'products.store', 'files' => true])}}
 <div class="row">
 	<div class="form-group col-md-4">
 		{{ Form::label('name', 'Nome') }}
@@ -28,11 +28,19 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="form-group col-md-6">
+		{{ Form::file('file', ['class' => 'form-file']) }}
+	</div>
+</div>
 
 
-<div class="form-group">
-	{{ Form::label('desc', 'Descrição') }}
-	{{ Form::textarea('desc', '', ['class' => 'form-control']) }}
+
+<div class="row">
+	<div class="form-group">
+		{{ Form::label('desc', 'Descrição') }}
+		{{ Form::textarea('desc', '', ['class' => 'form-control']) }}
+	</div>
 </div>
 
 
@@ -42,3 +50,4 @@
 {{ Form::close()}}
 
 @endsection
+

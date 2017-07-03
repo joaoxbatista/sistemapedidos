@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->decimal('unit_price', 10, 2);
             $table->decimal('weight', 10, 2);
+            $table->string('image')->nullable();
             $table->text('desc');
             $table->timestamps();
             $table->integer('user_id')->unsigned();

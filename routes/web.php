@@ -5,80 +5,35 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 
 /**
- *  Rotas responsáveis por testes
- */
+ * Rotas responsáaveis pelos testes
+*/
 
-Route::get('test/cart', function(Request $request) {
-    $cart = $cart = $request->session()->has('cart') ? new App\Models\Cart($request->session()->get('cart')) : new App\Models\Cart();
-    dd($cart);
-    $request->session()->put('cart', null);
-});
-
-Route::get('test/cart/update/{id}/{quantity}', function(Request $request, $id, $quantity){
-    $cart = $cart = $request->session()->has('cart') ? new App\Models\Cart($request->session()->get('cart')) : new App\Models\Cart();
-    $product = Product::find($id);
-    
-    if ($product) {
-        $item = new App\Models\Item($product, $quantity);
-        $cart->updateItem($item);
-        $request->session()->put('cart', $cart);
-    }
-});
-
-Route::get('test/cart/add/{id}/{quantity}', function(Request $request, $id, $quantity) {
-
-    $cart = $cart = $request->session()->has('cart') ? new App\Models\Cart($request->session()->get('cart')) : new App\Models\Cart();
-    $product = Product::find($id);
-    if ($product) {
-        $item = new App\Models\Item($product, $quantity);
-        $cart->addItem($item);
-        $request->session()->put('cart', $cart);
-    }
-});
-
-Route::get('test/cart/delete/{id}', function(Request $request, int $id){
-    $cart = $cart = $request->session()->has('cart') ? new App\Models\Cart($request->session()->get('cart')) : new App\Models\Cart();
-   
-    if (Product::find($id)) {
-       
-        $cart->removeItem($id);
-        $request->session()->put('cart', $cart);
-    }
-    
-    
-});
-
-Route::get('test/pdf', function(Request $request){
-    $order = Order::all()->first();
-    
-    $pdf = PDF::loadView('dashboard.order.pdf', compact('order'));
-    return $pdf->stream('invoice.pdf');
-});
-/*
-  | Rotas responsáveis pelas páginas estáticas
-  | Para modificar as informações diriga-se ao controller StaticPAgesController em Http/Controllers
- */
+/**
+ * Rotas responsáveis pelas páginas estáticas
+ * Para modificar as informações diriga-se ao controller StaticPAgesController em Http/Controllers
+*/
 
 Route::get('', 'Site\StaticController@home')->name('home');
 
 Route::get('about', 'Site\StaticController@about')->name('about');
 
-Route::get('products-datatable', function() {
+Route::get('products-datatable', function () {
     return Datatables::of(Product::all())->make(true);
 });
 
-/*
-  | Rotas responsáveis pelo Painel de Controle (Dashboard)
-  | Todas as rotas a seguir possuiram o prefixo dashboard. Para modificar informações diriga-se ao diretório     | Http/Controllers/Dashboard
+/**
+ * Rotas responsáveis pelo Painel de Controle (Dashboard)
+ * Todas as rotas a seguir possuiram o prefixo dashboard. Para modificar informações diriga-se ao diretório     | Http/Controllers/Dashboard
  */
 
-Route::group(['prefix' => 'dashboard'], function() {
+Route::group(['prefix' => 'dashboard'], function () {
 
     Route::get('', 'Dashboard\StaticController@home')->name('dashboard.home');
 
-    /*
-      | Área reservada para Clientes
+    /**
+     * Área reservada para Clientes
      */
+
     /* Página Inicial */
     Route::get('clients', 'Dashboard\ClientController@index');
 
@@ -96,9 +51,10 @@ Route::group(['prefix' => 'dashboard'], function() {
     /* Deletar */
     Route::get('clients/{id}/delete', 'Dashboard\ClientController@destroy')->name('clients.destroy');
 
-    /*
-      | Área reservada para Fornecedores
+    /**
+     * Área reservada para Fornecedores
      */
+
     /* Página Inicial */
     Route::get('providers', 'Dashboard\ProviderController@index');
 
@@ -116,9 +72,10 @@ Route::group(['prefix' => 'dashboard'], function() {
     /* Deletar */
     Route::get('providers/{id}/delete', 'Dashboard\ProviderController@destroy')->name('providers.destroy');
 
-    /*
-      | Área reservada para Produtos
+    /**
+     * Área reservada para Produtos
      */
+
     /* Página Inicial */
     Route::get('products', 'Dashboard\ProductController@index')->name('products');
 
@@ -136,9 +93,10 @@ Route::group(['prefix' => 'dashboard'], function() {
     /* Deletar */
     Route::get('products/{id}/delete', 'Dashboard\ProductController@destroy')->name('products.destroy');
 
-    /*
-      | Área reservada para Pedidos
+    /**
+     * Área reservada para Pedidos
      */
+
     /* Página Inicial */
     Route::get('orders', 'Dashboard\OrderController@index')->name('orders')->middleware('hasitems');
 
@@ -162,10 +120,10 @@ Route::group(['prefix' => 'dashboard'], function() {
     /* Download */
     Route::get('orders/{id}/download', 'Dashboard\OrderController@download')->name('orders.download');
 
-
-    /*
-      | Área reservada para o Carrinho de Compras
+    /**
+     * Área reservada para o Carrinho de Compras
      */
+
     Route::get('cart', 'Dashboard\CartController@index')->name('cart');
     Route::post('cart/add', 'Dashboard\CartController@add')->name('cart.add');
     Route::get('cart/remove/{id}', 'Dashboard\CartController@remove')->name('cart.remove');
