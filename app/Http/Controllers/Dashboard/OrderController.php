@@ -49,12 +49,13 @@ class OrderController extends Controller {
          */
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
-
+        $client_id = $cart->getClient()->id ? $cart->getClient()->id : null;
+        $client_id = $cart->getSaller()->id ? $cart->getSaller()->id : null;
 
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
-        'client_id' => $cart->getClient()->id,
-        'saller_id' => $cart->getSaller()->id,
+        'client_id' => $client_id,
+        'saller_id' => $client_id,
         'total' => $cart->getTotalPrice()
         ]);
 
