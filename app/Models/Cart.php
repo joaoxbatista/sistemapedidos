@@ -12,19 +12,25 @@ class Cart {
     private $items;
     private $totalPrice;
     private $totalQuantity;
+    private $saller;
+    private $client;
 
     public function __construct($oldCart = null) {
         if ($oldCart) {
             $this->items = $oldCart->items;
             $this->totalPrice = $oldCart->totalPrice;
             $this->totalQuantity = $oldCart->totalQuantity;
+            $this->saller = $oldCart->saller;
+            $this->client = $oldCart->client;
         } else {
             $this->items = null;
             $this->totalPrice = 0;
             $this->totalQuantity = 0;
+            $this->saller = null;
+            $this->client = null;
         }
     }
-    
+
     public function addItem(Item $item) {
 
         if ($this->items) {
@@ -107,6 +113,38 @@ class Cart {
    function setTotalQuantity($totalQuantity) {
        $this->totalQuantity = $totalQuantity;
    }
+
+    /**
+     * @return null
+     */
+    public function getSaller()
+    {
+        return $this->saller;
+    }
+
+    /**
+     * @param Saller $saler
+     */
+    public function setSaller(Saller $saller)
+    {
+        $this->saller = $saller;
+    }
+
+    /**
+     * @return null
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param null $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
 
 
     

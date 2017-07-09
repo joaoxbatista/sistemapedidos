@@ -3,8 +3,11 @@
 @section('content')
 <a href="{{ route('orders') }}" class="btn btn-default">Voltar</a><br><br>
 <div class="well">
-    <h3>Informações do cliente</h3>
-    <p><strong>Nome: </strong>{{ $order->client->name }}</p>
+
+    @if($order->cliente)
+        <h3>Informações do cliente</h3>
+        <p><strong>Nome: </strong>{{ $order->client->name }}</p>
+    @endif
 
     <h3>Informações dos itens da compra</h3>
     <table class="table table-bordered"> 

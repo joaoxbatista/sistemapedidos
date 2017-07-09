@@ -85,6 +85,7 @@ class ProductController extends Controller
             'file' => 'image'
         ]);
 
+
         /*Verifica se existe alguma com a url da imagem*/
         if($request->file('file')) {
 
@@ -92,6 +93,7 @@ class ProductController extends Controller
             $filename =  'uploads' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR
                 . 'products' . DIRECTORY_SEPARATOR . str_replace(' ', '', $request->get('name')) .$request->get('provider_id').'.'.$extension;
 
+            File::delete($filename);
             File::move($request->file('file'), $filename);
 
             $request['image'] = $filename;

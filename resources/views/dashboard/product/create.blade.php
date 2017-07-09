@@ -37,7 +37,7 @@
 
 
 <div class="row">
-	<div class="form-group">
+	<div class="form-group col-md-12">
 		{{ Form::label('desc', 'Descrição') }}
 		{{ Form::textarea('desc', '', ['class' => 'form-control']) }}
 	</div>
@@ -45,7 +45,7 @@
 
 
 
-{{ Form::hidden('user_id', 1)}}
+{{ Form::hidden('user_id', Auth::user()->id )}}
 {{ Form::submit('Save', ['class' => 'btn btn-success'])}}
 {{ Form::close()}}
 

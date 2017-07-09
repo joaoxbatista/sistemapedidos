@@ -16,10 +16,12 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('buy_date');
-            $table->dateTime('pay_date')->nullable();
             $table->decimal('total', 10, 2);
-            $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('saller_id')->nullable()->unsigned();
+            $table->integer('client_id')->nullable()->unsigned();
+
+            $table->foreign('saller_id')->references('id')->on('sallers')->onDelete('set null')->onUpdate('set null');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('set null');
         });
     }
 

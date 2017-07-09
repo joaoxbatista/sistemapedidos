@@ -78,7 +78,7 @@
 
 	<div class="row">
 		<div class="form-group col-md-4">
-			{{ Form::hidden('user_id', 1)}}
+			{{ Form::hidden('user_id', Auth::user()->id )}}
 			{{ Form::submit('Salvar', ['class' => 'btn btn-success'])}}
 		</div>
 	</div>

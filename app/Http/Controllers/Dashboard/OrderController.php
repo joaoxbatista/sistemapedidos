@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Client;
+use App\Models\Saller;
 use App\Models\Cart;
 use Session;
+
 
 class OrderController extends Controller {
 
@@ -29,8 +31,6 @@ class OrderController extends Controller {
     public function create()
     {
         $products = Product::all();
-        $clients = Client::all();
-        $clients = array_pluck($clients, 'name', 'id');
 
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
@@ -44,12 +44,17 @@ class OrderController extends Controller {
      */
     public function store(Request $request)
     {
+        /**
+         * Obtem o carrinho antigo
+         */
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
-        $client_id = $request->get('client_id') != 0 ?  $request->get('client_id') : 1;
-        
+
+
+
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
-        'client_id' => $client_id,
+        'client_id' => $cart->getClient()->id,
+        'saller_id' => $cart->getSaller()->id,
         'total' => $cart->getTotalPrice()
         ]);
 
@@ -62,7 +67,7 @@ class OrderController extends Controller {
         $cart = null;
 
         $request->session()->put('cart', $cart);
-        return redirect()->route('orders')->with('success-message', 'Pedido registrado com sucesso!');
+        return redirect()->back()->with('success-message', 'Pedido registrado com sucesso!');
     }
 
     /**

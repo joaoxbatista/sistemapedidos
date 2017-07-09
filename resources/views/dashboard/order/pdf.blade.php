@@ -25,29 +25,31 @@
         </table>
     </section>
 
-    <section>
-        <h3>Informações do Cliente</h3>
-        <table>
-            <tbody>
+    @if($order->cliente)
+        <section>
+            <h3>Informações do Cliente</h3>
+            <table>
+                <tbody>
 
-            <tr>
-                <td width="10%"><strong>CPF</strong></td>
-                <td>{{ $order->client->cpf }}</td>
-            </tr>
+                <tr>
+                    <td width="10%"><strong>CPF</strong></td>
+                    <td>{{ $order->client->cpf }}</td>
+                </tr>
 
-            <tr>
-                <td width="10%"><strong>Nome</strong></td>
-                <td>{{ $order->client->name }}</td>
-            </tr>
+                <tr>
+                    <td width="10%"><strong>Nome</strong></td>
+                    <td>{{ $order->client->name }}</td>
+                </tr>
 
-            <tr>
-                <td width="10%"><strong>Endereço</strong></td>
-                <td>CEP: {{ $order->client->cep }}; Rua: {{ $order->client->street }}; Bairro: {{ $order->client->district }}; Cidade: {{ $order->client->city }}; Estado: {{ $order->client->state }}. </td>
-            </tr>
+                <tr>
+                    <td width="10%"><strong>Endereço</strong></td>
+                    <td>CEP: {{ $order->client->cep }}; Rua: {{ $order->client->street }}; Bairro: {{ $order->client->district }}; Cidade: {{ $order->client->city }}; Estado: {{ $order->client->state }}. </td>
+                </tr>
 
-            </tbody>
-        </table>
-    </section>
+                </tbody>
+            </table>
+        </section>
+    @endif
 
     <section>
         <h3>Informações dos Items</h3>

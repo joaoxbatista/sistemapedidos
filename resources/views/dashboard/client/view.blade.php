@@ -18,12 +18,5 @@
 
 </div>
 
-<div class="well">
-	<h4>Informações Bancárias</h4>
-</div>
-
-<div class="well">
-	<h4>Pedidos</h4>
-</div>
 
 @endsection

@@ -3,8 +3,8 @@
 @section('content')
 
 <h3>Dashboard - Pedidos - Home</h3>
-<a href="/dashboard/" class="btn btn-default">Voltar</a>
-<a href="/dashboard/orders/create" class="btn btn-success">Novo <i class="fa fa-plus"></i> </a> <br> <br>
+<a href="{{ route('dashboard.home') }}" class="btn btn-default">Voltar</a>
+<a href="{{ route('orders.create') }}" class="btn btn-success">Novo <i class="fa fa-plus"></i> </a> <br> <br>
 
 <div class="table-responsive">
     <table id="data-table" class="table table-bordered">
@@ -22,7 +22,13 @@
             @foreach($orders as $order)
             <tr>
                 <td>{{ $order->buy_date }}</td>
-                <td>{{ $order->client->name }}</td>
+                <td>
+                    @if($order->client)
+                        {{ $order->client->name }}
+                    @else
+                        Sem cliente
+                    @endif
+                </td>
                 <td>R$ {{ $order->total}}</td>
                 <td>
 

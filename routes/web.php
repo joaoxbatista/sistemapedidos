@@ -5,9 +5,10 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 
 /**
- * Rotas responsáaveis pelos testes
+ * Rotas responsáaveis pela autenticação
 */
-
+Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 /**
  * Rotas responsáveis pelas páginas estáticas
  * Para modificar as informações diriga-se ao controller StaticPAgesController em Http/Controllers
@@ -26,7 +27,7 @@ Route::get('products-datatable', function () {
  * Todas as rotas a seguir possuiram o prefixo dashboard. Para modificar informações diriga-se ao diretório     | Http/Controllers/Dashboard
  */
 
-Route::group(['prefix' => 'dashboard'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
     Route::get('', 'Dashboard\StaticController@home')->name('dashboard.home');
 
@@ -35,7 +36,7 @@ Route::group(['prefix' => 'dashboard'], function () {
      */
 
     /* Página Inicial */
-    Route::get('clients', 'Dashboard\ClientController@index');
+    Route::get('clients', 'Dashboard\ClientController@index')->name('clients');
 
     /* Criar */
     Route::get('clients/create', 'Dashboard\ClientController@create')->name('clients.create');
@@ -56,7 +57,7 @@ Route::group(['prefix' => 'dashboard'], function () {
      */
 
     /* Página Inicial */
-    Route::get('providers', 'Dashboard\ProviderController@index');
+    Route::get('providers', 'Dashboard\ProviderController@index')->name('providers');
 
     /* Criar */
     Route::get('providers/create', 'Dashboard\ProviderController@create')->name('providers.create');
@@ -121,10 +122,54 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('orders/{id}/download', 'Dashboard\OrderController@download')->name('orders.download');
 
     /**
-     * Área reservada para o Carrinho de Compras
+     * Área reservada para Vendedores
+     */
+    Route::get('saller', 'Dashboard\SallerController@index')->name('sallers');
+
+    /* Criar */
+    Route::get('saller/create', 'Dashboard\SallerController@create')->name('sallers.create');
+    Route::post('saller', 'Dashboard\SallerController@store')->name('sallers.store');
+
+    /* Editar */
+    Route::get('saller/{id}/edit', 'Dashboard\SallerController@edit')->name('sallers.edit');
+    Route::post('saller/edit', 'Dashboard\SallerController@update')->name('sallers.update');
+
+    /* Exibir */
+    Route::get('saller/{id}', 'Dashboard\SallerController@show')->name('sallers.show');
+
+    /* Deletar */
+    Route::get('saller/{id}/delete', 'Dashboard\SallerController@destroy')->name('sallers.destroy');
+
+
+
+    /**
+     * Área reservada para o Perfil do ususário
      */
 
-    Route::get('cart', 'Dashboard\CartController@index')->name('cart');
-    Route::post('cart/add', 'Dashboard\CartController@add')->name('cart.add');
-    Route::get('cart/remove/{id}', 'Dashboard\CartController@remove')->name('cart.remove');
+    Route::get('profile', 'Dashboard\ProfileController@index')->name('profile');
+
+});
+
+
+/**
+ * Área reservada para o Carrinho de Compras
+ */
+
+Route::get('cart', 'Dashboard\CartController@index')->name('cart');
+Route::post('cart/add', 'Dashboard\CartController@add')->name('cart.add');
+Route::get('cart/remove/{id}', 'Dashboard\CartController@remove')->name('cart.remove');
+Route::get('cart/clear', 'Dashboard\CartController@clear')->name('cart.clear');
+Route::get('cart/print', 'Dashboard\CartCOntroller@print')->name('cart.print');
+
+
+/**
+ * Área reservada para o Painel de vendas
+ */
+Route::group(['prefix' => 'sales'], function(){
+    Route::get('', 'Sale\SaleController@index')->name('sales');
+    Route::get('login', 'Sale\SaleController@getLogin')->name('sales.login');
+    Route::post('add/product', 'Dashboard\CartController@add')->name('sales.add.product');
+    Route::post('order', 'Dashboard\OrderController@store')->name('sales.order.store');
+    Route::post('add/saller', 'Dashboard\CartController@addSaller')->name('sales.add.saller');
+    Route::post('add/client', 'Dashboard\CartController@addClient')->name('sales.add.client');
 });

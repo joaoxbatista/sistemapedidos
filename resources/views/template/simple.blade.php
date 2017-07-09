@@ -10,38 +10,27 @@
         @yield('styles')
     </head>
     <body>
-        <div id="alert-area">
-            @if(session()->has('success-message'))
-                <div class="alert alert-success">
-                    {{ session()->get('success-message') }}
-                </div>
-            @endif
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+        <div class="content">
+            <div id="alert-area">
+                @if(session()->has('success-message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success-message') }}
+                    </div>
+                @endif
 
-            <div class="content">
-                @yield('content')
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
+
+            @yield('content')
         </div>
 
         @yield('scripts')

@@ -1,5 +1,5 @@
 /* Colors */
-/* line 3, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 3, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table-content {
   background: #fff;
   padding: 10px;
@@ -8,19 +8,19 @@
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* line 10, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 10, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table-content .table-search {
   display: block;
   float: right;
   color: #757575;
 }
 
-/* line 15, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 15, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table-content .table-search label {
   padding-right: 10px;
 }
 
-/* line 18, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 18, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table-content .table-search input[type=search] {
   border: none;
   border-right: 4px solid #757575;
@@ -32,34 +32,34 @@
   transition: all .3s;
 }
 
-/* line 29, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 29, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table-content .table-search input[type=search]:focus {
   border-color: #00C853;
 }
 
-/* line 35, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 35, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table thead {
   background: #212121;
   border-radius: 4px;
 }
 
-/* line 38, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 38, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table thead th {
   color: #F5F5F5;
 }
 
-/* line 40, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 40, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table .option-table-header {
   width: 130px;
 }
 
-/* line 43, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 43, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table .option-table {
   list-style: none;
   padding: 0px;
 }
 
-/* line 47, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 47, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table .option-table .opt {
   float: left;
   border-radius: 4px;
@@ -68,17 +68,17 @@
   color: #F5F5F5;
 }
 
-/* line 55, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 55, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table .option-table .opt-view {
   background-color: #0288D1;
 }
 
-/* line 58, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 58, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table .option-table .opt-edit {
   background-color: #FF9800;
 }
 
-/* line 60, C:/xampp/htdocs/sistemapedidos.hbioss/resources/assets/sass/table.sass */
+/* line 60, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table .option-table .opt-delete {
   background-color: #F44336;
 }
