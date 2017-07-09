@@ -51,12 +51,12 @@ class OrderController extends Controller {
 
 
         $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
-        $client_id = $cart->getSaller() != null ? $cart->getSaller()->id : null;
+        $saller_id = $cart->getSaller() != null ? $cart->getSaller()->id : null;
 
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
         'client_id' => $client_id,
-        'saller_id' => $client_id,
+        'saller_id' => $saller_id ,
         'total' => $cart->getTotalPrice()
         ]);
 
