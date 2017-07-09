@@ -130,15 +130,17 @@ class OrderController extends Controller {
 
         $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'))
                 ->setPaper('a4', 'landscape');
+        $client_name = $order->client != null ? $order->client->name : "sem-cliente";
 
-        return $pdf->stream($order->client->name.'_'.$order->id.'.pdf');
+        return $pdf->stream($client_name.'_'.$order->id.'.pdf');
     }
 
 
     public function download($id){
         $order  = Order::find($id);
         $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'));
-        return $pdf->download($order->client->name.'_'.$order->id.'.pdf')
+        $client_name = $order->client != null ? $order->client->name : "sem-cliente";
+        return $pdf->download($client_name.'_'.$order->id.'.pdf')
             ->setPaper('a4', 'landscape');
     }
 }
