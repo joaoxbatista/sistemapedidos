@@ -49,8 +49,9 @@ class OrderController extends Controller {
          */
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
-        $client_id = $cart->getClient()->id ? $cart->getClient()->id : null;
-        $client_id = $cart->getSaller()->id ? $cart->getSaller()->id : null;
+
+        $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
+        $client_id = $cart->getSaller() != null ? $cart->getSaller()->id : null;
 
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
