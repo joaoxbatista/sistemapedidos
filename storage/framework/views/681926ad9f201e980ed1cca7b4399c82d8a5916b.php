@@ -45,8 +45,8 @@
                     <li><a href="<?php echo e(route('saller.dashboard')); ?>"><i class="fa fa-dashboard"></i> Painel</a></li>
 
                     <li><a href="<?php echo e(route('saller.product')); ?>"><i class="fa fa-archive"></i> Produtos</a></li>
-                    <li><a href="#"><i class="fa fa-group"></i> Clientes</a></li>
-                    <li><a href="#"><i class="fa fa-shopping-cart"></i> Pedidos</a></li>
+                    <li><a href="<?php echo e(route('saller.clients')); ?>"><i class="fa fa-group"></i> Clientes</a></li>
+                    <li><a href="<?php echo e(route('saller.orders')); ?>"><i class="fa fa-shopping-cart"></i> Pedidos</a></li>
 
                 </nav>
             </div>
