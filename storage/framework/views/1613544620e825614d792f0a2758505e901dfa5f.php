@@ -38,7 +38,7 @@
 
 <div class="row">
 	<div class="form-group col-md-6">
-		<?php echo e(Form::file('file', ['class' => 'form-file'])); ?>
+			<?php echo e(Form::file('file', ['class' => 'form-file'])); ?>
 
 	</div>
 </div>

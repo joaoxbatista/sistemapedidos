@@ -5,7 +5,7 @@
 
 	<a href="<?php echo e(route('sallers')); ?>" class="btn btn-default">Voltar</a><br><br>
 
-	<?php echo e(Form::open(['method' => 'post', 'route' => 'sallers.store'])); ?>
+	<?php echo e(Form::open(['method' => 'post', 'route' => 'sallers.store', 'files' => true])); ?>
 
 
 	<h4>Informações do vendedor</h4>
@@ -30,6 +30,14 @@
 			<?php echo e(Form::text('payment', '', ['class' => 'form-control'])); ?>
 
 		</div>
+
+		<div class="form-group col-md-4">
+			<?php echo e(Form::label('file', 'Fotografia')); ?>
+
+			<?php echo e(Form::file('file', ['class' => 'form-file'])); ?>
+
+		</div>
+
 	</div>
 
 	<h4>Informações de acesso</h4>

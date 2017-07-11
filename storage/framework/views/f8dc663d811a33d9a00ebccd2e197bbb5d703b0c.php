@@ -23,7 +23,7 @@
             <tr>
                 <td><?php echo e($product->id); ?></td>
                 <td><a href="<?php echo e(route('saller.product.view', ['id' => $product->id ])); ?>"><?php echo e($product->name); ?></a></td>
-                <td><img height="100px" src="<?php echo e(asset($product->image)); ?>" alt="<?php echo e($product->name); ?>"></td>
+                <td><img height="100px" src="<?php echo e(asset('uploads/images/products/'.$product->image)); ?>" alt="<?php echo e($product->name); ?>"></td>
                 <td>R$ <?php echo e($product->unit_price); ?></td>
             </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

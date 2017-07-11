@@ -30,7 +30,7 @@
 
 <div class="row">
 	<div class="form-group col-md-6">
-		{{ Form::file('file', ['class' => 'form-file']) }}
+			{{ Form::file('file', ['class' => 'form-file']) }}
 	</div>
 </div>
 

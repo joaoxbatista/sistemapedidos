@@ -4,11 +4,13 @@
 <h3>Dashboard - Fornecedores - View</h3>
 <a href="<?php echo e(route('sallers')); ?>" class="btn btn-default">Voltar</a><br><br>
 <div class="well">
+	<img src="<?php echo e(asset('uploads/images/sellers/'.$saller->image)); ?>" alt="">
 	<p><strong>Nome: </strong><?php echo e($saller->name); ?></p>
 	<p><strong>CPF: </strong><?php echo e($saller->cpf); ?></p>
 	<p><strong>Salário: </strong><?php echo e($saller->payment); ?></p>
 	<p><strong>Vendas: </strong><?php echo e($saller->sales); ?></p>
 	<p><strong>E-mail: </strong><?php echo e($saller->email); ?></p>
+	
 </div>
 
 <?php $__env->stopSection(); ?>

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Saller;
-
+use App\Helpers\Upload;
+use Image;
 class SallerController extends Controller
 {
 
@@ -39,11 +40,22 @@ class SallerController extends Controller
             'name' => 'max:100|required',
             'email' => 'max:100|email|required|unique:sallers',
             'password' => 'max:255|min:6|required',
-            'cpf' => 'min:12|numeric|required'
+            'cpf' => 'min:12|numeric|required',
+            'file' => 'image'
         ]);
 
-        $password = bcrypt($request->get('password'));
+        if($request->file('file') != null)
+        {
+            $dir = DIRECTORY_SEPARATOR;
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $name = time().$request->get('name').'.'.$extension;
+            $file = $request->file('file');
 
+            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'sellers'.$dir.$name));
+            $request['image'] = $name;
+        }
+
+        $password = bcrypt($request->get('password'));
         $request->merge(['password' => $password]);
 
         Saller::create($request->except('_token'));
@@ -86,9 +98,22 @@ class SallerController extends Controller
             'cpf' => 'min:12|numeric|required'
         ]);
 
-        $saller = Saller::find($request->get('id'));
 
+
+        if($request->file('file') != null)
+        {
+
+            $dir = DIRECTORY_SEPARATOR;
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $name = time().'.'.$extension;
+            $file = $request->file('file');
+
+            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'sellers'.$dir.$name));
+            $request['image'] = $name;
+        }
+        $saller = Saller::find($request->get('id'));
         $saller->update($request->except('_token'));
+
         return redirect()->back()->with('success-message', 'Vendedor atualizado com sucesso!');
     }
 

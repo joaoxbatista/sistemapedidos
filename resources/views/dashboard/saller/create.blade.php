@@ -6,7 +6,7 @@
 
 	<a href="{{ route('sallers') }}" class="btn btn-default">Voltar</a><br><br>
 
-	{{ Form::open(['method' => 'post', 'route' => 'sallers.store'])}}
+	{{ Form::open(['method' => 'post', 'route' => 'sallers.store', 'files' => true])}}
 
 	<h4>Informações do vendedor</h4>
 	<div class="row">
@@ -24,6 +24,12 @@
 			{{Form::label('payment', 'Salário')}}
 			{{Form::text('payment', '', ['class' => 'form-control'])}}
 		</div>
+
+		<div class="form-group col-md-4">
+			{{ Form::label('file', 'Fotografia') }}
+			{{ Form::file('file', ['class' => 'form-file']) }}
+		</div>
+
 	</div>
 
 	<h4>Informações de acesso</h4>

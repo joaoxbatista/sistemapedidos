@@ -25,7 +25,7 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td><a href="{{ route('saller.product.view', ['id' => $product->id ]) }}">{{ $product->name }}</a></td>
-                <td><img height="100px" src="{{ asset($product->image) }}" alt="{{ $product->name }}"></td>
+                <td><img height="100px" src="{{ asset('uploads/images/products/'$product->image) }}" alt="{{ $product->name }}"></td>
                 <td>R$ {{ $product->unit_price }}</td>
             </tr>
         @endforeach

@@ -22,7 +22,7 @@
         <div id="profile-menu">
 
             @if(Auth::user()->image != null)
-                <img src="{{ asset(Auth::user()->image)}}" alt="" id="profile-image">
+                <img src="{{ asset('uploads/images/sellers/'.Auth::user()->image)}}" alt="" id="profile-image">
             @else
                 <img src="{{ asset('imgs/img-profile.png')}}" alt="" id="profile-image">
             @endif

@@ -22,7 +22,7 @@
         <div id="profile-menu">
 
             <?php if(Auth::user()->image != null): ?>
-                <img src="<?php echo e(asset(Auth::user()->image)); ?>" alt="" id="profile-image">
+                <img src="<?php echo e(asset('uploads/images/sellers/'.Auth::user()->image)); ?>" alt="" id="profile-image">
             <?php else: ?>
                 <img src="<?php echo e(asset('imgs/img-profile.png')); ?>" alt="" id="profile-image">
             <?php endif; ?>

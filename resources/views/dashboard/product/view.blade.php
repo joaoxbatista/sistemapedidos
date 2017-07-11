@@ -2,9 +2,10 @@
 @section('title') Dashboard | Home @endsection
 @section('content')
 <a href="/dashboard/products/" class="btn btn-default">Voltar</a><br><br>
+
 <div class="well">
 	<p><strong>Nome: </strong>{{ $product->name }}</p>
-	<img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+	<img src="{{ asset('uploads/images/products/'.$product->image) }}" alt="{{ $product->name }}">
 	<p><strong>Preço unitário: </strong>{{ $product->unit_price }}</p>
 	<p><strong>Validade: </strong>{{ $product->expiration }}</p>
 	<p><strong>Peso: </strong>{{ $product->weight }}Kg</p>

@@ -4,9 +4,7 @@
     <h3>Dashboard/Perfil</h3>
     <a href="<?php echo e(route('saller.dashboard')); ?>" class="btn btn-default">Voltar</a><br><br>
 
-    <?php if($saller->image != null): ?>
-        <img src="<?php echo e($saller->image); ?>" alt="<?php echo e($saller->name); ?>">
-    <?php endif; ?>
+
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -58,9 +56,8 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-4">
-                    <?php echo e(Form::label('image', 'Imagem de perfil')); ?>
-
+                <div class="form-group col-md-6">
+                    <img width="100px" src="<?php echo e(asset('uploads/images/sellers/'.$saller->image)); ?>" alt=""><br><br>
                     <?php echo e(Form::file('file', ['class' => 'form-file'])); ?>
 
                 </div>

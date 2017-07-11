@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Provider;
-use File;
-
+use Image;
 class ProductController extends Controller
 {
     public function index()
@@ -40,16 +39,15 @@ class ProductController extends Controller
             'file' => 'image'
         ]);
 
-        /*Verifica se existe alguma com a url da imagem*/
-        if($request->file('file')) {
-
+        if($request->file('file') != null)
+        {
+            $dir = DIRECTORY_SEPARATOR;
             $extension = $request->file('file')->getClientOriginalExtension();
-            $filename =  'uploads' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR
-                . 'products' . DIRECTORY_SEPARATOR . str_replace(' ', '', $request->get('name')) .$request->get('provider_id').'.'.$extension;
+            $name = time().$request->get('name').'.'.$extension;
+            $file = $request->file('file');
 
-            File::move($request->file('file'), $filename);
-
-            $request['image'] = $filename;
+            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'products'.$dir.$name));
+            $request['image'] = $name;
         }
 
         Product::create($request->except('_token'));
@@ -86,17 +84,15 @@ class ProductController extends Controller
         ]);
 
 
-        /*Verifica se existe alguma com a url da imagem*/
-        if($request->file('file')) {
-
+        if($request->file('file') != null)
+        {
+            $dir = DIRECTORY_SEPARATOR;
             $extension = $request->file('file')->getClientOriginalExtension();
-            $filename =  'uploads' . DIRECTORY_SEPARATOR . 'imgs' . DIRECTORY_SEPARATOR
-                . 'products' . DIRECTORY_SEPARATOR . str_replace(' ', '', $request->get('name')) .$request->get('provider_id').'.'.$extension;
+            $name = time().$request->get('name').'.'.$extension;
+            $file = $request->file('file');
 
-            File::delete($filename);
-            File::move($request->file('file'), $filename);
-
-            $request['image'] = $filename;
+            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'products'.$dir.$name));
+            $request['image'] = $name;
         }
 
         $product->update($request->except('_token'));

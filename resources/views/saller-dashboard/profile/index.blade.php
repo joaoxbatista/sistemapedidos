@@ -5,9 +5,7 @@
     <h3>Dashboard/Perfil</h3>
     <a href="{{ route('saller.dashboard') }}" class="btn btn-default">Voltar</a><br><br>
 
-    @if($saller->image != null)
-        <img src="{{$saller->image}}" alt="{{$saller->name}}">
-    @endif
+
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -54,8 +52,8 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-4">
-                    {{ Form::label('image', 'Imagem de perfil') }}
+                <div class="form-group col-md-6">
+                    <img width="100px" src="{{ asset('uploads/images/sellers/'.$saller->image) }}" alt=""><br><br>
                     {{ Form::file('file', ['class' => 'form-file']) }}
                 </div>
             </div>
