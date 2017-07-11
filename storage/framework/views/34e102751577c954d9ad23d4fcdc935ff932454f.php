@@ -11,11 +11,12 @@
 		
 		<thead>
 			<tr>
-				<th>name</th>
-				<th>cpf</th>
-				<th>phone</th>
-				<th>email</th>
-				<th>cep</th>
+				<th>Código</th>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Telefone</th>
+				<th>E-mail</th>
+				<th>CEP</th>
 				<th class="option-table-header"></th>
 			</tr>
 		</thead>
@@ -23,6 +24,7 @@
 		<tbody>
 			<?php $__currentLoopData = $clients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $client): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<tr>
+				<td><?php echo e($client->id); ?></td>
 				<td><?php echo e($client->name); ?></td>
 				<td><?php echo e($client->cpf); ?></td>
 				<td><?php echo e($client->phone); ?></td>

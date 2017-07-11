@@ -11,20 +11,34 @@ class SallerSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-        for($i = 0; $i < 30; $i++)
-        {
-            $saller = [
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'cpf' => $faker->creditCardNumber,
-                'password' => bcrypt('saller'),
-                'payment' => $faker->numberBetween(700, 1200),
-                'sales' => $faker->numberBetween(0, 100),
-                'user_id' => 1,
-            ];
 
-            DB::table('sallers')->insert($saller);
-        }
+        $faker = Faker\Factory::create();
+
+        $saller1 = [
+            'name' => $faker->name,
+            'email' => 'admin@admin.com',
+            'cpf' => $faker->creditCardNumber,
+            'password' => bcrypt('admin'),
+            'payment' => $faker->numberBetween(700, 1200),
+            'sales' => $faker->numberBetween(0, 100),
+            'user_id' => 1,
+        ];
+
+        DB::table('sallers')->insert($saller1);
+
+//        for($i = 0; $i < 2; $i++)
+//        {
+//            $saller = [
+//                'name' => $faker->name,
+//                'email' => $faker->email,
+//                'cpf' => $faker->creditCardNumber,
+//                'password' => bcrypt('saller'),
+//                'payment' => $faker->numberBetween(700, 1200),
+//                'sales' => $faker->numberBetween(0, 100),
+//                'user_id' => 1,
+//            ];
+//
+//            DB::table('sallers')->insert($saller);
+//        }
     }
 }

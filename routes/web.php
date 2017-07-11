@@ -4,6 +4,13 @@ use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
+
+
+/**
+ * Área reservada para os vendedores
+ */
+
+include_once('saller.php');
 /**
  * Rotas responsáaveis pela autenticação
 */
@@ -173,3 +180,4 @@ Route::group(['prefix' => 'sales'], function(){
     Route::post('add/saller', 'Dashboard\CartController@addSaller')->name('sales.add.saller');
     Route::post('add/client', 'Dashboard\CartController@addClient')->name('sales.add.client');
 });
+

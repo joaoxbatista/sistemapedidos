@@ -14,7 +14,8 @@
         	<nav>
 	        	<li><a href="">Documentação</a></li>
 	        	<li><a href="">Contato</a></li>
-	        	<li><a href="<?php echo e(route('dashboard.home')); ?>">Entrar</a></li>	
+	        	<li><a href="<?php echo e(route('dashboard.home')); ?>">Administrador</a></li>
+	        	<li><a href="<?php echo e(route('saller.login')); ?>">Vendedor</a></li>
 	        </nav>
         </div>
         

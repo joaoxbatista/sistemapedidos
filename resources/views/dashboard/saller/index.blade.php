@@ -11,6 +11,7 @@
 	<table id="data-table" class="table table-bordered">
 		<thead>
 			<tr>
+				<th>Código</th>
 				<th>Nome</th>
 				<th>CPF</th>
 				<th>E-mail</th>
@@ -23,6 +24,7 @@
 		<tbody>
 			@foreach($sallers as $saller)
 				<tr>
+					<td>{{$saller->id}}</td>
 					<td>{{$saller->name}}</td>
 					<td>{{$saller->cpf}}</td>
 					<td>{{$saller->email}}</td>

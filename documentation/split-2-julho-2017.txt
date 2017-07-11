@@ -1,0 +1,18 @@
+1 - Modificação da opção do menu do dashboard. O menu deve ser modificado para
+que o usuário possa criar um novo e acessar a gerência(editar, deletar) os clientes,
+produtos, pedidos, e vendedores.
+
+2 - Gerador de códigos para cadastro de fornecedor. Os fornecedores já possuim um
+identificador (id), que é gerado ao cadastrar, vou apenas acrescentar essa informação
+na visualização dos mesmos e acrescentar também aos produtos e clientes.
+
+3 - No cadastro os clientes podem possuir cpnj ou cpf. O mesmo deve possuir um limite
+de crédito.
+
+4 - Os pedidos devem exibir as informações dos vendedores.
+
+5 - Os pedido pode possuir um prazo de pagamento.
+
+6 - Funcionarios podem possuir salário ou comissão.
+    * Caso seja por comissão definir a porcentagem de ganho em cada venda;
+    * Caso seja salário deifinir o valor do salário.

@@ -12,11 +12,12 @@
 		
 		<thead>
 			<tr>
-				<th>name</th>
-				<th>cpf</th>
-				<th>phone</th>
-				<th>email</th>
-				<th>cep</th>
+				<th>Código</th>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Telefone</th>
+				<th>E-mail</th>
+				<th>CEP</th>
 				<th class="option-table-header"></th>
 			</tr>
 		</thead>
@@ -24,6 +25,7 @@
 		<tbody>
 			@foreach($clients as $client)
 			<tr>
+				<td>{{ $client->id }}</td>
 				<td>{{ $client->name }}</td>
 				<td>{{ $client->cpf }}</td>
 				<td>{{ $client->phone }}</td>

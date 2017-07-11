@@ -42,6 +42,10 @@ class SallerController extends Controller
             'cpf' => 'min:12|numeric|required'
         ]);
 
+        $password = bcrypt($request->get('password'));
+
+        $request->merge(['password' => $password]);
+
         Saller::create($request->except('_token'));
 
         return redirect()->back()->with('success-message', 'Vendedor cadastrado com sucesso!');

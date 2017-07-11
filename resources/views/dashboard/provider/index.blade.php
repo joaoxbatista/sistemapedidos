@@ -12,11 +12,11 @@
 
 		<thead>
 			<tr>
-				<th>name</th>
-				<th>cnpj</th>
-				<th>phone</th>
-				<th>email</th>
-				<th>cep</th>
+				<th>Nome</th>
+				<th>CNPJ</th>
+				<th>Telefone</th>
+				<th>E-mail</th>
+				<th>CEP</th>
 				<th class="option-table-header"></th>
 			</tr>
 		</thead>

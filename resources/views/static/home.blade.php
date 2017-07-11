@@ -16,7 +16,8 @@
         	<nav>
 	        	<li><a href="">Documentação</a></li>
 	        	<li><a href="">Contato</a></li>
-	        	<li><a href="{{ route('dashboard.home')}}">Entrar</a></li>	
+	        	<li><a href="{{ route('dashboard.home')}}">Administrador</a></li>
+	        	<li><a href="{{ route('saller.login')}}">Vendedor</a></li>
 	        </nav>
         </div>
         

@@ -6,16 +6,16 @@
 <?php $__env->startSection('content'); ?>
 
 <h3>Dashboard - Produtos - Home</h3>
-<a href="/dashboard/" class="btn btn-default">Voltar</a>
-<a href="/dashboard/products/create" class="btn btn-success">Novo <i class="fa fa-plus"></i></a> <br><br>
+<a href="<?php echo e(route('dashboard.home')); ?>" class="btn btn-default">Voltar</a>
+<a href="<?php echo e(route('products.create')); ?>" class="btn btn-success">Novo <i class="fa fa-plus"></i></a> <br><br>
 
 <table id="data-table" class="table table-bordered">
 	<thead>
 		<tr>
-			<th width="8%">#</th>
+			<th width="8%">Código</th>
 			<th>Nome</th>
-			<th width="15%">Preço</th>
-			<th width="15%">Fornecedor</th>
+			<th>Preço</th>
+			<th>Fornecedor</th>
 			<th class="option-table-header"></th>
 		</tr>
 	</thead>

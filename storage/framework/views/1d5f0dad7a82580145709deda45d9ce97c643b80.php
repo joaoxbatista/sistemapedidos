@@ -10,6 +10,7 @@
 	<table id="data-table" class="table table-bordered">
 		<thead>
 			<tr>
+				<th>Código</th>
 				<th>Nome</th>
 				<th>CPF</th>
 				<th>E-mail</th>
@@ -22,6 +23,7 @@
 		<tbody>
 			<?php $__currentLoopData = $sallers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $saller): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<tr>
+					<td><?php echo e($saller->id); ?></td>
 					<td><?php echo e($saller->name); ?></td>
 					<td><?php echo e($saller->cpf); ?></td>
 					<td><?php echo e($saller->email); ?></td>
