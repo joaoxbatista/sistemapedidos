@@ -20,7 +20,7 @@ class CreateSallersTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->decimal('payment');
-            $table->string('phone')->nullabel();
+            $table->string('phone')->nullable();
             $table->integer('sales')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();
