@@ -7,6 +7,7 @@
 	<h4>Contato</h4>
 	<p><strong>Nome: </strong><?php echo e($client->name); ?></p>
 	<p><strong>CPF: </strong><?php echo e($client->cpf); ?></p>
+	<p><strong>CNPJ: </strong><?php echo e($client->cnpj); ?></p>
 	<p><strong>Telefone: </strong><?php echo e($client->phone); ?></p>
 	<p><strong>E-mail: </strong><?php echo e($client->email); ?></p>
 	<p><strong>CEP:</strong><?php echo e($client->cep); ?></p>

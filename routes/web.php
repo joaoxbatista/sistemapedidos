@@ -5,6 +5,10 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 
 
+/**
+ * Área reservada para os testes
+ */
+include_once('tests.php');
 
 /**
  * Área reservada para os vendedores

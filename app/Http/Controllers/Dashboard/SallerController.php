@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Saller;
-use App\Helpers\Upload;
 use Image;
 class SallerController extends Controller
 {

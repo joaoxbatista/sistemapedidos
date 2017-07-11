@@ -24,7 +24,15 @@
 
 		</div>
 
-		
+		<div class="form-group col-md-4">
+			{{Form::label('cnpj', 'CNPJ')}}
+			{{Form::text('cnpj', '', ['class' => 'form-control'])}}
+		</div>
+
+		<div class="form-group col-md-4">
+			{{Form::label('limit', 'Limite de crédito')}}
+			{{Form::text('limit', '', ['class' => 'form-control'])}}
+		</div>
 	</div>
 
 	<h3>Contato</h3>
