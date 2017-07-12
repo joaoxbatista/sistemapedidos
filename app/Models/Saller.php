@@ -14,5 +14,9 @@ class Saller extends Authenticatable
     public $fillable = ['cpf', 'name', 'payment', 'email', 'image', 'password', 'user_id'];
     protected $hidden = ['password', 'remember_token'];
 
+    public function orders(){
+        return $this->hasMany('App\Models\Order');
+    }
+
 }
 

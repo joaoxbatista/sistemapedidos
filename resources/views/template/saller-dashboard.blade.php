@@ -28,9 +28,9 @@
             @endif
 
             <div id="content-profile-menu">
-                <p id="profile-username">
-                    {{ Auth::user()->name }}
-                </p>
+                <h3 id="profile-username">
+                    {{ Str::words(Auth::user()->name, 2, '') }}
+                </h3>
 
             </div>
 

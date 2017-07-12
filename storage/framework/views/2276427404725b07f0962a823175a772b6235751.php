@@ -3,7 +3,7 @@
 
 <h3>Dashboard - Pedidos - Novo</h3>
 
-<a href="/dashboard/orders/" class="btn btn-default">Voltar</a><br><br>
+<a href="<?php echo e(route('saller.orders')); ?>" class="btn btn-default">Voltar</a><br><br>
 
 
 <div class="table-responsive">

@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\Saller;
 use App\Models\Cart;
 use Session;
+use Auth;
 
 
 class OrderController extends Controller {
@@ -31,6 +32,7 @@ class OrderController extends Controller {
     public function create()
     {
         $products = Product::all();
+        $clients = Client::pluck('name', 'id');
 
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
@@ -51,7 +53,7 @@ class OrderController extends Controller {
 
 
         $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
-        $saller_id = $cart->getSaller() != null ? $cart->getSaller()->id : null;
+        $saller_id = Auth::guard('saller') != null ? Auth::guard('saller')->user()->id : null;
 
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),

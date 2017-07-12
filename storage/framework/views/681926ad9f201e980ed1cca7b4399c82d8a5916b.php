@@ -28,10 +28,10 @@
             <?php endif; ?>
 
             <div id="content-profile-menu">
-                <p id="profile-username">
-                    <?php echo e(Auth::user()->name); ?>
+                <h3 id="profile-username">
+                    <?php echo e(Str::words(Auth::user()->name, 2, '')); ?>
 
-                </p>
+                </h3>
 
             </div>
 

@@ -94,7 +94,6 @@
 <script>
     $(document).ready(function(){
         $('#content').perfectScrollbar({
-            wheelSpeed: 6
         });
         $('#side-menu').perfectScrollbar();
 

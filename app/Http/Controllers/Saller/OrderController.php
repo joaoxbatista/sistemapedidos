@@ -20,8 +20,8 @@ class OrderController extends Controller {
      */
     public function index()
     {
-        $saller_id = Auth::user()->id;
-        $orders = Order::where('saller_id', $saller_id);
+        $saller = Saller::find(Auth::guard('saller')->user()->id);
+        $orders = $saller->orders;
 
         return view('saller-dashboard.order.index', compact('orders'));
     }
@@ -34,6 +34,7 @@ class OrderController extends Controller {
     {
         $products = Product::all();
 
+        $clients = Client::pluck('name', 'id');
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
         return view('saller-dashboard.order.create', compact(['products', 'clients', 'cart']));
@@ -50,10 +51,8 @@ class OrderController extends Controller {
          * Obtem o carrinho antigo
          */
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
-
-
+        $saller_id = Auth::user()->id;
         $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
-        $saller_id = $cart->getSaller() != null ? $cart->getSaller()->id : null;
 
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
@@ -82,7 +81,7 @@ class OrderController extends Controller {
     public function show($id)
     {
         $order = Order::find($id);
-        return view('dashboard.order.view', compact('order'));
+        return view('saller-dashboard.order.view', compact('order'));
     }
 
     /**
@@ -93,7 +92,7 @@ class OrderController extends Controller {
     public function edit($id)
     {
         $order = Order::find($id);
-        return view('dashboard.order.edit', compact('order'));
+        return view('saller-dashboard.order.edit', compact('order'));
     }
 
     /**

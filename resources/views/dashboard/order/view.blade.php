@@ -5,9 +5,29 @@
 <div class="well">
 
     @if($order->cliente)
-        <h3>Informações do cliente</h3>
-        <p><strong>Nome: </strong>{{ $order->client->name }}</p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Informações do cliente</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <p><strong>Nome: </strong>{{ $order->client->name }}</p>
+            </div>
+        </div>
     @endif
+
+        @if($order->cliente)
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Informações do vendedor</h3>
+                </div>
+
+                <div class="panel-body">
+                    <p><strong>Nome: </strong>{{ $order->saller->name }}</p>
+                </div>
+            </div>
+        @endif
 
     <h3>Informações dos itens da compra</h3>
     <table class="table table-bordered"> 

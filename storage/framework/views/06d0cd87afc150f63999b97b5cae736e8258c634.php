@@ -4,9 +4,29 @@
 <div class="well">
 
     <?php if($order->cliente): ?>
-        <h3>Informações do cliente</h3>
-        <p><strong>Nome: </strong><?php echo e($order->client->name); ?></p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Informações do cliente</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <p><strong>Nome: </strong><?php echo e($order->client->name); ?></p>
+            </div>
+        </div>
     <?php endif; ?>
+
+        <?php if($order->cliente): ?>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Informações do vendedor</h3>
+                </div>
+
+                <div class="panel-body">
+                    <p><strong>Nome: </strong><?php echo e($order->saller->name); ?></p>
+                </div>
+            </div>
+        <?php endif; ?>
 
     <h3>Informações dos itens da compra</h3>
     <table class="table table-bordered"> 
