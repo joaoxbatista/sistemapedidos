@@ -2,12 +2,11 @@
 @section('title') Dashboard | Home @endsection
 @section('content')
 
-<h3>Dashboard - Cliente</h3>
-<a href="/dashboard/clients/" class="btn btn-default">Voltar</a><br><br>
+<a href="{{ route('clients') }}" class="btn btn-default">Voltar</a><br><br>
 <div class="well">
-	<h4>Contato</h4>
 	<p><strong>Nome: </strong>{{ $client->name }}</p>
 	<p><strong>CPF: </strong>{{ $client->cpf }}</p>
+	<p><strong>Limite de Crédito: </strong>R${{ $client->limit_credit }}</p>
 	<p><strong>CNPJ: </strong>{{ $client->cnpj }}</p>
 	<p><strong>Telefone: </strong>{{ $client->phone }}</p>
 	<p><strong>E-mail: </strong>{{ $client->email }}</p>
@@ -16,7 +15,6 @@
 	<p><strong>Rua: </strong>{{ $client->district }}</p>
 	<p><strong>Cidade: </strong>{{ $client->city }}</p>
 	<p><strong>Estado: </strong>{{ $client->state }}</p>
-
 </div>
 
 

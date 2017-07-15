@@ -25,9 +25,9 @@ class ClientController extends Controller
     {
         $this->validate($request, [
         	'name' => 'required|max:255',
-        	'cpf' => 'required|max:12',
-        	'phone' => 'required|max:12',
-        	'email' => 'required|max:255'
+        	'phone' => 'required|max:16',
+        	'email' => 'required|email|max:255|unique:clients',
+            'cep' => 'max:9'
         ]);
 
         Client::create($request->except('_token'));

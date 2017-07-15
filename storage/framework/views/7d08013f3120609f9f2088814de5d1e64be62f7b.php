@@ -55,7 +55,7 @@
 					<div class="form-group col-md-4">
 						<?php echo e(Form::label('cpf', 'CPF *', ['class' => 'text-danger'])); ?>
 
-						<?php echo e(Form::text('cpf', '', ['class' => 'form-control', 'required'])); ?>
+						<?php echo e(Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required'])); ?>
 
 						<p class="help-block">Insira 12 números sem traços e pontos.</p>
 					</div>
@@ -101,5 +101,17 @@
 	<?php echo e(Form::close()); ?>
 
 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<script src="<?php echo e(asset('js/jquery.mask.min.js')); ?>"></script>
+	<script>
+        $(document).ready(function(){
+            $('#cpf').mask('999.999.999-99');
+            $('#cnpj').mask('99.999.999/9999-99');
+            $('#phone').mask('(999)99999-9999');
+            $('#cep').mask('99999-999');
+        });
+	</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('template.dashboard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

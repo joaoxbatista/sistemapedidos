@@ -46,11 +46,19 @@ class OrderController extends Controller {
      */
     public function store(Request $request)
     {
+
+
         //Obtem o carrinho antigo
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
+        //Verifica se o limite de crédito é menor que o valor da compra, caso verdade, apresenta um erro.
+        if($cart->getClient()->limit_credit < $cart->getTotalPrice() and !is_null($request->get('due_date'))){
+            return redirect()->back()->withErrors('O limite do cliente é insuficiente.');
+        }
+
         //Obtem o cliente
         $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
+
 
         //Obtem o vendedor
         $saller_id = Auth::guard('saller')->user() != null ? Auth::guard('saller')->user()->id : null;

@@ -23,7 +23,7 @@
 			<div class="form-group col-md-3">
 				<?php echo e(Form::label('cpf', 'CPF')); ?>
 
-				<?php echo e(Form::text('cpf', '', ['class' => 'form-control', 'required' => true])); ?>
+				<?php echo e(Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required' => true])); ?>
 
 
 			</div>
@@ -31,7 +31,7 @@
 			<div class="form-group col-md-3">
 				<?php echo e(Form::label('cnpj', 'CNPJ')); ?>
 
-				<?php echo e(Form::text('cnpj', '', ['class' => 'form-control'])); ?>
+				<?php echo e(Form::text('cnpj', '', ['id' => 'cnpj','class' => 'form-control'])); ?>
 
 			</div>
 
@@ -54,14 +54,14 @@
 			<div class="form-group col-md-4">
 				<?php echo e(Form::label('phone', 'Telefone')); ?>
 
-				<?php echo e(Form::text('phone', '', ['class' => 'form-control', 'required' => true])); ?>
+				<?php echo e(Form::text('phone', '', ['id' => 'phone', 'class' => 'form-control', 'required' => true])); ?>
 
 			</div>
 
 			<div class="form-group col-md-4">
 				<?php echo e(Form::label('email', 'E-mail')); ?>
 
-				<?php echo e(Form::text('email', '', ['class' => 'form-control', 'required' => true])); ?>
+				<?php echo e(Form::text('email', '', ['id' => 'email', 'class' => 'form-control', 'required' => true])); ?>
 
 
 			</div>
@@ -106,7 +106,7 @@
 			<div class="form-group col-md-2">
 				<?php echo e(Form::label('cep', 'CEP')); ?>
 
-				<?php echo e(Form::text('cep', '', ['class' => 'form-control'])); ?>
+				<?php echo e(Form::text('cep', '', ['id' => 'cep', 'class' => 'form-control'])); ?>
 
 
 			</div>
@@ -121,5 +121,17 @@
 <?php echo e(Form::close()); ?>
 
 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<script src="<?php echo e(asset('js/jquery.mask.min.js')); ?>"></script>
+	<script>
+		$(document).ready(function(){
+			$('#cpf').mask('999.999.999-99');
+            $('#cnpj').mask('99.999.999/9999-99');
+            $('#phone').mask('(999)99999-9999');
+            $('#cep').mask('99999-999');
+		});
+	</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('template.dashboard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

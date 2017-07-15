@@ -20,13 +20,13 @@
 
 			<div class="form-group col-md-3">
 				{{ Form::label('cpf', 'CPF')}}
-				{{ Form::text('cpf', '', ['class' => 'form-control', 'required' => true]) }}
+				{{ Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required' => true]) }}
 
 			</div>
 
 			<div class="form-group col-md-3">
 				{{Form::label('cnpj', 'CNPJ')}}
-				{{Form::text('cnpj', '', ['class' => 'form-control'])}}
+				{{Form::text('cnpj', '', ['id' => 'cnpj','class' => 'form-control'])}}
 			</div>
 
 			<div class="form-group col-md-2">
@@ -45,12 +45,12 @@
 		<div class="panel-body">
 			<div class="form-group col-md-4">
 				{{ Form::label('phone', 'Telefone')}}
-				{{ Form::text('phone', '', ['class' => 'form-control', 'required' => true]) }}
+				{{ Form::text('phone', '', ['id' => 'phone', 'class' => 'form-control', 'required' => true]) }}
 			</div>
 
 			<div class="form-group col-md-4">
 				{{ Form::label('email', 'E-mail')}}
-				{{ Form::text('email', '', ['class' => 'form-control', 'required' => true]) }}
+				{{ Form::text('email', '', ['id' => 'email', 'class' => 'form-control', 'required' => true]) }}
 
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 
 			<div class="form-group col-md-2">
 				{{ Form::label('cep', 'CEP')}}
-				{{ Form::text('cep', '', ['class' => 'form-control']) }}
+				{{ Form::text('cep', '', ['id' => 'cep', 'class' => 'form-control']) }}
 
 			</div>
 
@@ -96,4 +96,16 @@
 
 {{ Form::close()}}
 
+@endsection
+
+@section('scripts')
+	<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+	<script>
+		$(document).ready(function(){
+			$('#cpf').mask('999.999.999-99');
+            $('#cnpj').mask('99.999.999/9999-99');
+            $('#phone').mask('(999)99999-9999');
+            $('#cep').mask('99999-999');
+		});
+	</script>
 @endsection

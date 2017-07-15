@@ -47,7 +47,7 @@
 
 					<div class="form-group col-md-4">
 						{{Form::label('cpf', 'CPF *', ['class' => 'text-danger'])}}
-						{{Form::text('cpf', '', ['class' => 'form-control', 'required'])}}
+						{{Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required'])}}
 						<p class="help-block">Insira 12 números sem traços e pontos.</p>
 					</div>
 				</div>
@@ -84,4 +84,16 @@
 	{{ Form::submit('Salvar', ['class' => 'btn btn-success'])}}
 	{{ Form::close()}}
 
+@endsection
+
+@section('scripts')
+	<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+	<script>
+        $(document).ready(function(){
+            $('#cpf').mask('999.999.999-99');
+            $('#cnpj').mask('99.999.999/9999-99');
+            $('#phone').mask('(999)99999-9999');
+            $('#cep').mask('99999-999');
+        });
+	</script>
 @endsection
