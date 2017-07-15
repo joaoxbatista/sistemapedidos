@@ -20,6 +20,7 @@ Route::group(['prefix' => 'sallers'], function(){
         Route::get('orders/create', 'Saller\OrderController@create')->name('saller.orders.create');
         Route::post('orders/store', 'Saller\OrderController@store')->name('saller.orders.store');
         Route::get('orders/{id}', 'Saller\OrderController@show')->name('saller.orders.show');
+        Route::get('orders/delete/{id}', 'Saller\OrderController@destroy')->name('saller.orders.delete');
 
 
     });

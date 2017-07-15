@@ -40,6 +40,11 @@
         </div>
         <div class="panel-body">
             <p><strong>Data da compra:</strong> {{ $order->buy_date }}</p>
+            @if($order->status)
+                <p><strong>Status:</strong> <span class="label-success label">Pagamento realizado.</span></p>
+            @else
+                <p><strong>Status:</strong> <span class="label-danger label">Data de vencimento {{ $order->due_date }}</span></p>
+            @endif
             <table class="table table-bordered">
                 <thead>
                 <tr>

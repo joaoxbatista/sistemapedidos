@@ -34,7 +34,7 @@
 
                     <ul class="option-table">
                         <li><a href="{{ route('saller.orders.show', ['id' => $order->id]) }}" class="opt opt-view"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="/dashboard/orders/{{$order->id}}/delete" class="opt opt-delete"><i class="fa fa-trash"></i></a></li>
+                        <li><a href="{{ route('saller.orders.delete', ['id' => $order->id]) }}" class="opt opt-delete"><i class="fa fa-trash"></i></a></li>
                     </ul>
                 </td>
             </tr>

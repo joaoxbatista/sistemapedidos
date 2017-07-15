@@ -1,65 +1,107 @@
 <?php $__env->startSection('title'); ?> Dashboard | Home <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
-	<h3>Dashboard/Vendedor/Editar</h3>
-
 	<a href="<?php echo e(route('sallers')); ?>" class="btn btn-default">Voltar</a><br><br>
 
 	<?php echo e(Form::open(['method' => 'post', 'route' => 'sallers.update', 'files' => true])); ?>
 
-
-	<h4>Informações do vendedor</h4>
-	<div class="row">
-		<div class="form-group col-md-4">
-			<?php echo e(Form::label('name', 'Nome')); ?>
-
-			<?php echo e(Form::text('name', $saller->name, ['class' => 'form-control'])); ?>
-
-		</div>
-
-		<div class="form-group col-md-4">
-			<?php echo e(Form::label('cpf', 'CPF')); ?>
-
-			<?php echo e(Form::text('cpf', $saller->cpf, ['class' => 'form-control'])); ?>
-
-		</div>
-
-		<div class="form-group col-md-4">
-			<?php echo e(Form::label('payment', 'Salário')); ?>
-
-			<?php echo e(Form::text('payment', $saller->payment, ['class' => 'form-control'])); ?>
-
-		</div>
-
-
-	</div>
-
-	<div class="row">
-
-		<div class="form-group col-md-6">
-			<img width="100px" src="<?php echo e(asset('uploads/images/sellers/'.$saller->image)); ?>" alt=""><br><br>
-			<?php echo e(Form::file('file', ['class' => 'form-file'])); ?>
-
-
-		</div>
-	</div>
-
-
-	<h4>Informações de acesso</h4>
-	<div class="row">
-		<div class="form-group col-md-4">
-			<?php echo e(Form::label('email', 'E-mail')); ?>
-
-			<?php echo e(Form::text('email', $saller->email, ['class' => 'form-control'])); ?>
-
-		</div>
-
-
-	</div>
+	<?php echo e(Form::hidden('user_id', Auth::user()->id)); ?>
 
 	<?php echo e(Form::hidden('id', $saller->id)); ?>
 
-	<?php echo e(Form::submit('Atualizar', ['class' => 'btn btn-success'])); ?>
+
+	<!-- Informações Financeiras -->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Informações financeiras</h4>
+		</div>
+
+		<div class="panel-body">
+			<div class="col-md-12">
+				<p>Os funcionários podem possuir remuneração por comissão ou salário. Não é necessário preencher os dois campos.</p>
+			</div>
+
+			<div class="form-group col-md-3">
+				<?php echo e(Form::label('payment', 'Salário')); ?>
+
+				<?php echo e(Form::text('payment', $saller->payment, ['class' => 'form-control'])); ?>
+
+			</div>
+
+			<div class="form-group col-md-3">
+				<?php echo e(Form::label('comission', 'Comissão')); ?>
+
+				<?php echo e(Form::text('comission', $saller->comission, ['class' => 'form-control'])); ?>
+
+				<p class="help-block">São admitidos valores de no máximo até 999.</p>
+
+			</div>
+		</div>
+	</div><!--/ Informações Financeiras -->
+
+	<!-- Informações Pessoais e Documentos -->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Informações pessoais e documentos</h4>
+		</div>
+
+		<div class="panel-body">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<?php echo e(Form::label('name', 'Nome *', ['class' => 'text-danger'])); ?>
+
+						<?php echo e(Form::text('name', $saller->name , ['class' => 'form-control', 'required'])); ?>
+
+					</div>
+
+					<div class="form-group col-md-4">
+						<?php echo e(Form::label('cpf', 'CPF *', ['class' => 'text-danger'])); ?>
+
+						<?php echo e(Form::text('cpf', $saller->cpf, ['class' => 'form-control', 'required'])); ?>
+
+						<p class="help-block">Insira 12 números sem traços e pontos.</p>
+					</div>
+				</div>
+				<?php if($saller->image != null): ?>
+				<div class="row">
+					<div class="col-md-4">
+						<img class="img-rounded" width="180px" src="<?php echo e(asset('uploads/images/sellers/'.$saller->image)); ?>" alt="">
+					</div>
+				</div>
+				<?php endif; ?>
+
+				<div class="row">
+					<div class="form-group col-md-4">
+						<?php echo e(Form::label('file', 'Fotografia')); ?>
+
+						<?php echo e(Form::file('file', ['class' => 'form-file'])); ?>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div><!--/ Informações Pessoais e Documentos -->
+
+	<!-- Informaçoes de Acesso -->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Informações de acesso</h4>
+		</div>
+
+		<div class="panel-body">
+			<div class="form-group col-md-4">
+				<?php echo e(Form::label('email', 'E-mail *', ['class' => 'text-danger'])); ?>
+
+				<?php echo e(Form::text('email', $saller->email , ['class' => 'form-control'])); ?>
+
+			</div>
+
+		</div>
+	</div><!--/ Informaçoes de Acesso -->
+
+	<?php echo e(Form::submit('Salvar', ['class' => 'btn btn-success'])); ?>
 
 	<?php echo e(Form::close()); ?>
 

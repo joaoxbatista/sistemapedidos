@@ -19,15 +19,22 @@ class CartController extends Controller {
 
     public function add(Request $request) {
 
+        //Obtem o carrinho
         $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
+
+        //Obtem o produto
         $product = Product::find($request->get('product_id'));
-        if ($product) {
+
+        if ($product and $request->get('quantity') > 0)
+        {
             $item = new Item($product, $request->get('quantity'));
             $cart->addItem($item);
             $request->session()->put('cart', $cart);
             return redirect()->back()->with('success-message');
-        } else {
-            return redirect()->back()->withErrors('Houve um erro, o produto selecionado não existe no banco de dados.');
+        }
+        else
+        {
+            return redirect()->back()->withErrors('Houve um erro, o produto selecionado não existe no banco de dados ou a quantidade informada é inválida.');
         }
 
         
@@ -35,6 +42,8 @@ class CartController extends Controller {
 
     public function addClient(Request $request)
     {
+
+
         $client = Client::find($request->get('client_id'));
 
         if($client != null)
@@ -42,7 +51,7 @@ class CartController extends Controller {
             $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
             $cart->setClient($client);
             $request->session()->put('cart', $cart);
-            return redirect()->back()->with('success-message', 'Vendedor adicionado com sucesso!');
+            return redirect()->back();
         }
         else{
             return redirect()->back()->withErrors('O cliente referente ao código não existe.');

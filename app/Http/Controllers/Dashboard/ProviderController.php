@@ -62,11 +62,15 @@
         return redirect()->back()->with('success-message', 'Fornecedor atualizado com sucesso!');
     }
 
-    
-    public function destroy($id)
+    public function delete($id)
     {
         $provider = Provider::find($id);
+        return view('dashboard.provider.delete', compact('provider'));
+    }
+    public function destroy(Request $request)
+    {
+        $provider = Provider::find($request->get('id'));
         $provider->delete();
-        return redirect()->back()->with('success-message', 'Fornecedor removido com sucesso!');
+        return redirect()->route('providers')->with('success-message', 'Fornecedor removido com sucesso!');
     }
 	}

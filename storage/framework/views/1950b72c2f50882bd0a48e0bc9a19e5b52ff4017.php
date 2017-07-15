@@ -21,7 +21,11 @@
 
         <div id="profile-menu">
 
-            <img src="<?php echo e(asset('imgs/img-profile.png')); ?>" alt="" id="profile-image">
+            <?php if(Auth::user()->image != null): ?>
+                <img src="<?php echo e(asset('uploads/images/users/'.Auth::user()->image)); ?>" alt="" id="profile-image">
+            <?php else: ?>
+                <img src="<?php echo e(asset('imgs/img-profile.png')); ?>" alt="" id="profile-image">
+            <?php endif; ?>
 
             <div id="content-profile-menu">
                 <h3 id="profile-username">

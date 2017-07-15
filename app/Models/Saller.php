@@ -11,7 +11,7 @@ class Saller extends Authenticatable
 
     protected $guard = 'saller';
 
-    public $fillable = ['cpf', 'name', 'payment', 'email', 'image', 'password', 'user_id'];
+    public $fillable = ['cpf', 'name', 'payment' ,'comission', 'email', 'image', 'password', 'user_id'];
     protected $hidden = ['password', 'remember_token'];
 
     public function orders(){

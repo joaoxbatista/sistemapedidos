@@ -50,6 +50,7 @@ class ClientController extends Controller
     
     public function update(Request $request)
     {
+
         $client = Client::find($request->get('id'));
 
         $this->validate($request, [
@@ -58,7 +59,6 @@ class ClientController extends Controller
         	'phone' => 'required|max:12',
         	'email' => 'required|max:255'
         ]);
-
         $client->update($request->except('_token'));
         return redirect()->back()->with('success-message', 'Cliente atualizado com sucesso!');
     }

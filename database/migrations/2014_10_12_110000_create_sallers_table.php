@@ -19,7 +19,8 @@ class CreateSallersTable extends Migration
             $table->string('cpf');
             $table->string('email');
             $table->string('password');
-            $table->decimal('payment');
+            $table->decimal('payment')->nullable();
+            $table->decimal('comission', 5, 2)->nullable();
             $table->string('phone')->nullable();
             $table->integer('sales')->nullable();
             $table->string('image')->nullable();

@@ -21,7 +21,11 @@
 
         <div id="profile-menu">
 
-            <img src="{{ asset('imgs/img-profile.png')}}" alt="" id="profile-image">
+            @if(Auth::user()->image != null)
+                <img src="{{ asset('uploads/images/users/'.Auth::user()->image)}}" alt="" id="profile-image">
+            @else
+                <img src="{{ asset('imgs/img-profile.png')}}" alt="" id="profile-image">
+            @endif
 
             <div id="content-profile-menu">
                 <h3 id="profile-username">

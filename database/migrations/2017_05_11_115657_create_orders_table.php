@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->dateTime('buy_date');
             $table->decimal('total', 10, 2);
+            $table->date('due_date')->nullable();
+            $table->boolean('status');
             $table->integer('saller_id')->nullable()->unsigned();
             $table->integer('client_id')->nullable()->unsigned();
 

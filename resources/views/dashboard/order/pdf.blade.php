@@ -25,6 +25,27 @@
         </table>
     </section>
 
+    @if($order->saller)
+        <section>
+            <h3>Informações do Vendedor</h3>
+            <table>
+                <tbody>
+
+                <tr>
+                    <td width="10%"><strong>Código</strong></td>
+                    <td>{{ $order->saller->id }}</td>
+                </tr>
+
+                <tr>
+                    <td width="10%"><strong>Nome</strong></td>
+                    <td>{{ $order->saller->name }}</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </section>
+    @endif
+
     @if($order->cliente)
         <section>
             <h3>Informações do Cliente</h3>

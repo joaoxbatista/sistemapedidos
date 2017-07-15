@@ -35,7 +35,7 @@ class ProductController extends Controller
             'unit_price' => 'required|numeric',
             'weight' => 'required|numeric',
             'provider_id' => 'required|numeric',
-            'desc' => 'required|min:50',
+            'desc' => 'required',
             'file' => 'image'
         ]);
 
@@ -100,11 +100,16 @@ class ProductController extends Controller
         return redirect()->back()->with('success-message', 'Fornecedor atualizado com sucesso!');
     }
 
-    
-    public function destroy($id)
+    public function delete(int $id)
     {
         $product = Product::find($id);
+        return view('dashboard.product.delete', compact('product'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $product = Product::find($request->get('id'));
         $product->delete();
-        return redirect()->back()->with('success-message', 'Fornecedor removido com sucesso!');
+        return redirect()->route('products')->with('success-message', 'Fornecedor removido com sucesso!');
     }
 }

@@ -20,11 +20,11 @@ include_once('saller.php');
 */
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
 /**
  * Rotas responsáveis pelas páginas estáticas
  * Para modificar as informações diriga-se ao controller StaticPAgesController em Http/Controllers
 */
-
 Route::get('', 'Site\StaticController@home')->name('home');
 
 Route::get('about', 'Site\StaticController@about')->name('about');
@@ -82,7 +82,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('providers/{id}', 'Dashboard\ProviderController@show')->name('providers.show');
 
     /* Deletar */
-    Route::get('providers/{id}/delete', 'Dashboard\ProviderController@destroy')->name('providers.destroy');
+    Route::get('providers/{id}/delete', 'Dashboard\ProviderController@delete')->name('providers.delete');
+    Route::post('providers/delete', 'Dashboard\ProviderController@destroy')->name('providers.destroy');
 
     /**
      * Área reservada para Produtos
@@ -103,7 +104,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('products/{id}', 'Dashboard\ProductController@show')->name('products.show');
 
     /* Deletar */
-    Route::get('products/{id}/delete', 'Dashboard\ProductController@destroy')->name('products.destroy');
+    Route::get('products/{id}/delete', 'Dashboard\ProductController@delete')->name('products.delete');
+    Route::post('products/delete', 'Dashboard\ProductController@destroy')->name('products.destroy');
 
     /**
      * Área reservada para Pedidos
@@ -124,7 +126,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('orders/{id}', 'Dashboard\OrderController@show')->name('orders.show');
 
     /* Deletar */
-    Route::get('orders/{id}/delete', 'Dashboard\OrderController@destroy')->name('orders.destroy');
+    Route::get('orders/{id}/delete', 'Dashboard\OrderController@delete')->name('orders.delete');
+
+    /* Delete*/
+    Route::post('orders/delete', 'Dashboard\OrderController@destroy')->name('orders.destroy');
 
     /* Imprimir */
     Route::get('orders/{id}/print', 'Dashboard\OrderController@print')->name('orders.print');
@@ -149,7 +154,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('saller/{id}', 'Dashboard\SallerController@show')->name('sallers.show');
 
     /* Deletar */
-    Route::get('saller/{id}/delete', 'Dashboard\SallerController@destroy')->name('sallers.destroy');
+    Route::get('saller/{id}/delete', 'Dashboard\SallerController@delete')->name('sallers.delete');
+
+    /* Deletar */
+    Route::post('saller/delete', 'Dashboard\SallerController@destroy')->name('sallers.destroy');
 
 
 
@@ -158,9 +166,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
      */
 
     Route::get('profile', 'Dashboard\ProfileController@index')->name('profile');
+    Route::post('profile', 'Dashboard\ProfileController@update')->name('profile.update');
 
 });
-
 
 /**
  * Área reservada para o Carrinho de Compras

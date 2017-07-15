@@ -10,13 +10,13 @@
 
             <div class="form-group">
                 <label for="">Insira seu e-mail</label>
-                <?php echo e(Form::text('email', '', ['placeholder' => 'exemple@exemple.com', 'class' => 'form-control'])); ?>
+                <?php echo e(Form::text('email', '', ['class' => 'form-control'])); ?>
 
             </div>
 
             <div class="form-group">
                 <label for="">Insira sua senha</label>
-                <?php echo e(Form::password('password',['placeholder' => '******', 'class' => 'form-control'])); ?>
+                <?php echo e(Form::password('password',['class' => 'form-control'])); ?>
 
             </div>
 

@@ -93,7 +93,6 @@ class SallerController extends Controller
     {
         $this->validate($request, [
             'name' => 'max:100|required',
-            'payment' => 'required|numeric',
             'cpf' => 'min:12|numeric|required'
         ]);
 
@@ -117,15 +116,26 @@ class SallerController extends Controller
     }
 
     /**
+     * Retorna a view para remoção de vendedores
+     * @param Request $request
+     * @param int $id
+     */
+    public function delete(Request $request, int $id)
+    {
+        $saller = Saller::findOrFail($id);
+        return view('dashboard.saller.delete', compact('saller'));
+    }
+
+    /**
      * Método para remoção do pedido.
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $saller = Saller::find($id);
+        $saller = Saller::find($request->get('id'));
         $saller->delete();
-        return redirect()->back()->with('success-message', 'Vendedor removido com sucesso!');
+        return redirect()->route('sallers')->with('success-message', 'Vendedor removido com sucesso!');
     }
 
 }

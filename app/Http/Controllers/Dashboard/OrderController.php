@@ -46,19 +46,28 @@ class OrderController extends Controller {
      */
     public function store(Request $request)
     {
-        /**
-         * Obtem o carrinho antigo
-         */
+        //Obtem o carrinho antigo
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
-
+        //Obtem o cliente
         $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
-        $saller_id = Auth::guard('saller') != null ? Auth::guard('saller')->user()->id : null;
 
+        //Obtem o vendedor
+        $saller_id = Auth::guard('saller')->user() != null ? Auth::guard('saller')->user()->id : null;
+
+        //Caso exista um prazo para pagar o status se torna false, se não se torna verdadeiro
+        $due_date = $request->get('due_date') != null ? $request->get('due_date') : null;
+
+        //Obtem o status
+        $status = $request->get('due_date') != null ? false : true;
+
+        //Cria um novo pedido
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
         'client_id' => $client_id,
         'saller_id' => $saller_id ,
+        'due_date' => $due_date,
+        'status' => $status,
         'total' => $cart->getTotalPrice()
         ]);
 
@@ -110,16 +119,21 @@ class OrderController extends Controller {
         return redirect()->back()->with('success-message', 'Pedido atualizado com sucesso!');
     }
 
+    public function delete(Request $request, int $id)
+    {
+        $order = Order::find($id);
+        return view('dashboard.order.delete', compact('order'));
+    }
     /**
      * Método para remoção do pedido.
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $order = Order::find($id);
+        $order = Order::find($request->get('id'));
         $order->delete();
-        return redirect()->back()->with('success-message', 'Pedido removido com sucesso!');
+        return redirect()->route('orders')->with('success-message', 'Pedido removido com sucesso!');
     }
 
     /**
@@ -130,19 +144,15 @@ class OrderController extends Controller {
     public function print($id){
         $order = Order::find($id);
 
-        $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'))
-                ->setPaper('a4', 'landscape');
-        $client_name = $order->client != null ? $order->client->name : "sem-cliente";
+        $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'))->setPaper('a4', 'landscape');
 
-        return $pdf->stream($client_name.'_'.$order->id.'.pdf');
+        return $pdf->stream(time().' id('.$order->id.').pdf');
     }
 
 
     public function download($id){
         $order  = Order::find($id);
         $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'));
-        $client_name = $order->client != null ? $order->client->name : "sem-cliente";
-        return $pdf->download($client_name.'_'.$order->id.'.pdf')
-            ->setPaper('a4', 'landscape');
+        return $pdf->download(time().' id('.$order->id.').pdf');
     }
 }

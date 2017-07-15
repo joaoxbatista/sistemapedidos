@@ -39,6 +39,11 @@
         </div>
         <div class="panel-body">
             <p><strong>Data da compra:</strong> <?php echo e($order->buy_date); ?></p>
+            <?php if($order->status): ?>
+                <p><strong>Status:</strong> <span class="label-success label">Pagamento realizado.</span></p>
+            <?php else: ?>
+                <p><strong>Status:</strong> <span class="label-danger label">Data de vencimento <?php echo e($order->due_date); ?></span></p>
+            <?php endif; ?>
             <table class="table table-bordered">
                 <thead>
                 <tr>

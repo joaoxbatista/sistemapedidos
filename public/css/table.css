@@ -39,13 +39,7 @@
 
 /* line 35, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
 .table thead {
-  background: #212121;
   border-radius: 4px;
-}
-
-/* line 38, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
-.table thead th {
-  color: #F5F5F5;
 }
 
 /* line 40, C:/xampp/htdocs/sistemapedidos/resources/assets/sass/table.sass */
