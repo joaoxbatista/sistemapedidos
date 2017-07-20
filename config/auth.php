@@ -46,14 +46,14 @@ return [
             'provider' => 'users',
         ],
 
-        'saller' => [
+        'seller' => [
             'driver' => 'session',
-            'provider' => 'sallers',
+            'provider' => 'sellers',
         ],
 
-        'saller-api' => [
+        'seller-api' => [
             'driver' => 'token',
-            'provider' => 'sallers',
+            'provider' => 'sellers',
         ],
     ],
 
@@ -81,9 +81,9 @@ return [
             'model' => App\User::class,
         ],
 
-        'sallers' => [
+        'sellers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Saller::class,
+            'model' => App\Models\Seller::class,
         ],
 
         // 'users' => [
@@ -114,8 +114,8 @@ return [
             'expire' => 60,
         ],
 
-        'sallers' => [
-            'provider' => 'sallers',
+        'sellers' => [
+            'provider' => 'sellers',
             'table' => 'password_resets',
             'expire' => 60,
         ]

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Client;
-use App\Models\Saller;
+use App\Models\Seller;
 use App\Models\Cart;
 use Session;
 use Auth;
@@ -47,21 +47,26 @@ class OrderController extends Controller {
     public function store(Request $request)
     {
 
-
         //Obtem o carrinho antigo
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
-        //Verifica se o limite de crédito é menor que o valor da compra, caso verdade, apresenta um erro.
-        if($cart->getClient()->limit_credit < $cart->getTotalPrice() and !is_null($request->get('due_date'))){
-            return redirect()->back()->withErrors('O limite do cliente é insuficiente.');
-        }
 
         //Obtem o cliente
         $client_id = $cart->getClient() != null ? $cart->getClient()->id : null;
 
-
         //Obtem o vendedor
-        $saller_id = Auth::guard('saller')->user() != null ? Auth::guard('saller')->user()->id : null;
+        $seller_id = Auth::guard('seller')->user() != null ? Auth::guard('seller')->user()->id : null;
+
+        if($client_id != null)
+        {
+            //Verifica se o limite de crédito é menor que o valor da compra, caso verdade, apresenta um erro.
+            if($cart->getClient()->limit_credit < $cart->getTotalPrice() and !is_null($request->get('due_date'))){
+                return redirect()->back()->withErrors('O limite do cliente é insuficiente.');
+            }
+
+            $cart->getClient()->limit_credit -= $cart->getTotalPrice();
+            $cart->getClient()->update();
+        }
 
         //Caso exista um prazo para pagar o status se torna false, se não se torna verdadeiro
         $due_date = $request->get('due_date') != null ? $request->get('due_date') : null;
@@ -73,16 +78,21 @@ class OrderController extends Controller {
         $order = Order::create([
         'buy_date' => $request->get('buy_date'),
         'client_id' => $client_id,
-        'saller_id' => $saller_id ,
+        'seller_id' => $seller_id ,
         'due_date' => $due_date,
         'status' => $status,
         'total' => $cart->getTotalPrice()
         ]);
 
         foreach ($cart->getItems() as $item) {
+            //Adiciona os items no pedido
             $order->items()->save($item->product, ['total' => $item->price,
                 'qtd_itens' => $item->quantity]);
             $order->save();
+
+            //Remove a quantidade dos items do estoque
+            $item->product->quantity -= $item->quantity;
+            $item->product->update();
         }
 
         $cart = null;
@@ -142,6 +152,19 @@ class OrderController extends Controller {
         $order = Order::find($request->get('id'));
         $order->delete();
         return redirect()->route('orders')->with('success-message', 'Pedido removido com sucesso!');
+    }
+
+    public function payment_confirm(int $id)
+    {
+        if(!is_null($id))
+        {
+            $order = Order::find($id);
+            $order->status = true;
+            $order->client->limit_credit += $order->total;
+            $order->client->update();
+            $order->update();
+            return redirect()->back()->withd('success-message', 'Pagamento confirmado');
+        }
     }
 
     /**

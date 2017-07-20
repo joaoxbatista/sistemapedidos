@@ -17,9 +17,10 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->decimal('unit_price', 10, 2);
-            $table->decimal('weight', 10, 2);
+            $table->decimal('weight', 5, 2)->nullable();
             $table->string('image')->nullable();
-            $table->text('desc');
+            $table->text('desc')->nullable();
+            $table->integer('quantity')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('provider_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');

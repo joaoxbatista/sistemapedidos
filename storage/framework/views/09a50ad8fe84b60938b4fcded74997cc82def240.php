@@ -20,20 +20,21 @@
 
 			</div>
 
-			<div class="form-group col-md-3">
-				<?php echo e(Form::label('cpf', 'CPF')); ?>
+			<?php if($type == 'cpf'): ?>
+				<div class="form-group col-md-3">
+					<?php echo e(Form::label('cpf', 'CPF')); ?>
 
-				<?php echo e(Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required' => true])); ?>
+					<?php echo e(Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required' => true])); ?>
 
+				</div>
+			<?php elseif($type == 'cnpj'): ?>
+				<div class="form-group col-md-3">
+					<?php echo e(Form::label('cnpj', 'CNPJ')); ?>
 
-			</div>
+					<?php echo e(Form::text('cnpj', '', ['id' => 'cnpj','class' => 'form-control', 'required' => true])); ?>
 
-			<div class="form-group col-md-3">
-				<?php echo e(Form::label('cnpj', 'CNPJ')); ?>
-
-				<?php echo e(Form::text('cnpj', '', ['id' => 'cnpj','class' => 'form-control'])); ?>
-
-			</div>
+				</div>
+			<?php endif; ?>
 
 			<div class="form-group col-md-2">
 				<?php echo e(Form::label('limit_credit', 'Limite de crédito')); ?>

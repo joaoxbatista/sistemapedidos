@@ -3,7 +3,7 @@
 
     <div class="col-md-12">
         <div class="row" style="margin-top: 10px;">
-            <?php if($cart->getSaller() != null or $cart->getClient() != null): ?>
+            <?php if($cart->getSeller() != null or $cart->getClient() != null): ?>
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
@@ -14,8 +14,8 @@
 
 
 
-                        <?php if($cart->getSaller() != null): ?>
-                            <p><strong>Vendedor: </strong><?php echo e($cart->getSaller()->name); ?></p>
+                        <?php if($cart->getSeller() != null): ?>
+                            <p><strong>Vendedor: </strong><?php echo e($cart->getSeller()->name); ?></p>
                         <?php endif; ?>
 
                         <?php if($cart->getClient() != null): ?>

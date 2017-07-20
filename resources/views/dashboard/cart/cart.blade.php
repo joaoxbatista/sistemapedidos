@@ -3,7 +3,7 @@
 
     <div class="col-md-12">
         <div class="row" style="margin-top: 10px;">
-            @if($cart->getSaller() != null or $cart->getClient() != null)
+            @if($cart->getSeller() != null or $cart->getClient() != null)
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
@@ -14,8 +14,8 @@
 
 
 
-                        @if($cart->getSaller() != null)
-                            <p><strong>Vendedor: </strong>{{ $cart->getSaller()->name }}</p>
+                        @if($cart->getSeller() != null)
+                            <p><strong>Vendedor: </strong>{{ $cart->getSeller()->name }}</p>
                         @endif
 
                         @if($cart->getClient() != null)

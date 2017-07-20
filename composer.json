@@ -16,6 +16,7 @@
         "matriphe/imageupload": "^5.4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.7"
     },
@@ -41,6 +42,8 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ],
         "post-update-cmd": [

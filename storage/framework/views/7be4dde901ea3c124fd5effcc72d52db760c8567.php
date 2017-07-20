@@ -1,7 +1,7 @@
 <?php $__env->startSection('title'); ?> Dashboard | Perfil <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
-    <a href="<?php echo e(route('sallers')); ?>" class="btn btn-default">Voltar</a><br><br>
+    <a href="<?php echo e(route('dashboard.home')); ?>" class="btn btn-default">Voltar</a><br><br>
 
     <?php echo e(Form::open(['method' => 'post', 'route' => 'profile.update', 'files' => true])); ?>
 
@@ -27,10 +27,16 @@
                     </div>
 
                 </div>
-                <?php if($user->image != null): ?>
+                <?php if($user->image): ?>
                     <div class="row">
                         <div class="col-md-4">
                             <img class="img-rounded" width="180px" src="<?php echo e(asset('uploads/images/users/'.$user->image)); ?>" alt="">
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-rounded" width="180px" src="<?php echo e(asset('imgs/no-image.png')); ?>" alt="">
                         </div>
                     </div>
                 <?php endif; ?>

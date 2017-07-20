@@ -3,8 +3,8 @@
 @section('content')
 
 <a href="{{ route('dashboard.home') }}" class="btn btn-default">Voltar</a>
-
-<a href="{{ route('clients.create') }}" class="btn btn-success">Novo <i class="fa fa-plus"></i></a><br><br>
+<a href="{{ route('clients.create', ['type' => 'cpf']) }}" class="btn btn-success">Pessoa <i class="fa fa-plus"></i></a>
+<a href="{{ route('clients.create', ['type' => 'cnpj']) }}" class="btn btn-success">Empresa <i class="fa fa-plus"></i></a><br><br>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -19,7 +19,6 @@
 				<tr>
 					<th>Código</th>
 					<th>Nome</th>
-					<th>CPF</th>
 					<th>Telefone</th>
 					<th>E-mail</th>
 					<th>CEP</th>
@@ -32,7 +31,6 @@
 					<tr>
 						<td>{{ $client->id }}</td>
 						<td>{{ $client->name }}</td>
-						<td>{{ $client->cpf }}</td>
 						<td>{{ $client->phone }}</td>
 						<td>{{ $client->email }}</td>
 						<td>{{ $client->cep }}</td>

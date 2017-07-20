@@ -18,16 +18,17 @@
 				{{ Form::text('name', '', ['class' => 'form-control', 'required' => true]) }}
 			</div>
 
-			<div class="form-group col-md-3">
-				{{ Form::label('cpf', 'CPF')}}
-				{{ Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required' => true]) }}
-
-			</div>
-
-			<div class="form-group col-md-3">
-				{{Form::label('cnpj', 'CNPJ')}}
-				{{Form::text('cnpj', '', ['id' => 'cnpj','class' => 'form-control'])}}
-			</div>
+			@if($type == 'cpf')
+				<div class="form-group col-md-3">
+					{{ Form::label('cpf', 'CPF')}}
+					{{ Form::text('cpf', '', ['id' => 'cpf', 'class' => 'form-control', 'required' => true]) }}
+				</div>
+			@elseif($type == 'cnpj')
+				<div class="form-group col-md-3">
+					{{Form::label('cnpj', 'CNPJ')}}
+					{{Form::text('cnpj', '', ['id' => 'cnpj','class' => 'form-control', 'required' => true])}}
+				</div>
+			@endif
 
 			<div class="form-group col-md-2">
 				{{Form::label('limit_credit', 'Limite de crédito')}}

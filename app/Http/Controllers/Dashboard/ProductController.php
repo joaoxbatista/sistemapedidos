@@ -33,9 +33,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3|max:255',
             'unit_price' => 'required|numeric',
-            'weight' => 'required|numeric',
             'provider_id' => 'required|numeric',
-            'desc' => 'required',
             'file' => 'image'
         ]);
 
@@ -111,5 +109,20 @@ class ProductController extends Controller
         $product = Product::find($request->get('id'));
         $product->delete();
         return redirect()->route('products')->with('success-message', 'Fornecedor removido com sucesso!');
+    }
+
+    public function addQuantity(Request $request)
+    {
+        $product_id = !is_null($request->get('id')) ? $request->get('id') : null;
+        $quantity = !is_null($request->get('quantity')) ? $request->get('quantity') : null;
+        echo $product_id;
+        echo $quantity;
+        if(!is_null($product_id) and $quantity > 0)
+        {
+            $product = Product::find($product_id);
+            $product->quantity += $quantity;
+            $product->update();
+            return redirect()->back()->with('success-message', $quantity.' do produto '.$product->name.'adicionada ao estoque.');
+        }
     }
 }

@@ -34,7 +34,7 @@
 			<div class="form-group col-md-2">
 				<?php echo e(Form::label('weight', 'Peso')); ?>
 
-				<?php echo e(Form::text('weight', '', ['class' => 'form-control', 'required' => true])); ?>
+				<?php echo e(Form::text('weight', '', ['class' => 'form-control'])); ?>
 
 			</div>
 
@@ -61,7 +61,7 @@
 
 		<?php echo e(Form::hidden('user_id', Auth::user()->id )); ?>
 
-		<?php echo e(Form::submit('Save', ['class' => 'btn btn-success'])); ?>
+		<?php echo e(Form::submit('Salvar', ['class' => 'btn btn-success'])); ?>
 
 		<?php echo e(Form::close()); ?>
 

@@ -29,7 +29,7 @@
 
             <div id="content-profile-menu">
                 <h3 id="profile-username">
-                    <?php echo e(Auth::user()->name); ?>
+                    <?php echo e(Str::words(Auth::user()->name, 2, '')); ?>
 
                 </h3>
 
@@ -49,7 +49,7 @@
                     <li><a href="<?php echo e(route('products')); ?>"><i class="fa fa-archive"></i> Produtos</a></li>
                     <li><a href="<?php echo e(route('clients')); ?>"><i class="fa fa-group"></i> Clientes</a></li>
                     <li><a href="<?php echo e(route('orders')); ?>"><i class="fa fa-shopping-cart"></i> Pedidos</a></li>
-                    <li><a href="<?php echo e(route('sallers')); ?>"><i class="fa fa-vcard"></i> Funcionários</a></li>
+                    <li><a href="<?php echo e(route('sellers')); ?>"><i class="fa fa-vcard"></i> Funcionários</a></li>
                 </nav>
             </div>
 

@@ -5,7 +5,7 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	class Order extends Model{
-		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'saller_id', 'status'];
+		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'seller_id', 'status'];
 		public $timestamps = false;
 
 		public function client()
@@ -23,11 +23,11 @@
             return date('d/m/Y', strtotime($this->attributes['due_date']));
         }
 
-		public function saller(){
-		    return $this->belongsTo('App\Models\Saller');
+		public function seller(){
+		    return $this->belongsTo('App\Models\Seller');
         }
 
-		public static function sallerItems()
+		public static function sellerItems()
         {
             $orders = self::all();
             $totalItems = 0;

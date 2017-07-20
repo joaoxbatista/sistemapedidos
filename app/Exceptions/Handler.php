@@ -63,8 +63,8 @@ class Handler extends ExceptionHandler
         $guard = array_get($exception->guards(), 0);
 
         switch ($guard) {
-            case 'saller':
-                $route_login = 'saller.login';
+            case 'seller':
+                $route_login = 'seller.login';
                 break;
 
             default:

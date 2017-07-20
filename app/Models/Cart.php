@@ -12,7 +12,7 @@ class Cart {
     private $items;
     private $totalPrice;
     private $totalQuantity;
-    private $saller;
+    private $seller;
     private $client;
 
     public function __construct($oldCart = null) {
@@ -20,13 +20,13 @@ class Cart {
             $this->items = $oldCart->items;
             $this->totalPrice = $oldCart->totalPrice;
             $this->totalQuantity = $oldCart->totalQuantity;
-            $this->saller = $oldCart->saller;
+            $this->seller = $oldCart->seller;
             $this->client = $oldCart->client;
         } else {
             $this->items = null;
             $this->totalPrice = 0;
             $this->totalQuantity = 0;
-            $this->saller = null;
+            $this->seller = null;
             $this->client = null;
         }
     }
@@ -46,7 +46,6 @@ class Cart {
         $this->totalPrice += $item->price;
         $this->totalQuantity += $item->quantity;
 
-        echo "Item adicionado com sucesso!";
     }
 
     public function updateItem(Item $item) {
@@ -117,17 +116,17 @@ class Cart {
     /**
      * @return null
      */
-    public function getSaller()
+    public function getseller()
     {
-        return $this->saller;
+        return $this->seller;
     }
 
     /**
-     * @param Saller $saler
+     * @param seller $saler
      */
-    public function setSaller(Saller $saller)
+    public function setseller(seller $seller)
     {
-        $this->saller = $saller;
+        $this->seller = $seller;
     }
 
     /**

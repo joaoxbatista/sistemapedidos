@@ -2,7 +2,7 @@
 @section('title') Dashboard | Perfil @endsection
 @section('content')
 
-    <a href="{{ route('sallers') }}" class="btn btn-default">Voltar</a><br><br>
+    <a href="{{ route('dashboard.home') }}" class="btn btn-default">Voltar</a><br><br>
 
     {{ Form::open(['method' => 'post', 'route' => 'profile.update', 'files' => true])}}
     {{ Form::hidden('user_id', Auth::user()->id)}}
@@ -23,10 +23,16 @@
                     </div>
 
                 </div>
-                @if($user->image != null)
+                @if($user->image)
                     <div class="row">
                         <div class="col-md-4">
                             <img class="img-rounded" width="180px" src="{{ asset('uploads/images/users/'.$user->image)  }}" alt="">
+                        </div>
+                    </div>
+                @else
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-rounded" width="180px" src="{{ asset('imgs/no-image.png')  }}" alt="">
                         </div>
                     </div>
                 @endif

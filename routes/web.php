@@ -14,7 +14,7 @@ include_once('tests.php');
  * Área reservada para os vendedores
  */
 
-include_once('saller.php');
+include_once('seller.php');
 /**
  * Rotas responsáaveis pela autenticação
 */
@@ -107,6 +107,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('products/{id}/delete', 'Dashboard\ProductController@delete')->name('products.delete');
     Route::post('products/delete', 'Dashboard\ProductController@destroy')->name('products.destroy');
 
+    /* Adicionar ao estoque*/
+    Route::post('products/add', 'Dashboard\ProductController@addQuantity')->name('products.add');
     /**
      * Área reservada para Pedidos
      */
@@ -134,30 +136,33 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     /* Imprimir */
     Route::get('orders/{id}/print', 'Dashboard\OrderController@print')->name('orders.print');
 
+    /* Confirmar Pagamento */
+    Route::get('orders/payment_confirm/{id}', 'Dashboard\OrderController@payment_confirm')->name('orders.confirm');
+
     /* Download */
     Route::get('orders/{id}/download', 'Dashboard\OrderController@download')->name('orders.download');
 
     /**
      * Área reservada para Vendedores
      */
-    Route::get('saller', 'Dashboard\SallerController@index')->name('sallers');
+    Route::get('seller', 'Dashboard\SellerController@index')->name('sellers');
 
     /* Criar */
-    Route::get('saller/create', 'Dashboard\SallerController@create')->name('sallers.create');
-    Route::post('saller', 'Dashboard\SallerController@store')->name('sallers.store');
+    Route::get('seller/create', 'Dashboard\SellerController@create')->name('sellers.create');
+    Route::post('seller', 'Dashboard\SellerController@store')->name('sellers.store');
 
     /* Editar */
-    Route::get('saller/{id}/edit', 'Dashboard\SallerController@edit')->name('sallers.edit');
-    Route::post('saller/edit', 'Dashboard\SallerController@update')->name('sallers.update');
+    Route::get('seller/{id}/edit', 'Dashboard\SellerController@edit')->name('sellers.edit');
+    Route::post('seller/edit', 'Dashboard\SellerController@update')->name('sellers.update');
 
     /* Exibir */
-    Route::get('saller/{id}', 'Dashboard\SallerController@show')->name('sallers.show');
+    Route::get('seller/{id}', 'Dashboard\SellerController@show')->name('sellers.show');
 
     /* Deletar */
-    Route::get('saller/{id}/delete', 'Dashboard\SallerController@delete')->name('sallers.delete');
+    Route::get('seller/{id}/delete', 'Dashboard\SellerController@delete')->name('sellers.delete');
 
     /* Deletar */
-    Route::post('saller/delete', 'Dashboard\SallerController@destroy')->name('sallers.destroy');
+    Route::post('seller/delete', 'Dashboard\SellerController@destroy')->name('sellers.destroy');
 
 
 
@@ -190,7 +195,7 @@ Route::group(['prefix' => 'sales'], function(){
     Route::get('login', 'Sale\SaleController@getLogin')->name('sales.login');
     Route::post('add/product', 'Dashboard\CartController@add')->name('sales.add.product');
     Route::post('order', 'Dashboard\OrderController@store')->name('sales.order.store');
-    Route::post('add/saller', 'Dashboard\CartController@addSaller')->name('sales.add.saller');
+    Route::post('add/seller', 'Dashboard\CartController@addSeller')->name('sales.add.seller');
     Route::post('add/client', 'Dashboard\CartController@addClient')->name('sales.add.client');
 });
 

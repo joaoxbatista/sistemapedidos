@@ -16,16 +16,16 @@
     </div>
 <?php endif; ?>
 
-<?php if($order->saller): ?>
+<?php if($order->seller): ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4>Informações do vendedor</h4>
         </div>
 
         <div class="panel-body">
-            <img class="img-circle" width="70" src="<?php echo e(asset('uploads/images/sellers/'.$order->saller->image)); ?>"></img>
-            <p><strong>Código: </strong><?php echo e($order->saller->id); ?></p>
-            <p><strong>Nome: </strong><?php echo e($order->saller->name); ?></p>
+            <img class="img-circle" width="70" src="<?php echo e(asset($order->seller->image)); ?>"></img>
+            <p><strong>Código: </strong><?php echo e($order->seller->id); ?></p>
+            <p><strong>Nome: </strong><?php echo e($order->seller->name); ?></p>
         </div>
     </div>
 <?php endif; ?>
@@ -75,7 +75,10 @@
             </tfoot>
         </table>
         <a href="<?php echo e(route('orders.print', ['id' => $order->id])); ?>" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
-        <a href="<?php echo e(route('orders.download', ['id' => $order->id])); ?>" class="btn btn-success"><i class="fa fa-file"></i> Salvar</a>
+        <a href="<?php echo e(route('orders.download', ['id' => $order->id])); ?>" class="btn btn-info"><i class="fa fa-file"></i> Salvar</a>
+        <?php if(!$order->status): ?>
+            <a href="<?php echo e(route('orders.confirm', ['id' => $order->id])); ?>" class="btn btn-success"><i class="fa fa-check"></i> Confirmar</a>
+        <?php endif; ?>
 
     </div>
 </div>

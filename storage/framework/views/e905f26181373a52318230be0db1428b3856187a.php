@@ -23,7 +23,7 @@
         </table>
     </section>
 
-    <?php if($order->saller): ?>
+    <?php if($order->seller): ?>
         <section>
             <h3>Informações do Vendedor</h3>
             <table>
@@ -31,12 +31,12 @@
 
                 <tr>
                     <td width="10%"><strong>Código</strong></td>
-                    <td><?php echo e($order->saller->id); ?></td>
+                    <td><?php echo e($order->seller->id); ?></td>
                 </tr>
 
                 <tr>
                     <td width="10%"><strong>Nome</strong></td>
-                    <td><?php echo e($order->saller->name); ?></td>
+                    <td><?php echo e($order->seller->name); ?></td>
                 </tr>
 
                 </tbody>

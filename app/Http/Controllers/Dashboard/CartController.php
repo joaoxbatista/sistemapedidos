@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\Client;
 use App\Models\Cart;
 use App\Models\Item;
-use App\Models\Saller;
+use App\Models\Seller;
 use Session;
 
 class CartController extends Controller {
@@ -18,23 +18,42 @@ class CartController extends Controller {
     }
 
     public function add(Request $request) {
-
-        //Obtem o carrinho
+        //Definição das variaveis
+        $product_id = $request->get('product_id');
+        $quantity = $request->get('quantity');
         $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
+        $product = Product::find($product_id);
+        $item_quantity = isset($cart->getItems()[$product_id]) ? $cart->getItems()[$product_id]->quantity : 0;
 
-        //Obtem o produto
-        $product = Product::find($request->get('product_id'));
-
-        if ($product and $request->get('quantity') > 0)
+        //Verificar se exitesm produtos
+        if($product->quantity > 0)
         {
-            $item = new Item($product, $request->get('quantity'));
-            $cart->addItem($item);
-            $request->session()->put('cart', $cart);
-            return redirect()->back()->with('success-message');
+            //Verificar se a quantidade da requisição é positiva
+            if($quantity > 0)
+            {
+                //Soma a quantidade do item armazenado na sessão(carrinho) com a da requisição
+                $total_quantity = $quantity + $item_quantity;
+
+                if($total_quantity <= $product->quantity)
+                {
+                    $item = new Item($product, $request->get('quantity'));
+                    $cart->addItem($item);
+                    $request->session()->put('cart', $cart);
+                    return redirect()->back();
+                }
+                else
+                {
+                    return redirect()->back()->withErrors('A quantidade informada é superior a do estoque. Quantidade do estoque: '.$product->quantity.'.');
+                }
+            }
+            else
+            {
+                return redirect()->back()->withErrors('O valor informado não pode ser negativo.');
+            }
         }
         else
         {
-            return redirect()->back()->withErrors('Houve um erro, o produto selecionado não existe no banco de dados ou a quantidade informada é inválida.');
+            return redirect()->back()->withErrors('Não existem produtos no estoque');
         }
 
         
@@ -57,15 +76,15 @@ class CartController extends Controller {
             return redirect()->back()->withErrors('O cliente referente ao código não existe.');
         }
     }
-    public function addSaller(Request $request)
+    public function addSeller(Request $request)
     {
 
         $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
-        $saller_id = $request->get('saller_id');
-        $saller = Saller::find($saller_id);
+        $seller_id = $request->get('seller_id');
+        $seller = Seller::find($seller_id);
 
-        if($saller != null){
-            $cart->setSaller($saller);
+        if($seller != null){
+            $cart->setSeller($seller);
             $request->session()->put('cart', $cart);
             return redirect()->back()->with('success-message', 'Vendedor adicionado com sucesso!');
         }

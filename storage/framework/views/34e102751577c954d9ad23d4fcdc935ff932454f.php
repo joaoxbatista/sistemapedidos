@@ -2,8 +2,8 @@
 <?php $__env->startSection('content'); ?>
 
 <a href="<?php echo e(route('dashboard.home')); ?>" class="btn btn-default">Voltar</a>
-
-<a href="<?php echo e(route('clients.create')); ?>" class="btn btn-success">Novo <i class="fa fa-plus"></i></a><br><br>
+<a href="<?php echo e(route('clients.create', ['type' => 'cpf'])); ?>" class="btn btn-success">Pessoa <i class="fa fa-plus"></i></a>
+<a href="<?php echo e(route('clients.create', ['type' => 'cnpj'])); ?>" class="btn btn-success">Empresa <i class="fa fa-plus"></i></a><br><br>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -18,7 +18,6 @@
 				<tr>
 					<th>Código</th>
 					<th>Nome</th>
-					<th>CPF</th>
 					<th>Telefone</th>
 					<th>E-mail</th>
 					<th>CEP</th>
@@ -31,7 +30,6 @@
 					<tr>
 						<td><?php echo e($client->id); ?></td>
 						<td><?php echo e($client->name); ?></td>
-						<td><?php echo e($client->cpf); ?></td>
 						<td><?php echo e($client->phone); ?></td>
 						<td><?php echo e($client->email); ?></td>
 						<td><?php echo e($client->cep); ?></td>

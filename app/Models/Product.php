@@ -6,7 +6,16 @@
 
 	class Product extends Model
     {
-		protected $fillable = ['name', 'unit_price', 'weight', 'desc', 'user_id', 'provider_id', 'image'];
+		protected $fillable = [
+		    'name',
+            'unit_price',
+            'weight',
+            'desc',
+            'user_id',
+            'provider_id',
+            'image',
+            'quantity'
+        ];
 
 		public function provider()
         {

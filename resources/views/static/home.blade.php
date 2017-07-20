@@ -17,7 +17,7 @@
 	        	<li><a href="">Documentação</a></li>
 	        	<li><a href="">Contato</a></li>
 	        	<li><a href="{{ route('dashboard.home')}}">Administrador</a></li>
-	        	<li><a href="{{ route('saller.login')}}">Vendedor</a></li>
+	        	<li><a href="{{ route('seller.login')}}">Vendedor</a></li>
 	        </nav>
         </div>
         

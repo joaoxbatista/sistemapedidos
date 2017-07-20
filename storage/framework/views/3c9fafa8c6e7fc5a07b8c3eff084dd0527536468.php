@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-md-3 well">
-            <p>Itens vendidos <span class="label label-primary"><?php echo e(App\Models\Order::sallerItems()); ?></span></p>
+            <p>Itens vendidos <span class="label label-primary"><?php echo e(App\Models\Order::sellerItems()); ?></span></p>
         </div>
 
         <div class="col-md-3 well">
@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-md-3 well">
-            <p>Vendedores <span class="label label-primary"><?php echo e(App\Models\Saller::count()); ?></span></p>
+            <p>Vendedores <span class="label label-primary"><?php echo e(App\Models\Seller::count()); ?></span></p>
         </div>
 
     </div>

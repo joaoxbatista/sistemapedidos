@@ -17,16 +17,16 @@
     </div>
 @endif
 
-@if($order->saller)
+@if($order->seller)
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4>Informações do vendedor</h4>
         </div>
 
         <div class="panel-body">
-            <img class="img-circle" width="70" src="{{ asset('uploads/images/sellers/'.$order->saller->image) }}"></img>
-            <p><strong>Código: </strong>{{ $order->saller->id }}</p>
-            <p><strong>Nome: </strong>{{ $order->saller->name }}</p>
+            <img class="img-circle" width="70" src="{{ asset($order->seller->image) }}"></img>
+            <p><strong>Código: </strong>{{ $order->seller->id }}</p>
+            <p><strong>Nome: </strong>{{ $order->seller->name }}</p>
         </div>
     </div>
 @endif
@@ -76,7 +76,10 @@
             </tfoot>
         </table>
         <a href="{{ route('orders.print', ['id' => $order->id]) }}" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</a>
-        <a href="{{ route('orders.download', ['id' => $order->id]) }}" class="btn btn-success"><i class="fa fa-file"></i> Salvar</a>
+        <a href="{{ route('orders.download', ['id' => $order->id]) }}" class="btn btn-info"><i class="fa fa-file"></i> Salvar</a>
+        @if(!$order->status)
+            <a href="{{ route('orders.confirm', ['id' => $order->id]) }}" class="btn btn-success"><i class="fa fa-check"></i> Confirmar</a>
+        @endif
 
     </div>
 </div>

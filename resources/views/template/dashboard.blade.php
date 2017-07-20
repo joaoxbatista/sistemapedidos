@@ -29,7 +29,7 @@
 
             <div id="content-profile-menu">
                 <h3 id="profile-username">
-                    {{ Auth::user()->name }}
+                    {{ Str::words(Auth::user()->name, 2, '') }}
                 </h3>
 
                 <i class="fa fa-shopping-cart"></i> {{ Session::has('cart') ? Session::get('cart')->getTotalQuantity() : 0 }} produtos
@@ -48,7 +48,7 @@
                     <li><a href="{{ route('products') }}"><i class="fa fa-archive"></i> Produtos</a></li>
                     <li><a href="{{ route('clients') }}"><i class="fa fa-group"></i> Clientes</a></li>
                     <li><a href="{{ route('orders') }}"><i class="fa fa-shopping-cart"></i> Pedidos</a></li>
-                    <li><a href="{{ route('sallers') }}"><i class="fa fa-vcard"></i> Funcionários</a></li>
+                    <li><a href="{{ route('sellers') }}"><i class="fa fa-vcard"></i> Funcionários</a></li>
                 </nav>
             </div>
 

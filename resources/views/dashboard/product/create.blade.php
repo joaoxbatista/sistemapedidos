@@ -27,7 +27,7 @@
 
 			<div class="form-group col-md-2">
 				{{ Form::label('weight', 'Peso') }}
-				{{ Form::text('weight', '', ['class' => 'form-control', 'required' => true]) }}
+				{{ Form::text('weight', '', ['class' => 'form-control']) }}
 			</div>
 
 
@@ -48,7 +48,7 @@
 		</div>
 
 		{{ Form::hidden('user_id', Auth::user()->id )}}
-		{{ Form::submit('Save', ['class' => 'btn btn-success'])}}
+		{{ Form::submit('Salvar', ['class' => 'btn btn-success'])}}
 		{{ Form::close()}}
 
 	</div>

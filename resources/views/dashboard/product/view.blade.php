@@ -16,8 +16,22 @@
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-md-6">
+						<h4>entrada de produtos</h4>
+						{{ Form::open(['route' => 'products.add', 'method' => 'post']) }}
+						{{ Form::hidden('id', $product->id) }}
+						<div class="form-group">
+							{{ Form::label('quantity', 'Quantidade') }}
+							{{ Form::text('quantity', '',['class' => 'form-control']) }}
+						</div>
+						{{ Form::submit('Adicionar', ['class' => 'btn btn-success']) }}
+						{{ Form::close() }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
 						<p><strong>Nome: </strong>{{ $product->name }}</p>
 						<p><strong>Fornecedor: </strong>{{ $product->provider->name }}</p>
+						<p><strong>Quantidade: </strong>{{ $product->quantity }}</p>
 					</div>
 					<div class="col-md-6">
 						<p><strong>Preço unitário: </strong>{{ $product->unit_price }}</p>

@@ -16,9 +16,10 @@ class ClientController extends Controller
         return view('dashboard.client.index', compact('clients'));
     }
     
-    public function create()
+    public function create(Request $request)
     {
-        return view('dashboard.client.create');
+        $type = $request->get('type');
+        return view('dashboard.client.create', compact('type'));
     }
 
     public function store(Request $request)
@@ -27,7 +28,6 @@ class ClientController extends Controller
         	'name' => 'required|max:255',
         	'phone' => 'required|max:16',
         	'email' => 'required|email|max:255|unique:clients',
-            'cep' => 'max:9'
         ]);
 
         Client::create($request->except('_token'));
@@ -55,8 +55,6 @@ class ClientController extends Controller
 
         $this->validate($request, [
         	'name' => 'required|max:255',
-        	'cpf' => 'required|max:12',
-        	'phone' => 'required|max:12',
         	'email' => 'required|max:255'
         ]);
         $client->update($request->except('_token'));
