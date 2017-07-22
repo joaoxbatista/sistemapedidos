@@ -21,14 +21,14 @@ class RedirectIfAuthenticated
             case 'saller':
                 if(Auth::guard($guard)->check())
                 {
-                    return redirect()->route('saller.dashboard');
+                    return redirect()->route('seller.dashboard');
                 }
             break;
 
             default:
                 if(Auth::guard($guard)->check())
                 {
-                    return redirect()->route('dashboard');
+                    return redirect()->route('dashboard.home');
                 }
             break;
         }

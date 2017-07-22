@@ -10,19 +10,16 @@
     </div>
     <div class="panel-body">
         <div class="table-responsive">
-            <table id="data-table" class="table table-bordered table-striped">
+            <table id="products" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
-                    <th>Preço unitário</th>
-                    <th>Fornecedor</th>
-                    <th width="10%">Quantidade</th>
-                    <th class="option-table-header"></th>
+                    <th>Quantidade</th>
                 </tr>
                 </thead>
 
-                <tbody>
+                <!-- <tbody>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($product->id); ?> </td>
@@ -44,7 +41,7 @@
 
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </tbody>
+                </tbody> -->
             </table>
         </div>
     </div>
@@ -57,6 +54,30 @@
 
 <?php $__env->startSection('scripts'); ?>
 <script src="<?php echo e(asset('js/jquery.dataTables.js')); ?>"></script>
+<script>
+    $(function(){
+        //Pega todos os produtos
+        var products = $('#products').DataTable( {
+            "ajax": "/api/products",
+            "columns": [
+                { "data": "id", 
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a href='api/add-to-cart/"+oData.id+"'>"+oData.name+"</a>");
+                    }
+                },
+                { "data": "name" },
+                { "data": "quantity" },
+            ]
+        } );
+
+        $('.odd').click(
+            function()
+            {
+                alert('clicou');
+            }
+        );
+    });
+</script>
 <script src="<?php echo e(asset('js/custom-dataTables.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('template.dashboard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

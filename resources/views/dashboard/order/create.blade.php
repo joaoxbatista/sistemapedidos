@@ -11,19 +11,16 @@
     </div>
     <div class="panel-body">
         <div class="table-responsive">
-            <table id="data-table" class="table table-bordered table-striped">
+            <table id="products" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
-                    <th>Preço unitário</th>
-                    <th>Fornecedor</th>
-                    <th width="10%">Quantidade</th>
-                    <th class="option-table-header"></th>
+                    <th>Quantidade</th>
                 </tr>
                 </thead>
 
-                <tbody>
+                <!-- <tbody>
                 @foreach($products as $product)
                     <tr>
                         <td>{{ $product->id }} </td>
@@ -41,7 +38,7 @@
                         {{ Form::close()}}
                     </tr>
                 @endforeach
-                </tbody>
+                </tbody> -->
             </table>
         </div>
     </div>
@@ -54,5 +51,29 @@
 
 @section('scripts')
 <script src="{{ asset('js/jquery.dataTables.js')}}"></script>
+<script>
+    $(function(){
+        //Pega todos os produtos
+        var products = $('#products').DataTable( {
+            "ajax": "/api/products",
+            "columns": [
+                { "data": "id", 
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a href='api/add-to-cart/"+oData.id+"'>"+oData.name+"</a>");
+                    }
+                },
+                { "data": "name" },
+                { "data": "quantity" },
+            ]
+        } );
+
+        $('.odd').click(
+            function()
+            {
+                alert('clicou');
+            }
+        );
+    });
+</script>
 <script src="{{ asset('js/custom-dataTables.js')}}"></script>
 @endsection
