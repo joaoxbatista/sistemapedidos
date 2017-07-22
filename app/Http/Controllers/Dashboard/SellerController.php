@@ -51,7 +51,7 @@ class SellerController extends Controller
             $name = time().$request->get('name').'.'.$extension;
             $file = $request->file('file');
 
-            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'sellers'.$dir.$name));
+            Image::make($file)->resize(240, 240)->save(public_path('images'.$dir.'sellers'.$dir.$name));
             $request['image'] = 'uploads/images/sellers/'.$name;
         }
 
@@ -107,7 +107,7 @@ class SellerController extends Controller
             $name = time().'.'.$extension;
             $file = $request->file('file');
 
-            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'sellers'.$dir.$name));
+            Image::make($file)->resize(240, 240)->save(public_path('images'.$dir.'sellers'.$dir.$name));
             $request['image'] = 'uploads/images/sellers/'.$name;
         }
         $seller = Seller::find($request->get('id'));

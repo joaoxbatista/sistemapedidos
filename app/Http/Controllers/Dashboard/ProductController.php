@@ -44,7 +44,7 @@ class ProductController extends Controller
             $name = time().$request->get('name').'.'.$extension;
             $file = $request->file('file');
 
-            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'products'.$dir.$name));
+            Image::make($file)->resize(240, 240)->save('imgs'.$dir.'products'.$dir.$name));
             $request['image'] = $name;
         }
 
@@ -89,7 +89,7 @@ class ProductController extends Controller
             $name = time().$request->get('name').'.'.$extension;
             $file = $request->file('file');
 
-            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'products'.$dir.$name));
+            Image::make($file)->resize(240, 240)->save(public_path('images'.$dir.'products'.$dir.$name));
             $request['image'] = $name;
         }
 
