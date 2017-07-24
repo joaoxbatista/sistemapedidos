@@ -156,7 +156,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 Route::get('cart', 'Dashboard\CartController@index')->name('cart');
 Route::post('cart/add', 'Dashboard\CartController@add')->name('cart.add');
 Route::post('cart/add/client', 'Dashboard\CartController@addClient')->name('cart.add.client');
+Route::get('cart/remove/client', 'Dashboard\CartController@removeClient')->name('cart.remove.client');
+
 Route::get('cart/remove/{id}', 'Dashboard\CartController@remove')->name('cart.remove');
+
+
 Route::get('cart/clear', 'Dashboard\CartController@clear')->name('cart.clear');
 Route::get('cart/print', 'Dashboard\CartCOntroller@print')->name('cart.print');
 

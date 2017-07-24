@@ -27,14 +27,55 @@
 	</div>
 </div>
 
-<div class="panel panel-defaul">
+<div class="panel panel-default">
 	<div class="panel-heading">
-		<h4>Compras</h4>
+		<h4>Informações das compra</h4>
 	</div>
 
 	<div class="panel-body">
-		<?php echo e($client->orders); ?>
+		<div class="table-responsive">
+			<table id="data-table" class="table table-bordered">
 
+				<thead>
+				<tr>
+					<th>Código</th>
+					<th>Data de Compra</th>
+					<th>Data do Pagamento</th>
+					<th>Vendedor</th>
+					<th>Total</th>
+				</tr>
+				</thead>
+
+				<tbody>
+				<?php $__currentLoopData = $client->orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+					<tr>
+						
+						<td style="color: white; font-weight: bold;"
+                        <?php if($order->status): ?>
+                            class="label-success"
+                        <?php else: ?>
+                            class="label-danger"
+                        <?php endif; ?>
+                        >
+                        	<?php echo e($order->id); ?>
+
+                        </td>
+						<td><?php echo e($order->buy_date); ?></td>
+						<td><?php echo e($order->due_date); ?></td>
+						<td>
+							<?php if(isset($order->seller->name)): ?>
+								<?php echo e($order->seller->id); ?> - <?php echo e($order->seller->name); ?>
+
+							<?php else: ?>
+								Sem vendedor					
+							<?php endif; ?>
+						</td>
+						<td>R$ <?php echo e($order->total); ?></td>
+					</tr>
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 <?php $__env->stopSection(); ?>

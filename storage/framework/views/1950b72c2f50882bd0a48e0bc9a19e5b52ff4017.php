@@ -32,9 +32,6 @@
                     <?php echo e(Str::words(Auth::user()->name, 2, '')); ?>
 
                 </h3>
-
-                <i class="fa fa-shopping-cart"></i> <?php echo e(Session::has('cart') ? Session::get('cart')->getTotalQuantity() : 0); ?> produtos
-
             </div>
 
         </div>
@@ -88,11 +85,13 @@
         </div>
 
         <?php echo $__env->yieldContent('content'); ?>
+        <?php echo $__env->yieldContent('modal'); ?>
     </div>
 </div>
 
 <!-- Importação dos Scrips JS-->
 <script src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/perfect-scrollbar.jquery.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/menu.js')); ?>"></script>
 <script>

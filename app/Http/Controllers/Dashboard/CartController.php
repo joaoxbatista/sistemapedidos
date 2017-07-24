@@ -107,4 +107,13 @@ class CartController extends Controller {
         return redirect()->back();
     }
 
+     public function removeClient(Request $request)
+    {
+        $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
+        $cart->setClient(null);
+        $request->session()->put('cart', $cart);
+        return redirect()->back();
+    }
+
+
 }

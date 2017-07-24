@@ -12,6 +12,7 @@ class Seller extends Authenticatable
     protected $guard = 'seller';
 
     public $fillable = ['cpf', 'name', 'payment' ,'comission', 'email', 'image', 'password', 'user_id'];
+
     protected $hidden = ['password', 'remember_token'];
 
     public function orders(){

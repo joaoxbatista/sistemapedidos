@@ -15,7 +15,7 @@
 
 		public function getBuyDateAttribute()
         {
-			return date('d/m/Y H:i:s', strtotime($this->attributes['buy_date']));
+			return date('d/m/Y', strtotime($this->attributes['buy_date']));
 		}
 
         public function getDueDateAttribute()

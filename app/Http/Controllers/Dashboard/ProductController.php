@@ -25,11 +25,11 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        /*
-        | Realiazr validação dos produtos
-        */
-
-
+        
+        if(is_null($request->get('quantity'))){
+            $request['quantity'] = 0;
+        }
+        //Realiazr validação dos produtos
         $this->validate($request, [
             'name' => 'required|min:3|max:255',
             'unit_price' => 'required|numeric',
@@ -37,6 +37,7 @@ class ProductController extends Controller
             'file' => 'image'
         ]);
 
+        //Validar imagem
         if($request->file('file') != null)
         {
             $dir = DIRECTORY_SEPARATOR;
@@ -48,6 +49,7 @@ class ProductController extends Controller
             $request['image'] = $name;
         }
 
+        //Criar produto
         Product::create($request->except('_token'));
         return redirect()->back()->with('success-message', 'Fornecedor cadastrado com sucesso!');
     }
@@ -95,7 +97,7 @@ class ProductController extends Controller
 
         $product->update($request->except('_token'));
         
-        return redirect()->back()->with('success-message', 'Fornecedor atualizado com sucesso!');
+        return redirect()->back()->with('success-message', 'Produto atualizado com sucesso!');
     }
 
     public function delete(int $id)

@@ -28,13 +28,53 @@
 	</div>
 </div>
 
-<div class="panel panel-defaul">
+<div class="panel panel-default">
 	<div class="panel-heading">
-		<h4>Compras</h4>
+		<h4>Informações das compra</h4>
 	</div>
 
 	<div class="panel-body">
-		{{ $client->orders }}
+		<div class="table-responsive">
+			<table id="data-table" class="table table-bordered">
+
+				<thead>
+				<tr>
+					<th>Código</th>
+					<th>Data de Compra</th>
+					<th>Data do Pagamento</th>
+					<th>Vendedor</th>
+					<th>Total</th>
+				</tr>
+				</thead>
+
+				<tbody>
+				@foreach($client->orders as $order)
+					<tr>
+						
+						<td style="color: white; font-weight: bold;"
+                        @if($order->status)
+                            class="label-success"
+                        @else
+                            class="label-danger"
+                        @endif
+                        >
+                        	{{ $order->id}}
+                        </td>
+						<td>{{ $order->buy_date }}</td>
+						<td>{{ $order->due_date }}</td>
+						<td>
+							@if(isset($order->seller->name))
+								{{ $order->seller->id }} - {{ $order->seller->name}}
+							@else
+								Sem vendedor					
+							@endif
+						</td>
+						<td>R$ {{ $order->total}}</td>
+					</tr>
+				@endforeach
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 @endsection

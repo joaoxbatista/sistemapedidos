@@ -23,7 +23,7 @@
             </tr>
         </thead>
 
-        <!-- <tbody>
+        <tbody>
             @foreach($products as $product)
             <tr>
                 <td>{{ $product->id }} </td>
@@ -41,13 +41,12 @@
                 {{ Form::close()}}
             </tr>
             @endforeach
-        </tbody> -->
+        </tbody>
 
     
     </table>
 </div>
 
-    </div>
 </div>
 
 @include('dashboard.cart.cart')

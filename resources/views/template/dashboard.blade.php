@@ -31,9 +31,6 @@
                 <h3 id="profile-username">
                     {{ Str::words(Auth::user()->name, 2, '') }}
                 </h3>
-
-                <i class="fa fa-shopping-cart"></i> {{ Session::has('cart') ? Session::get('cart')->getTotalQuantity() : 0 }} produtos
-
             </div>
 
         </div>
@@ -86,11 +83,13 @@
         </div>
 
         @yield('content')
+        @yield('modal')
     </div>
 </div>
 
 <!-- Importação dos Scrips JS-->
 <script src="{{ asset('js/jquery.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/perfect-scrollbar.jquery.min.js')}}"></script>
 <script src="{{ asset('js/menu.js')}}"></script>
 <script>
