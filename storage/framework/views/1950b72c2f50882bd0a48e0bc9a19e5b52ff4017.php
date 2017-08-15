@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $__env->yieldContent('title'); ?></title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/app.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/perfect-scrollbar.min.css')); ?>">
+
 
     <?php echo $__env->yieldContent('styles'); ?>
 </head>
@@ -66,6 +68,8 @@
     <div id="content">
 
         <div id="alert-area">
+            <?php echo $__env->yieldContent('alerts'); ?>
+
             <?php if(session()->has('success-message')): ?>
                 <div class="alert alert-success">
                     <?php echo e(session()->get('success-message')); ?>
@@ -94,6 +98,7 @@
 <script src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/perfect-scrollbar.jquery.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/menu.js')); ?>"></script>
+
 <script>
     $(document).ready(function(){
         $('#content').perfectScrollbar({

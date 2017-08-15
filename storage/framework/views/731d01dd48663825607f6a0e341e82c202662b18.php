@@ -9,7 +9,7 @@
         <div class="panel-body">
             <p>Tem certeza que deseja remover o vendedor com as seguinte informações ?</p>
             <p><strong>Código: </strong><?php echo e($order->id); ?></p>
-            <p><strong>Código: </strong><?php echo e($order->buy_date); ?></p>
+            <p><strong>Data de compra: </strong><?php echo e($order->buy_date); ?></p>
 
             <?php echo e(Form::open(['method' => 'post', 'route' => 'orders.destroy'])); ?>
 

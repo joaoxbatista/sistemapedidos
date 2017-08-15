@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Provider;
+use App\Models\Category;
 use Image;
+use Datatables;
+
 class ProductController extends Controller
 {
     public function index()
@@ -20,7 +23,10 @@ class ProductController extends Controller
         $providers = Provider::all();
         $providers = array_pluck($providers, 'name', 'id');
 
-        return view('dashboard.product.create', compact('providers'));
+        $categories = Category::all();
+        $categories = array_pluck($categories, 'name', 'id');
+
+        return view('dashboard.product.create', compact(['providers', 'categories']));
     }
 
     public function store(Request $request)
@@ -126,5 +132,10 @@ class ProductController extends Controller
             $product->update();
             return redirect()->back()->with('success-message', $quantity.' do produto '.$product->name.'adicionada ao estoque.');
         }
+    }
+
+    public function dataTables(Request $request)
+    {
+        return Datatables::eloquent(Product::query())->make(true);
     }
 }

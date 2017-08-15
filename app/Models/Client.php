@@ -13,4 +13,29 @@
 		{
 			return $this->hasMany('App\Models\Order');
 		}
+
+		public function getIdentify($type = null){
+			if(is_null($type))
+			{
+				if(!is_null($this->attributes['cpf']))
+				{
+					return $this->attributes['cpf'];
+				}
+
+				return $this->attributes['cnpj'];
+			}
+
+			if(!is_null($this->attributes['cpf']))
+			{
+				return "CPF";
+			}
+			else{
+				return "CNPJ";
+			}
+
+			
+			
+
+			
+		}
 	}

@@ -22,5 +22,11 @@ Route::get('', 'Site\StaticController@home')->name('home');
 
 Route::get('about', 'Site\StaticController@about')->name('about');
 
+Route::get('datatable', function(Request $request){
+	return view('datatable');
+});
 
+Route::get('validate', function(Request $request){
+	return view('tests.validate');
+});
 

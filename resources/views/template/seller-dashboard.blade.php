@@ -64,6 +64,9 @@
     <div id="content">
 
         <div id="alert-area">
+
+            @yield('alerts')
+            
             @if(session()->has('success-message'))
                 <div class="alert alert-success">
                     {{ session()->get('success-message') }}

@@ -39,9 +39,15 @@
         <p><strong>Data da compra:</strong> <?php echo e($order->buy_date); ?></p>
         <?php if($order->status): ?>
             <p><strong>Status:</strong> <span class="label-success label">Pagamento realizado.</span></p>
+
+        <?php elseif(!$order->status and !is_null($order->due_date)): ?>
+            <p><strong>Status:</strong> <span class="label-danger label">Parcelas pendentes</span></p>
         <?php else: ?>
-            <p><strong>Status:</strong> <span class="label-danger label">Data de vencimento <?php echo e($order->due_date); ?></span></p>
+            <p><strong>Data de pagamento:</strong> <span class="label-danger label"><?php echo e($order->due_date); ?> </span></p>
         <?php endif; ?>
+
+       
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -82,5 +88,48 @@
 
     </div>
 </div>
+
+<?php if(!is_null($order->parcels())): ?>
+  
+    <div class="panel panel-default">   
+        <div class="panel-heading"> 
+            <h4>Parcelas</h4>
+        </div>
+        <div class="panel-body"> 
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Código</th>
+                <th>Valor</th>
+                <th>Data de Pagamento</th>
+                <th width="60px"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <?php $__currentLoopData = $order->parcels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parcel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td><?php echo e($parcel->id); ?></td>
+                    <td><?php echo e($parcel->value); ?></td>
+                    <td><?php echo e($parcel->pay_date); ?></td>
+                    <td>
+
+                    <a href="<?php echo e(route('checks.create', ['id' => $parcel->id])); ?>" class="btn btn-success">Adicionar Cheque</a>
+
+                    <?php if(!$parcel->status): ?>
+                        <a href="<?php echo e(route('parcel.confirm', ['id' => $parcel->id])); ?>" class="btn btn-success">Pagar</a>
+                    <?php else: ?>
+                        Pagamento confirmado
+                    <?php endif; ?>
+                    </td>
+                   
+                </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </tbody>
+                
+        </div>
+    </div>
+<?php endif; ?>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('template.dashboard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

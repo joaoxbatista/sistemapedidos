@@ -8,6 +8,28 @@
 		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'seller_id', 'status'];
 		public $timestamps = false;
 
+        public function getStatusAttribute()
+        {
+            $parcels = $this->parcels;
+            if(is_null($parcels))
+            {
+                $this->attributes['status'];
+            }
+            else
+            {
+               
+                foreach($parcels as $parcel)
+                {
+                    if(!$parcel->status)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+
 		public function client()
         {
 			return $this->belongsTo('App\Models\Client');
@@ -50,5 +72,10 @@
 			return $this->belongsToMany('App\Models\Product', 'order_product', 'order_id', 'product_id')
 			->withPivot('total', 'qtd_itens');
 		}
+
+        public function parcels()
+        {
+            return $this->hasMany('App\Models\Parcel');
+        }
 
 	}

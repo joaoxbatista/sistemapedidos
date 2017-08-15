@@ -48,7 +48,7 @@
 						<img width="120px" src="<?php echo e(asset('uploads/images/products/'.$product->image)); ?>" alt="<?php echo e($product->name); ?>">
 					<?php endif; ?>
 				</div>
-
+¹
 				<div class="form-group col-md-6">
 					<?php echo e(Form::label('file', 'Fotografia')); ?>
 

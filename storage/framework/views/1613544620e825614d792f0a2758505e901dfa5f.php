@@ -1,6 +1,8 @@
 <?php $__env->startSection('title'); ?> Dashboard | Home <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-<a href="<?php echo e(route('products')); ?>" class="btn btn-default">Voltar</a><br><br>
+<a href="<?php echo e(route('products')); ?>" class="btn btn-default">Voltar</a>
+<a href="<?php echo e(route('categories.create')); ?>" class="btn btn-success">Nova Categoria</a>
+<a href="<?php echo e(route('providers.create')); ?>" class="btn btn-success">Novo Fornecedor</a><br><br>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -18,13 +20,25 @@
 
 			</div>
 			<div class="form-group col-md-3">
+				<?php echo e(Form::label('category_id', 'Categoria')); ?>
+
+				<?php echo e(Form::select('category_id', $categories , [] ,['class' => 'form-control'])); ?>
+
+
+			</div>
+			
+			<div class="form-group col-md-3">
 				<?php echo e(Form::label('provider_id', 'Fornecedor')); ?>
 
 				<?php echo e(Form::select('provider_id', $providers , [] ,['class' => 'form-control'])); ?>
 
 			</div>
 
-			<div class="form-group col-md-3">
+		</div>
+
+		<div class="row">
+			
+			<div class="form-group col-md-2">
 				<?php echo e(Form::label('unit_price', 'Preço unitário')); ?>
 
 				<?php echo e(Form::text('unit_price', '', ['class' => 'form-control', 'required' => true])); ?>
@@ -38,10 +52,13 @@
 
 			</div>
 
+			<div class="form-group col-md-2">
+				<?php echo e(Form::label('quantity', 'Quantidade')); ?>
 
-		</div>
+				<?php echo e(Form::text('quantity', '', ['class' => 'form-control'])); ?>
 
-		<div class="row">
+			</div>
+
 			<div class="form-group col-md-6">
 				<?php echo e(Form::label('file', 'Fotografia')); ?>
 

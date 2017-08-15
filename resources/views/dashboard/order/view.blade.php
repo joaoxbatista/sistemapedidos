@@ -40,9 +40,15 @@
         <p><strong>Data da compra:</strong> {{ $order->buy_date }}</p>
         @if($order->status)
             <p><strong>Status:</strong> <span class="label-success label">Pagamento realizado.</span></p>
+
+        @elseif(!$order->status and !is_null($order->due_date))
+            <p><strong>Status:</strong> <span class="label-danger label">Parcelas pendentes</span></p>
         @else
-            <p><strong>Status:</strong> <span class="label-danger label">Data de vencimento {{ $order->due_date }}</span></p>
+            <p><strong>Data de pagamento:</strong> <span class="label-danger label">{{ $order->due_date }} </span></p>
         @endif
+
+       
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -83,4 +89,47 @@
 
     </div>
 </div>
+
+@if(!is_null($order->parcels()))
+  
+    <div class="panel panel-default">   
+        <div class="panel-heading"> 
+            <h4>Parcelas</h4>
+        </div>
+        <div class="panel-body"> 
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Código</th>
+                <th>Valor</th>
+                <th>Data de Pagamento</th>
+                <th width="60px"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @foreach($order->parcels as $parcel)
+                <tr>
+                    <td>{{ $parcel->id }}</td>
+                    <td>{{ $parcel->value }}</td>
+                    <td>{{ $parcel->pay_date }}</td>
+                    <td>
+
+                    <a href="{{ route('checks.create', ['id' => $parcel->id])}}" class="btn btn-success">Adicionar Cheque</a>
+
+                    @if(!$parcel->status)
+                        <a href="{{ route('parcel.confirm', ['id' => $parcel->id]) }}" class="btn btn-success">Pagar</a>
+                    @else
+                        Pagamento confirmado
+                    @endif
+                    </td>
+                   
+                </tr>
+            @endforeach
+            </tbody>
+                
+        </div>
+    </div>
+@endif
 @endsection

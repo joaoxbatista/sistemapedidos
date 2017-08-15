@@ -16,6 +16,7 @@ class CreateOrderProduct extends Migration
         Schema::create('order_product', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('total', 10, 2);
+            $table->decimal('discount', 10, 2)->nullable();
             $table->integer('qtd_itens');
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();

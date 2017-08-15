@@ -181,6 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Str' => Illuminate\Support\Str::class,
+        'DataTables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];
