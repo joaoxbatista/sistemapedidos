@@ -24,7 +24,7 @@ class CreateChecksTable extends Migration
             $table->string('cnpj')->nullable();
             $table->string('cpf')->nullable();
             $table->integer('parcel_id')->unsigned();
-            $table->foreign('parcel_id')->references('id')->on('parcels')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('parcel_id')->references('id')->on('parcels')->onDelete('no action')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -231,7 +231,7 @@
     }
 
     //Seta quantidade de parcelas
-    public function setParcelsQuantity(int $quantity){
+    public function setParcelsQuantity($quantity){
         $this->parcelsQuantity = $quantity;
     }
 

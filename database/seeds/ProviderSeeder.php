@@ -11,22 +11,25 @@ class ProviderSeeder extends Seeder
      */
     public function run()
     {
-        $providers = [
+        for($i = 0; $i < 40; $i++)
+        {
+            $providers = [
 
-            ['name' => "Nike Sapatos", 
-            'cnpj' => "1232322123123",
+            ['name' => "Empresa {$i}", 
+            'cnpj' => "000000000000{$i}",
             'phone' => "123019230133",
-            'email' => "contact@nike.com",
+            'email' => "empresa@empresa{$i}.com",
             'cep' => "12301294",
             'street' => "US Solevan",
             'district' => "SQ Loborian",
             'city' => "Quorion",
             'state' => "New Mexico",
             'user_id' => 1],
-         
-        ];
 
-        DB::table('providers')->insert($providers);
+            ];
+
+            DB::table('providers')->insert($providers);
+            }
 
     }
 }

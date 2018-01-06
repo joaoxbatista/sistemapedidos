@@ -28,11 +28,19 @@ class CartController extends Controller
 
     public function add(Request $request) 
     {
-        //Definição das variaveis
+        
         $product_id = $request->get('product_id');
         $quantity = $request->get('quantity');
+        $product = !is_null(Product::find($product_id)) ? Product::find($product_id) : null;
+        if(is_null($product))
+        {
+            return 'Produto inexistente';
+        }
+
+
+
         $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
-        $product = Product::find($product_id);
+
         $item_quantity = isset($cart->getItems()[$product_id]) ? $cart->getItems()[$product_id]->quantity : 0;
 
         //Verificar se exitesm produtos
@@ -61,7 +69,7 @@ class CartController extends Controller
             else
             {
                 // return redirect()->back()->withErrors('O valor informado não pode ser negativo.');
-                return 'O valor informado não pode ser negativo.';
+                return 'Quantidade inválida';
             }
         }
         else

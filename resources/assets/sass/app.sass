@@ -1,156 +1,135 @@
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap'
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables'
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins'
-
 @import '../node_modules/font-awesome/scss/font-awesome'
-
-@import 'variable'
-@import 'animation'
+@import '_variables'
 @import 'font'
-@import 'table'
-@import 'images'
-@import 'titles'
-@import 'datatables'
 
-*
-    box-sizing: border-box
-    font-family: Quicksand
-a
-    text-decoration: none
-    color: $blue-light
-    font-weight: bold
+/*Estilos para posicionamento*/
 
-    &:hover
-        color: $blue-neon
+.bot-20
+    margin-bottom: 20px
+.bot-10
+    margin-bottom: 10px
 
-.content-expand
-    width: 100vw !important
-    transition: all .3s
-.show
-    margin-left: -20vw
-    transition: all .3s
+.top-20
+    margin-top: 20px
 
-#app
+.top-10
+    margin-top: 10px
 
-    position: relative
+#steps
+    margin-top: 10px
+    margin-bottom: 30px
 
-    #button-menu
-        border: none
-        border-radius: 50px
-        width: 50px
-        height: 50px
-        padding: 0px
-        background-color: $yellow-dark
-        color: $white
+
+
+/*Estilos da entrada de produtos*/
+#input-products, 
+    background: $grey
+    margin-top: 10px
+    margin-bottom: 10px
+    padding: 10px
+    border-radius: 6px
+    box-shadow: 2px 2px 4px rgba(190, 190, 190, .8)
+
+/*Estilos do carrinho*/
+#cart
+    box-shadow: 2px 2px 4px rgba(190, 190, 190, .8)
+    background: $grey
+    padding: 10px
+    border-radius: 6px
+
+    .cart-title
         font-weight: bold
-        text-align: center
-        line-height: 50px
-        box-sizing: border-box
-        position: fixed
-        right: 10px
-        margin-top: 15px
-        transition: all .3
-        z-index: 400
-
-    #side-menu
-        background-color: $blue
-        overflow: hidden
-        height: 100vh
-        width: 20vw
-        z-index: 10
-        transition: all .3s
-
-        position: fixed
-        padding: 10px
-
-        &::-webkit-scrollbar
-            width: 0px
-
-
-
-
-        #profile-menu
-            background: linear-gradient(rgba(0,0,0, .6), rgba(0, 0, 0, .7)), url('../imgs/bg-profile.jpg')
-            background-size: cover
-            position: absolute
-            width: 100%
-            left: 0px
-            top: 0px
-            height: 100px
-            z-index: 1
-            padding: 0px 10px
-            color: $grey
-
-            #content-profile-menu
-                margin-top: 20px
-                float: right
-                display: block
-                width: 200px
-                #profile-username
-                    line-height: 0px
-                #last-visit
-                    line-height: 5px
-                    font-size: .8em
-
-            #profile-image
-                margin-top: 20px
-                height: 50px
-                width: 50px
-                border-radius: 50px
-                float: left
-                display: block
-
-        #content-side-menu
-            margin-top: 100px
-            display: block
-
-            .group-menu
-                border-bottom: 1px solid rgba(0, 0, 0, .1)
-                padding: 6px 4px 20px 10px
-                margin-bottom: 5px
-
-                &:last-of-type
-                    border-bottom: none
-
-                h3
-                    color: $white
-                    font-family: Rubik
-                    background: rgba(0, 0, 0, .09)
-                    padding-left: 10px
-                    padding-top: 5px
-                    padding-bottom: 5px
-                    border-radius: 5px
-                    font-size: 18px
-                nav
-                    list-style: none
-
-                    li
-                        a
-                            color: $grey-dark
-                            font-family: Rubik
-                            font-weight: lighter
-                            padding: 6px 6px
-                            display: inline-block
-                            display: block
-                            margin-bottom: 8px
-                            border-radius: 2px
-                            color: $white
-                        i
-                            width: 30px
-
-    #content
-        background-color: $white
-        overflow: hidden
-        position: relative
-        padding: 4em 4em 4em 6em
-        height: 100vh
-        width: 80vw
-        float: right
-        transition: all .3s
         margin-top: 0px
         color: $grey-dark
-        z-index: 4
+        letter-spacing: 4px
+        padding: 4px
+        font-size: 14px
+        text-align: center
+        text-transform: uppercase
+        border-radius: 4px
+
+    .cart-info
+        margin: 0px 15px
+        padding: 10px
+        font-size: 20px
+        border-radius: 30px
+        text-align: center
+        color: #F5F5F5
+        background: $grey-dark
+        font-weight: bold
+
+        .cart-info-title
+            text-transform: lowercase
+            font-size: 14px
+            font-weight: bold
+        
+
+.hb-provider-view, .hb-product-view
+    
+    position: fixed 
+    width: 100%
+    height: 100%
+    padding: 10px 20px
+    z-index: 3
+    background: $white
+    top: 0px
+    left: 0px
+    -webkit-transition: all .6 s
+    transition: all .6 s
 
 
-@import 'phone'
+    .btn-close
+        text-decoration: none
+        color: $red
+        position: fixed
+        right: 30px
+        top: 20px
+        font-size: 20px
+        border: none
+        background: transparent
 
+.icon
+    cursor: pointer
+    
+#tools
+    display: block
+    padding: 10px 0px 40px 0px
+
+    background: linear-gradient(rgba(20, 150, 50, .8), rgba(100, 250, 110, .8) ), url('../img/background.jpg')
+    background-size: cover
+    background-repeat: no-repeat
+    background-attachment: fixed
+    font-family: Quicksand
+    color: $white
+    position: relative
+    
+    .tool
+
+        .content
+            border-radius: 4px
+            box-sizing: border-box
+            padding: 10px
+
+            &:after
+                content: ''
+                background: url('../img/down.png')
+                height: 20px
+                width: 20px
+                margin: 0 auto
+                border-radius: 5px
+                display: block
+
+
+#login-bar
+    display: block
+    min-height: 50px
+    padding: 20px 40px
+    a
+        color: $green
+        font-family: Rubik
+        padding: 0px 30px
+        display: inline-block
+        text-decoration: none

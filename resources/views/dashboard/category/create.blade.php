@@ -1,7 +1,7 @@
-@extends('template.dashboard')
+@extends('templates.admin-dashboard')
 @section('title') Dashboard | Home @endsection
 @section('content')
-<a href="{{ route('products') }}" class="btn btn-default">Voltar</a><br><br>
+<a href="{{ route('admin-dashboard.products') }}" class="btn btn-default">Voltar</a><br><br>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="panel-body">
-		{{ Form::open(['method' => 'post', 'route' => 'categories.store'])}}
+		{{ Form::open(['method' => 'post', 'route' => 'admin-dashboard.categories.store'])}}
 		<div class="row">
 			<div class="form-group col-md-4">
 				{{ Form::label('name', 'Nome') }}

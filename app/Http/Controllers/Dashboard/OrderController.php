@@ -15,20 +15,13 @@ use Carbon\Carbon;
 
 class OrderController extends Controller {
 
-    /**
-     * Método para retornar a view com a lista de pedidos cadastrados no banco
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function index()
     {
-        $orders = Order::all();
-        return view('dashboard.order.index', compact('orders'));
+        
+        return view('admin-dashboard.order.index');
     }
 
-    /**
-     * Método para retornar a view de criação dos pedidos
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function create()
     {
         $products = Product::all();
@@ -39,11 +32,6 @@ class OrderController extends Controller {
         return view('dashboard.order.create', compact(['products', 'clients', 'cart']));
     }
 
-    /**
-     * Método para salvar informações do pedido.
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
 
@@ -66,7 +54,12 @@ class OrderController extends Controller {
         //Caso exista um prazo para pagar o status se torna false, se não se torna verdadeiro
         $due_date = $request->get('due_date') != null ? $request->get('due_date') : null;
 
-        
+        $type = 'cash';
+
+        if(count($parcels) > 1){
+            $type = 'parcels';
+        }
+
 
         //Desconta o valor da compra caso haja uma data de pagamento exista e limite de crédito
         if($client_id != null)
@@ -76,7 +69,6 @@ class OrderController extends Controller {
             //Se existir data de pagamento
             if(!is_null($due_date) or !is_null($parcels)){
 
-                $status = false;
 
                 //Se o crédito do cliente for insuficiente
                 if($cart->getClient()->limit_credit < $cart->getTotalPrice()) 
@@ -96,6 +88,7 @@ class OrderController extends Controller {
 
         }
         
+        
 
         //Cria um novo pedido
         $order = Order::create([
@@ -106,6 +99,7 @@ class OrderController extends Controller {
         'status' => $status,
         'total' => $cart->getTotalPrice(),
         'discount' => $cart->getDiscount(),
+        'type' => $type
         ]);
 
         //Adicionar os items ao pedido
@@ -140,33 +134,18 @@ class OrderController extends Controller {
         return redirect()->back()->with('success-message', 'Pedido registrado com sucesso!');
     }
 
-    /**
-     * Método para retornar a view de visualização do pedido passando uma id.
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function show($id)
     {
         $order = Order::find($id);
         return view('dashboard.order.view', compact('order'));
     }
 
-    /**
-     * Método para retornar a view de edição do pedido.
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function edit($id)
     {
         $order = Order::find($id);
         return view('dashboard.order.edit', compact('order'));
     }
 
-    /**
-     * Método para atualização das informações do pedido.
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Request $request)
     {
         $order = Order::find($request->get('id'));
@@ -174,17 +153,12 @@ class OrderController extends Controller {
         return redirect()->back()->with('success-message', 'Pedido atualizado com sucesso!');
     }
 
-    public function delete(Request $request, int $id)
+    public function delete(Request $request, $id)
     {
         $order = Order::find($id);
         return view('dashboard.order.delete', compact('order'));
     }
 
-    /**
-     * Método para remoção do pedido.
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Request $request)
     {
         $order = Order::find($request->get('id'));
@@ -192,7 +166,7 @@ class OrderController extends Controller {
         return redirect()->route('orders')->with('success-message', 'Pedido removido com sucesso!');
     }
 
-    public function payment_confirm(int $id)
+    public function payment_confirm($id)
     {
         if(!is_null($id))
         {
@@ -204,21 +178,6 @@ class OrderController extends Controller {
             return redirect()->back()->withd('success-message', 'Pagamento confirmado');
         }
     }
-
-    /**
-     * Método para gerar pdf de impressão do pedido.
-     * @param $id
-     * @return mixed
-     */
-    public function print($id)
-    {
-        $order = Order::find($id);
-
-        $pdf = \PDF::loadView('dashboard.order.pdf', compact('order'))->setPaper('a4', 'landscape');
-
-        return $pdf->stream(time().' id('.$order->id.').pdf');
-    }
-
 
     public function download($id)
     {
@@ -273,8 +232,7 @@ class OrderController extends Controller {
         $cart->updateParcels();
         $request->session()->put('cart', $cart);
         return redirect()->back();
-
-
-
     }
+
+
 }

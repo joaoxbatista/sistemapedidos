@@ -1,25 +1,81 @@
-@extends('template.simple')
+@extends('templates.simple')
 
 @section('title') Home - SGP Hbioss @endsection
 @section('styles')
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/home.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/home.css')}}">
 @endsection
 
 @section('content') 
-   <div class="container">
-        
-        <div class="title-content">
-        	<img src="{{ asset('imgs/cart.png') }}" class="image-center">
-        	<h3 class="title-home">Sistema de Pedidos</h3>
-        </div>
-        <div class="home-navegation">
-        	<nav>
-	        	<li><a href="">Documentação</a></li>
-	        	<li><a href="">Contato</a></li>
-	        	<li><a href="{{ route('dashboard.home')}}">Administrador</a></li>
-	        	<li><a href="{{ route('seller.login')}}">Vendedor</a></li>
-	        </nav>
-        </div>
-        
-   </div>
+
+<div id="app">
+
+	<section id="login-bar">
+		<a href="{{ route('login') }}">Administração</a>	
+		<a href="">Funcionário</a>	
+	</section>
+
+	<section id="tools">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 tool">
+					<div class="header text-center">
+						<h3><i class="fa fa-shopping-basket"></i></h3>
+						<h4>Estoque</h4>
+					</div>
+					<div class="content">
+						<p class="text-justify">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-3 tool">
+					<div class="header text-center">
+						<h3><i class="fa fa-line-chart"></i></h3>
+						<h4>Relatórios</h4>
+					</div>
+					<div class="content">
+						<p class="text-justify">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						</p>
+					</div>
+				</div>
+
+
+				<div class="col-md-3 tool">
+					<div class="header text-center">
+						<h3><i class="fa fa-users"></i></h3>
+						<h4>Clientes</h4>
+					</div>
+					<div class="content">
+						<p class="text-justify">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						</p>
+					</div>
+				</div>
+
+
+				<div class="col-md-3 tool">
+					<div class="header text-center">
+						<h3><i class="fa fa-vcard-o"></i></h3>
+						<h4>Funcionários</h4>
+					</div>
+					<div class="content">
+						<p class="text-justify">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						</p>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</section>	
+</div>
+
+
 @endsection

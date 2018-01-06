@@ -1,5 +1,5 @@
 
-@extends('template.dashboard')
+@extends('templates.admin-dashboard')
 @section('title') Dashboard | Home @endsection
 @section('styles') 
 
@@ -7,58 +7,56 @@
 
 @section('content')
 
-<a href="{{ route('dashboard.home') }}" class="btn btn-default">Voltar</a>
-<a href="{{ route('products.create') }}" class="btn btn-success">Novo <i class="fa fa-plus"></i></a> <br><br>
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="header">
+				<h4 class="title">Gerêncie seus produtos</h4>
+				<p class="category">Clique no nome do produto para visualizar</p>
+				<br>
+				<a href="{{ route('admin-dashboard.products.create') }}" class="btn btn-success">Novo <i class="fa fa-plus"></i></a>
+			</div>
+			
+			<div class="content table-responsive ">
+				<table class="table table-hover table-striped" id="data-table">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Preço</th>
+							<th>Categoria</th>
+							<th>Fornecedor</th>
+						</tr>
+					</thead>
 
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4>Tabela de Produtos</h4>
-	</div>
+					<tbody>
+						@foreach($products as $product)
+						<tr>
+							<td>{{ $product->id }}</td>
+							<td>
+								<a href="{{ route('admin-dashboard.products.show', [ 'id' => $product->id]) }}">
+									{{ $product->name }}
+								</a>
+							</td>
+							<td>R$ {{ $product->unit_price }}</td>
+							<td>
+								@if( $product->category)
+									{{ $product->category->name }}
+								@else
+									sem categoria
+								@endif
+							</td>
+							<td>{{ $product->provider->name }}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
 
-	<div class="panel-body">
-		<table id="data-table" class="table table-bordered">
-			<thead>
-			<tr>
-				<th width="8%">Código</th>
-				<th>Image</th>
-				<th>Nome</th>
-				<th>Preço</th>
-				<th>Fornecedor</th>
-				<th class="option-table-header"></th>
-			</tr>
-			</thead>
-
-			<tbody>
-			@foreach($products as $product)
-				<tr>
-					<td>{{ $product->id }}</td>
-					<td>
-						@if(!is_null($product->image))
-							<img width="80px" src="{{ asset('uploads/images/products/'.$product->image) }}" alt="{{ $product->name }}">
-						@else
-							<img width="80px" src="{{ asset('uploads/images/products/no-image.png') }}" alt="{{ $product->name }}">
-						@endif
-					</td>
-					<td>{{ $product->name }}</td>
-					<td>R$ {{ $product->unit_price }}</td>
-					<td>{{ $product->provider->name }}</td>
-					<td>
-						<ul class="option-table">
-							<li><a href="{{ route('products.show', [ 'id' => $product->id]) }}" class="opt opt-view"><i class="fa fa-eye"></i></a></li>
-							<li><a href="{{ route('products.edit', [ 'id' => $product->id]) }}" class="opt opt-edit"><i class="fa fa-pencil"></i></a></li>
-							<li><a href="{{ route('products.delete', ['id' => $product->id]) }}" class="opt opt-delete"><i class="fa fa-trash"></i></a></li>
-						</ul>
-					</td>
-
-
-
-
-				</tr>
-			@endforeach
-			</tbody>
-		</table>
+			</div>
+		</div>
 	</div>
 </div>
+
 
 
 @endsection

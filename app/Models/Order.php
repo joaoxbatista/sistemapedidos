@@ -5,7 +5,7 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	class Order extends Model{
-		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'seller_id', 'status'];
+		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'seller_id', 'status', 'type'];
 		public $timestamps = false;
 
         public function getStatusAttribute()

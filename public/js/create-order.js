@@ -5,6 +5,7 @@ function clearProduct()
 	$('#preview img').attr('src', '');
 	$('#preview .product_description').text("");
 	$('#product_quantity').val("");
+	$('#product_id').val("").focus();
 	$('#preview').hide();
 }
 
@@ -34,7 +35,7 @@ function findProduct()
 				else
 				{
 					clearProduct();
-					$('#result-alert').addClass('alert-danger').text('Nenhum produto corresponde ao código digitado, verifique o mesmo e tente novamente.').show();
+					alert("Produto inexistente");
 				}
 			}
 
@@ -54,15 +55,17 @@ function addProduct()
 			quantity: product_quantity
 		};
 
-		console.log(postData);
+		$.post('/cart/add', postData, function(data)
+			{
+				
+				clearProduct();
+				alert(data);
+			}
+		);
 
-		$.post('/cart/add', postData, function(data){
-			
-			clearProduct();
-			$('#result-alert').removeClass('alert-danger').addClass('alert-success').text(data).show();
-		});
+	}
 
-	})
+	)
 }
 
 

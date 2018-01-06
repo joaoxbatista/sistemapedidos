@@ -9,31 +9,43 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
 	public function index()
-	{}
-	public function show(Request $request, $id)
-	{}
-
+	{
+		$categories = Category::orderBy('id', 'desc')->get();
+		return view('admin-dashboard.stock.category.index', compact('categories'));
+	}
+	
 	public function create(Request $request)
 	{
 		return view('dashboard.category.create');
 	}
+
 	public function store(Request $request)
 	{
-		$this->validate($request, [
-			'name' => 'required|max:255'
-		]);
+		
+		try {
+            Category::create($request->except('_token'));
+            
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
 
-		Category::create($request->except('_token'));
-		return redirect()->route('products')->with('success-message', 'Categoria criada com sucesso!');
 	}
 
-	public function edit(Request $request, $id)
-	{}
 	public function update(Request $request)
-	{}
+	{
+		$category = Category::find($request->get('id'));
+        $category->update($request->except(['_token', 'id']));
+        return response()->json($category, 200); 
+	}
 
-	public function delete(Request $request, $id)
-	{}
 	public function destroy(Request $request)
-	{}
+	{
+		$category = Category::find($request->get('id'));
+		$category->delete();
+	}
+
+	public function json(){
+		$categories = Category::orderBy('id', 'desc')->get();
+        return response()->json($categories, 200);
+	}
 }

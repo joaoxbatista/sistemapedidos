@@ -18,7 +18,9 @@ class CreateOrdersTable extends Migration
             $table->dateTime('buy_date');
             $table->decimal('total', 10, 2);
             $table->date('due_date')->nullable();
+            $table->enum('type', ['cash', 'parcels']);
             $table->boolean('status');
+            
             $table->integer('seller_id')->nullable()->unsigned();
             $table->integer('client_id')->nullable()->unsigned();
 
