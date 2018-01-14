@@ -16,6 +16,32 @@ class ClientController extends Controller
         return view('dashboard.client.index', compact('clients'));
     }
     
+    public function find(Request $request)
+    {
+        $cpf = $request->get('cpf') ? $request->get('cpf') : null;
+        $id = $request->get('id') ? $request->get('id') : null;
+
+        $client = null;
+
+        if($cpf)
+        {
+            $client = Client::where('cpf', $cpf)->first();
+        } 
+        
+        if($id and $client == null)
+        {
+            $client = Client::find($id);
+        }
+
+        return response()->json($client);
+    }
+
+    public function json()
+    {   
+        $clients = Client::all();
+        return response()->json($clients);
+    }    
+    
     public function create(Request $request)
     {
         $type = $request->get('type');
