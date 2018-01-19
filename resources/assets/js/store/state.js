@@ -14,6 +14,9 @@ export default {
 		}
 	},
 
+	banks: [
+	],
+
 	categories: {
 		data: [],
 
@@ -54,19 +57,18 @@ export default {
 	},
 
 	cart: {
-		product_quantity: 0,
-		item_quantity: 0,
+		client: {},
+		checks: [],
+		delivery: {},
+		discount: 0,
 		total_price: 0,
 		total_weight: 0,
+		parcels: [],
+		payment_form: '',
+		product_quantity: 0,
+		price_with_discount: 0,
+		item_quantity: 0,
 		items: [],
-		client: {},
-		discount: {},
-		parcels: {},
-		address: {},
-		itemRequest: {
-			status: null,
-			message: null
-		}
 	},
 
 

@@ -10,6 +10,11 @@ Vue.use(VeeValidade)
 import lang from 'element-ui/lib/locale/lang/pt-br'
 import locale from 'element-ui/lib/locale'
 
+//Moment JS
+import moment from "moment";
+import VueMomentJS from "vue-momentjs";
+Vue.use(VueMomentJS, moment);
+
 locale.use(lang)
 
 //ElementUI Components

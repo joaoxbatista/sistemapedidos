@@ -1,6 +1,6 @@
 <template>
 	<!-- Informações da Compra -->
-	<div id="hb-order-information">
+	<div id="hb-order-cart-information">
 		<div class="header">
 			<h4 class="title">Informações da compra</h4>
 		</div>
@@ -12,18 +12,23 @@
 			</div>
 
 			<div class="box-info">
-				<span class="value">{{ cart.total_price }} R$</span>
+				<span class="value">{{ cart.price_with_discount }} R$</span>
 				<span class="title"> <i class="pe-7s-cash"></i>  Reais</span>
 			</div>
 
 			<div class="box-info">
 				<span class="value">{{ cart.item_quantity }}</span>
-				<span class="title"> <i class="pe-7s-box1"></i> Items</span>
+				<span class="title"> <i class="pe-7s-box1"></i> Itens</span>
 			</div>
 
 			<div class="box-info">
 				<span class="value">{{ cart.total_weight }} Kg</span>
 				<span class="title"> <i class="pe-7s-box2"></i> Peso</span>
+			</div>
+
+			<div class="box-info" v-show="cart.delivery.status == 200">
+				<span class="value">{{ cart.delivery.distance/1000 }} km</span>
+				<span class="title"> <i class="pe-7s-box2"></i> Distância</span>
 			</div>
 
 		</div>
@@ -35,13 +40,13 @@
 		computed: {
 			cart () {
 				return this.$store.getters.getCart;
-			}
+			},
 		}
 	}
 </script>
 
 <style lang="scss">
-	#hb-order-information
+	#hb-order-cart-information
 	{
 		box-shadow: 2px 2px 4px rgba(190, 190, 190, .8);
 	    background: #F5F5F5;
@@ -94,12 +99,5 @@
 				}
 			}
 		}
-
-
 	}
-	    
-
-	    
-
-
 </style>

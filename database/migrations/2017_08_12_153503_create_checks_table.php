@@ -17,6 +17,7 @@ class CreateChecksTable extends Migration
             $table->increments('id');
             $table->string('bank');
             $table->boolean('status');
+            $table->date('due_date');
             $table->string('agency');
             $table->string('acount_number');
             $table->decimal('value');

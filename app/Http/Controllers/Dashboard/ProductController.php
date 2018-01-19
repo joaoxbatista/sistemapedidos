@@ -19,7 +19,7 @@ class ProductController extends Controller
     
     public function find(Request $request)
     {
-        $product = Product::findOrFail($request->get('product_id'));
+        $product = Product::find($request->get('product_id'));
         echo json_encode($product);
         
         // try

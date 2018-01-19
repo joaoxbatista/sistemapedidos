@@ -11,7 +11,7 @@ use App\Models\Parcel;
 use Session;
 use Auth;
 use Carbon\Carbon;
-
+use Valerian\GoogleDistanceMatrix\GoogleDistanceMatrix;
 
 class OrderController extends Controller {
 
@@ -30,6 +30,41 @@ class OrderController extends Controller {
         $cart = Session::has('cart') ? new Cart(Session::get('cart')) : new Cart();
 
         return view('dashboard.order.create', compact(['products', 'clients', 'cart']));
+    }
+
+    public function deliveryCalculation(Request $request)
+    {
+
+        $origin = $request->get('origin');
+        $destiny = $request->get('destiny');
+
+        $address_origin = "{$origin['city']} - {$origin['state']}, {$origin['district']}, {$origin['street']}, {$origin['number']}, {$origin['complement']}";
+
+        $address_destiny = "{$destiny['city']} - {$destiny['state']}, {$destiny['district']}, {$destiny['street']}, {$destiny['number']}, {$origin['complement']}";
+
+        $distanceMatrix = new GoogleDistanceMatrix(getenv('GOOGLE_MATRIX_KEY'));
+        $distance = $distanceMatrix->setLanguage('pt-br')
+        ->setOrigin($address_origin)
+        ->setDestination($address_destiny)
+        ->setMode(GoogleDistanceMatrix::MODE_DRIVING)
+        ->setLanguage('pt-BR')
+        ->setUnits(GoogleDistanceMatrix::UNITS_METRIC)
+        ->setAvoid(GoogleDistanceMatrix::AVOID_HIGHWAYS)
+        ->sendRequest();
+
+        $result = null;
+        
+        if($distance->rows[0]->elements[0]->status == 'OK')
+        {
+            $result = [
+                'distance' => $distance->rows[0]->elements[0]->distance->value,
+                'duration' => $distance->rows[0]->elements[0]->duration->value,
+                'status' => 200
+            ];
+        }
+
+        return response()->json($result);
+        
     }
 
     public function store(Request $request)

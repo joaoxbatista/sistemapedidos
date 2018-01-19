@@ -1,7 +1,6 @@
 export default {
 
 	//Usuário
-
 	'set-user-id' (state, user_id) {
 		state.user.id = user_id
 	},
@@ -39,7 +38,6 @@ export default {
 	'set-show-client-status' (state, status) {
 		state.clients.show.status = status
 	},
-
 	
 	//Categorias
 
@@ -79,8 +77,10 @@ export default {
 
 	//Pedidos
 
-	'add-item-to-cart' (state, item) {
+	'add-item-to-cart' (state, payload) {
+
 		//Status para verificar se o produto existe ou não no carrinho
+		var item = payload.data
 		var status = false
 
 		//Verifica se o item existe no carrinho
@@ -91,8 +91,14 @@ export default {
 			{
 				if((parseInt(element.quantity) + parseInt(item.quantity)) > parseInt(item.product.quantity))
 				{
-					state.cart.itemRequest.status = 'warning'
-					state.cart.itemRequest.message = 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity
+					payload.notify({
+						showClose: true,
+						message: 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity,
+						type: 'warning'
+					})
+
+					// state.cart.itemRequest.status = 'warning'
+					// state.cart.itemRequest.message = 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity
 					status = true
 
 				}
@@ -108,10 +114,16 @@ export default {
 
 					state.cart.item_quantity += parseInt(item.quantity)
 					state.cart.total_price = total_price
+					state.cart.price_with_discount = total_price
 					state.cart.total_weight = total_weight
 
-					state.cart.itemRequest.status = 'success'
-					state.cart.itemRequest.message = item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!'
+					payload.notify({
+						showClose: true,
+						message: item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!',
+						type: 'success'
+					})
+					// state.cart.itemRequest.status = 'success'
+					// state.cart.itemRequest.message = item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!'
 				}
 				
 			}
@@ -122,8 +134,14 @@ export default {
 		{
 			if(parseInt(item.quantity) > parseInt(item.product.quantity))
 			{
-				state.cart.itemRequest.status = 'warning'
-				state.cart.itemRequest.message = 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity
+				
+				payload.notify({
+					showClose: true,
+					message: 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity,
+					type: 'warning'
+				})
+				// state.cart.itemRequest.status = 'warning'
+				// state.cart.itemRequest.message = 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity
 			}
 			else
 			{
@@ -138,10 +156,14 @@ export default {
 
 				state.cart.item_quantity += parseInt(item.quantity)
 				state.cart.total_price = total_price
+				state.cart.price_with_discount = total_price
 				state.cart.total_weight = total_weight
 
-				state.cart.itemRequest.status = 'success'
-				state.cart.itemRequest.message = 'Item adicionado ao carrinho com sucesso!'
+				payload.notify({
+					showClose: true,
+					message: item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!',
+					type: 'success'
+				})
 			}
 			
 		}
@@ -159,6 +181,7 @@ export default {
 
 		state.cart.item_quantity -= parseInt(item.quantity)
 		state.cart.total_price = total_price
+		state.cart.price_with_discount = total_price
 		state.cart.total_weight = total_weight
 	},
 
@@ -184,9 +207,35 @@ export default {
 		state.cart.client = client
 	},
 
-	'add-item-to-cart-fail' (state) {
-		state.cart.itemRequest.status = 'error'
-		state.cart.itemRequest.message = "Erro ao adicionar o produto! Verifique se o código do produto corresponde a algum existente."
+	'add-discount-to-cart' (state, payload) {
+		state.cart.discount = payload.data
+		state.cart.price_with_discount = payload.data.price_with_discount
+		payload.notify({
+			showClose: true,
+			message: 'Disconto adicionado com sucesso! ' + payload.data.discount,
+			type: 'success'
+		})
+	},
+
+	'add-check-to-cart' (state, payload) {
+
+		var check = payload.data
+		state.cart.checks.push(check)
+
+		payload.notify({
+			showClose: true,
+			message: 'Foi adicionado um cheque no valor de '+check.value+' R$',
+			type: 'success'
+		})
+	},
+
+	'add-delivery-to-cart' (state, payload) {
+		state.cart.delivery = payload.data
+		payload.notify({
+			showClose: true,
+			message: 'Frete adicionado com sucesso!',
+			type: 'success'
+		})
 	},
 
 	'clear-item-request-cart' (state) {
@@ -195,7 +244,11 @@ export default {
 			status: '',
 			message: ''
 		}
-	}
+	},
 
+	//Bancos
+	'set-banks' (state, banks) {
+		state.banks = banks
+	},
 
 }

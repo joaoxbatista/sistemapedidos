@@ -31,6 +31,10 @@ export default {
 		return state.cart
 	},
 
+	getBanks: function (state) {
+		return state.banks
+	},
+
 	getItemsCart: function (state) {
 		return state.cart.items
 	},

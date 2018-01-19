@@ -221,6 +221,7 @@ Route::group(
             Route::get('', 'Dashboard\OrderController@index')->name('index');
 
 
+            Route::post('delivery/calculation', 'Dashboard\OrderController@deliveryCalculation')->name('delivery.calculation');
 
             // /* Página Inicial */
             // Route::get('orders', 'Dashboard\OrderController@index')->name('index')->middleware('hasitems');
@@ -280,6 +281,17 @@ Route::group(
         }
     );
 
+    //Bancos
+    Route::group(
+        [
+            'prefix' => 'banks',
+            'as' => 'banks.'
+        ],
+        function () {
+            Route::get('json', 'Dashboard\BankController@json')->name('json');
+                   
+        }
+    );
     
 
     /**

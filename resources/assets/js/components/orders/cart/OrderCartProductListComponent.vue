@@ -1,6 +1,6 @@
 <template>
 	<!-- Lista de Produtos -->
-	<div id="oder-product-list" v-show="cart.items.length > 0">
+	<div id="oder-cart-product-list" v-show="cart.items.length > 0">
 		<div class="header">
 			<h4 class="title">Lista de produtos</h4>
 		</div>
@@ -60,6 +60,12 @@
 			}
 		},
 
+		methods: {
+			removeToCart(item) {
+				this.$store.commit('remove-item-to-cart', item)
+			},
+		},
+
 		computed: {
 			cart () {
 				return this.$store.getters.getCart;
@@ -70,12 +76,13 @@
 </script>
 
 <style lang="scss">
-	#oder-product-list	
+	#oder-cart-product-list	
 	{
 		box-shadow: 2px 2px 4px rgba(190, 190, 190, .8);
 	    background: #F5F5F5;
 	    padding: 10px;
 	    border-radius: 6px;
+	    margin-top: 10px;
 
 	    .header
 	    {

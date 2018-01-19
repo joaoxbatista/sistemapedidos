@@ -60,8 +60,6 @@ export default
 		)
 	},
 
-
-
 	//Categorias
 
 	'update-categories' (context) 
@@ -121,7 +119,6 @@ export default
 		)
 	},
 
-
 	//Produtos
 
 	'update-products' (context)
@@ -172,24 +169,56 @@ export default
 		)
 	},
 
-	'find-has-product' (context, item) 
+	'delivery-calculation' (context, payload)
 	{
 		
-		axios.post('/admin-dashboard/products/find', item)
+		axios.post('/admin-dashboard/orders/delivery/calculation', payload.data)
 		.then(
 			response => {
-				var productData = {
-					product: response.data,
-					quantity: item.quantity,
-					id: item.product_id
-				}
-
-				context.commit('add-item-to-cart', productData)
+				context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify} )		
 			}
 		)
 		.catch(
 			erro => {
-				context.commit('add-item-to-cart-fail')
+				payload.notify({
+					message: 'Ops, ocorreu algum problema na execução desta tarefa',
+					type: 'error'
+				});
+			}
+		)
+
+	},
+
+	'find-has-product' (context, payload) 
+	{	
+		axios.post('/admin-dashboard/products/find', payload.data)
+		.then(
+			response => {
+				if(response.data != null){
+
+					var productData = {
+						product: response.data,
+						quantity: payload.data.quantity,
+						id: payload.data.product_id
+					}
+
+					context.commit('add-item-to-cart', { data: productData, notify: payload.notify})
+				}
+				else
+				{
+					payload.notify({
+						message: 'O código informado não corresponde a nenhum produto cadastrado!',
+						type: 'error'
+					});
+				}
+			}
+		)
+		.catch(
+			erro => {
+				payload.notify({
+					message: 'Ops, ocorreu algum problema na execução desta tarefa',
+					type: 'error'
+				});
 			}
 		)
 	},
@@ -211,10 +240,9 @@ export default
 	},
 
 
-
 	//Produtos
 
-	'update-client' (context)
+	'update-clients' (context)
 	{
 		axios.get('/admin-dashboard/clients/json')
 		.then(
@@ -229,7 +257,7 @@ export default
 		)
 	},
 
-	'save-product' (context, product) 
+	'save-client' (context, product) 
 	{
 		axios.post('/admin-dashboard/clients', client)
 
@@ -293,5 +321,21 @@ export default
 			}
 		)
 	},
+
+	//Bancos
+
+	'update-banks' (context) {
+		axios.get('/admin-dashboard/banks/json')
+		.then(
+			response => {
+				context.commit('set-banks', response.data)
+			}
+		)
+		.catch(
+			erro => {
+
+			}
+		)
+	}
 
 }
