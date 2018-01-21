@@ -1,5 +1,19 @@
 export default 
 {
+	// Configuração do Negócio
+	'get-business-setting' (context)
+	{
+		
+		axios.post('/admin-dashboard/business/setting/json').then(
+			response => {
+				console.log(response.data)
+				
+				context.state.business_setting = response.data
+				
+			}
+		)	
+	},
+
 	// Fornecedores
 	'update-providers' (context) 
 	{
@@ -172,10 +186,24 @@ export default
 	'delivery-calculation' (context, payload)
 	{
 		
-		axios.post('/admin-dashboard/orders/delivery/calculation', payload.data)
+		axios.post('/admin-dashboard/orders/delivery/calculation', {destiny: payload.data})
 		.then(
 			response => {
-				context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify} )		
+
+				
+				if(response.data.status != 200)
+				{
+					console.log(response.data)
+					payload.notify({
+					message: 'Ops, o endereço do cliente selecionado está incorreto!',
+					type: 'error'
+				});	
+				}
+				else
+				{
+					context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify} )			
+				}
+				
 			}
 		)
 		.catch(

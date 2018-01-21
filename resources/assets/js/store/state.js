@@ -1,6 +1,8 @@
 export default {
 	user: {},
 	
+	business_setting: {},
+	
 	providers: {
 		data: [],
 
@@ -57,18 +59,35 @@ export default {
 	},
 
 	cart: {
+		/*Dados relativos ao cliente*/
 		client: {},
-		checks: [],
-		delivery: {},
-		discount: 0,
-		total_price: 0,
-		total_weight: 0,
-		parcels: [],
-		payment_form: '',
+		
+		/*Dados relativos aos produtos*/
 		product_quantity: 0,
-		price_with_discount: 0,
 		item_quantity: 0,
 		items: [],
+		
+		/*Dados relativos a entrega*/
+		total_weight: 0,
+		delivery: {},
+
+		/*Dados relativos a forma de pagamento*/		
+		payment_form: '',
+		parcels: [],
+		checks: [],
+		
+		/*Dados relativos ao desconto*/
+		discounts: {
+			items: [],
+			total: 0,
+		},
+
+		/*Dados relativos aos preços*/
+		price_products: 0,
+		price_discount: 0,
+		price_delivery: 0,
+		price_final: 0,
+
 	},
 
 

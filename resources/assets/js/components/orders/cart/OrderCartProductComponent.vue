@@ -10,6 +10,7 @@
 					<div class="form-group">
 						<label>código do produto</label>
 						<input 
+						ref="product_id"
 						type="text" 
 						name="product_id"
 						class="form-control" 
@@ -80,6 +81,14 @@
 						this.$store.dispatch('find-has-product', { data: dataValidator, notify: this.$message});
 						
 						this.$store.commit('clear-item-request-cart')
+						
+						this.$nextTick(
+							() => {
+								this.$refs.product_id.focus()
+								this.clearItem()
+							}
+						)
+
 					}
 					else
 					{
@@ -89,6 +98,7 @@
 							message: 'Oops, algo está errado no formulário',
 							type: 'error'
 						})
+						this.$nextTick(() => this.$refs.product_id.focus())
 					}
 				})
 

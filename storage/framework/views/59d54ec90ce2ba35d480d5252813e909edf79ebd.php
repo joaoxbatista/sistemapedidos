@@ -56,6 +56,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo e(route('admin-dashboard.business.setting.index')); ?>">
+                        <i class="pe-7s-tools"></i>
+                        <p>Configurações</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo e(route('admin-dashboard.stock')); ?>">
                         <i class="pe-7s-note2"></i>
                         <p>Estoque</p>

@@ -39,4 +39,7 @@ export default {
 		return state.cart.items
 	},
 
+	getBusinessSetting: function (state) {
+		return state.business_setting
+	}
 }

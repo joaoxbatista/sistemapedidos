@@ -281,6 +281,18 @@ Route::group(
         }
     );
 
+    //Configurações do Negócio
+    Route::group(
+        [
+            'prefix' => 'business/setting',
+            'as' => 'business.setting.'
+        ],
+        function () {
+            Route::get('', 'Dashboard\BusinessSettingController@index')->name('index');
+            Route::post('json', 'Dashboard\BusinessSettingController@json')->name('json');        
+        }
+    );
+
     //Bancos
     Route::group(
         [

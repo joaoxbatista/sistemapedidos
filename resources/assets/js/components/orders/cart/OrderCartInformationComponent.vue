@@ -8,27 +8,32 @@
 		<div class="content">
 			<div class="box-info" v-show="cart.client.name">
 				<span class="value">{{ cart.client.limit_credit }} R$</span>
-				<span class="title"> <i class="fa fa-user"></i>  {{ cart.client.name }}</span>
+				<span class="title">limite de crédito</span>
+			</div>
+			
+			<div class="box-info">
+				<span class="value">{{ cart.price_products }} R$</span>
+				<span class="title">preço dos produtos</span>
 			</div>
 
 			<div class="box-info">
-				<span class="value">{{ cart.price_with_discount }} R$</span>
-				<span class="title"> <i class="pe-7s-cash"></i>  Reais</span>
+				<span class="value">{{ cart.discounts.total }} R$</span>
+				<span class="title">valor do desconto </span>
+			</div>
+			
+			<div class="box-info" v-show="cart.delivery.status == 200">
+				<span class="value">{{ cart.delivery.price }} R$</span>
+				<span class="title">preço do frete</span>
 			</div>
 
 			<div class="box-info">
 				<span class="value">{{ cart.item_quantity }}</span>
-				<span class="title"> <i class="pe-7s-box1"></i> Itens</span>
+				<span class="title">quantidade de itens</span>
 			</div>
 
 			<div class="box-info">
 				<span class="value">{{ cart.total_weight }} Kg</span>
-				<span class="title"> <i class="pe-7s-box2"></i> Peso</span>
-			</div>
-
-			<div class="box-info" v-show="cart.delivery.status == 200">
-				<span class="value">{{ cart.delivery.distance/1000 }} km</span>
-				<span class="title"> <i class="pe-7s-box2"></i> Distância</span>
+				<span class="title">peso da compra</span>
 			</div>
 
 		</div>
@@ -39,7 +44,11 @@
 	export default {
 		computed: {
 			cart () {
-				return this.$store.getters.getCart;
+				return this.$store.getters.getCart
+			},
+
+			business_setting () {
+				return this.$store.getters.getBussinesSetting
 			},
 		}
 	}

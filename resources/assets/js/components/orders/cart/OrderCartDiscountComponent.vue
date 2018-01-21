@@ -10,8 +10,13 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-							    <label for="">Selecione uma porcentagem</label>
-							    <el-slider v-model="discount.percentage" :format-tooltip="formatTooltip" @change="priceWithDiscount"></el-slider>
+							    <label>Selecione uma porcentagem</label>
+							    <el-slider 
+							    	v-model="discount.percentage.slider" 
+							    	:format-tooltip="formatTooltip" 
+							    	@change="updateInputPercentage"
+							    	:disabled="cart.discounts.total > 0">
+							    </el-slider>
 							</div>
 						</div>
 					</div>
@@ -19,28 +24,36 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-							    <label for="discount-percent">Valor selecionado</label>
-							    <input type="number" id="discount-percent" class="form-control" v-model="discount.value" @keyup="updatePercentage">
+							    <label>Valor selecionado</label>
+							    <input 
+							    	type="number" 
+							    	class="form-control" 
+							    	v-model="discount.percentage.input" 
+							    	@keyup="updateSliderPercentage"
+							    	:disabled="cart.discounts.total > 0 ">
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-md-6">
-							<button style="margin-top: 22px;" :class="{'disabled' : total_discount == 0}" class="btn btn-block btn-success btn-fill" @click="addDiscountToCart"><i class="fa fa-plus"></i> Adicionar</button>
+						<div class="col-md-4" v-if="cart.discounts.total == 0">
+							<button class="btn btn-block btn-success btn-fill"   @click="addDiscountToCart"><i class="fa fa-plus"></i> Adicionar</button>
+						</div>
+						<div class="col-md-4" v-else>
+							<button class="btn btn-block btn-danger btn-fill" @click="removeDiscountToCart"><i class="fa fa-trash"></i> Cancelar</button>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-md-6" v-show="total_discount > 0">
+				<div class="col-md-6" v-show="discount.price > 0">
 					<div class="box-discount">
 						<div class="header">
 							<h4 class="title">Informações do desconto</h4>
 						</div>
 
 						<div class="content">
-							<p>Valor do desconto<span> {{ total_discount }} R$</span></p>
-							<p>Preço com desconto<span> {{ price_with_discount }} R$</span></p>
+							<p>Valor do desconto<span> {{ discount.price }} R$</span></p>
+							<p>Preço com desconto<span> {{  price }} R$</span></p>
 						</div>
 					</div>
 				</div>
@@ -56,69 +69,73 @@
 		{
 			return {
 				discount: {
-					percentage: 0,
-					value: 0
+					percentage: {
+						slider: 0,
+						input: 0
+					},
+					price: 0,
 				},
-				total_discount: 0,
-				price_with_discount: 0,
 			}
 		},
 
-		created () 
-		{
-			this.price_with_discount = this.cart.total_price
-		},
-
 		methods: {
+
+			updateSliderPercentage()
+			{
+				if(this.discount.percentage.input > 100)
+				{
+					this.discount.percentage.input = 100
+				}
+
+				this.discount.percentage.slider = parseFloat(this.discount.percentage.input)
+				this.calculateDiscount()
+			},
+
+			updateInputPercentage()
+			{
+				this.discount.percentage.input = parseFloat(this.discount.percentage.slider)
+				this.calculateDiscount()
+			},
+
 			addDiscountToCart () {
 				
-				if(this.total_discount > 0)
+				if(this.discount.price > 0)
 				{
 					this.$store.commit('add-discount-to-cart', {
-						data: {
-							discount: this.total_discount,
-							price_with_discount: this.price_with_discount
-						}, 
+						data: this.discount, 
 						notify: this.$message
 					})
 				}
 
 			},
 
-			updatePercentage() {
+			removeDiscountToCart () {
+				this.$store.commit('remove-discount-to-cart', {
+					data: this.discount, 
+					notify: this.$message
+				})
 				
-				this.discount.value = parseInt(this.discount.value)
-				
-				if(this.discount.value > 100) {
-					this.discount.value = 100
-				}
-				else if ( this.discount.value < 0) {
-					this.discount.value = 0
-				}
-
-				this.discount.percentage = this.discount.value
-
-				this.priceWithDiscount()
 			},
-
 
 			formatTooltip (val) {
 		        return val + "%";
 		    },
 
-		    priceWithDiscount () {
-		    	this.discount.value = this.discount.percentage
-		     	this.total_discount = this.discount.percentage / 100 * this.cart.total_price
-		     	this.total_discount = parseFloat(this.total_discount.toFixed(2))
-
-		     	this.price_with_discount = this.cart.total_price - this.total_discount
-		     	this.price_with_discount = parseFloat(this.price_with_discount.toFixed(2))
+		    calculateDiscount () {
+		     	this.discount.price = this.discount.percentage.slider / 100 * this.cart.price_products
+		     	this.discount.price = parseFloat(this.discount.price.toFixed(2))
 		    }
 		},
 
 		computed: {
 			cart () {
 				return this.$store.getters.getCart;
+			},
+
+			price() {
+				var result = parseFloat(this.cart.price_products - this.discount.price)
+				result = result.toFixed(2)
+				return result
 			}
 		}
 

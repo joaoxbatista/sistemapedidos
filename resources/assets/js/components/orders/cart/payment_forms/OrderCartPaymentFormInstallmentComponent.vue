@@ -69,7 +69,7 @@
 
 			addInstallmentToCart () {
 				this.installment.parcels = []
-				var price = this.cart.price_with_discount / this.installment.quantity
+				var price = this.cart.price_discount / this.installment.quantity
 				price = price.toFixed(2)
 				var dateNow = new Date()
 

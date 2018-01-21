@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'image'
+        'id', 'name', 'email', 'password', 'image', 'business_setting_id'
     ];
 
     /**
@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-}
+
+    public function business_setting()
+    {
+        return $this->hasOne('App\Models\BusinessSettings', 'id', 'business_setting_id');
+    
+}}

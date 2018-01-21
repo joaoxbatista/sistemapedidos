@@ -78,7 +78,6 @@ export default {
 	//Pedidos
 
 	'add-item-to-cart' (state, payload) {
-
 		//Status para verificar se o produto existe ou não no carrinho
 		var item = payload.data
 		var status = false
@@ -86,9 +85,10 @@ export default {
 		//Verifica se o item existe no carrinho
 		state.cart.items.filter(element => {
 
-			//Se o id do item for igual ao item informado ele adiciona a quantidade ao item existente
+			//Se o id do item for igual ao item informado
 			if(item.id == element.id)
 			{
+				//Caso a quantidade solicitada seja maior que a do estoque, sera retornada uma messagem de erro
 				if((parseInt(element.quantity) + parseInt(item.quantity)) > parseInt(item.product.quantity))
 				{
 					payload.notify({
@@ -97,66 +97,81 @@ export default {
 						type: 'warning'
 					})
 
-					// state.cart.itemRequest.status = 'warning'
-					// state.cart.itemRequest.message = 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity
-					status = true
+					status = true //Diz que o produto já existe no carrinho
 
 				}
+				//Caso a quantidade solicitada não seja maior que a do estoque, o item sera adicionado no carrinho	
 				else{
-					element.quantity = parseInt(element.quantity)+parseInt(item.quantity)
-					status = true	
+					
+					element.quantity = parseInt(element.quantity) + parseInt(item.quantity)
+					
+					element.subtotal_price = (item.quantity * item.product.unit_price) + element.subtotal_price
+					element.subtotal_price = parseFloat(element.subtotal_price.toFixed(2))
 
-					var total_price = (item.quantity * item.product.unit_price) + state.cart.total_price
-					total_price = parseFloat(total_price.toFixed(2))
+					element.subtotal_weight = (item.quantity * item.product.weight) + element.subtotal_weight
+					element.subtotal_weight = parseFloat(element.subtotal_weight.toFixed(2))
+
+					var price_products = (item.quantity * item.product.unit_price) + state.cart.price_products
+					price_products = parseFloat(price_products.toFixed(2))
 
 					var total_weight = (item.quantity * item.product.weight) + state.cart.total_weight
 					total_weight = parseFloat(total_weight.toFixed(2))
 
+					//Atualiza a quantidade dos items do carrinho
 					state.cart.item_quantity += parseInt(item.quantity)
-					state.cart.total_price = total_price
-					state.cart.price_with_discount = total_price
+					//Atualiza o valor dos items no carrinho
+					state.cart.price_products = price_products
+					//Atualiza o valor do disconto no carrinho
+					state.cart.price_discount = price_products
+					//Atualiza o peso total no carrinho
 					state.cart.total_weight = total_weight
+
+					status = true //Diz que o produto já existe no carrinho
 
 					payload.notify({
 						showClose: true,
 						message: item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!',
 						type: 'success'
 					})
-					// state.cart.itemRequest.status = 'success'
-					// state.cart.itemRequest.message = item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!'
 				}
 				
 			}
 		})
 
-		//Caso o produto não exista no carrinho o mesmo é adicionado
+		//Caso o produto não exista no carrinho
 		if(!status)
 		{
+			//Caso a quantidade solicitada seja maior que a do estoque sera retornada uma messagem de erro
 			if(parseInt(item.quantity) > parseInt(item.product.quantity))
 			{
-				
 				payload.notify({
 					showClose: true,
 					message: 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity,
 					type: 'warning'
 				})
-				// state.cart.itemRequest.status = 'warning'
-				// state.cart.itemRequest.message = 'A quantidade solicitada excede o estoque! Quantidade disponível é igual a: '+item.product.quantity
 			}
+
+			//Caso a quantidade solicitada não seja maior que a do estoque,o item sera adicionado no carrinho	
 			else
 			{
+				item.subtotal_price = item.quantity * item.product.unit_price
+				item.subtotal_price = parseFloat(item.subtotal_price.toFixed(2))
+
+				item.subtotal_weight = item.quantity * item.product.weight
+				item.subtotal_weight = parseFloat(item.subtotal_weight.toFixed(2))
+
 				state.cart.items.push(item)
 				state.cart.product_quantity +=  1
 
-				var total_price = (item.quantity * item.product.unit_price) + state.cart.total_price
-				total_price = parseFloat(total_price.toFixed(2))
+				var price_products = item.subtotal_price + state.cart.price_products
+				price_products = parseFloat(price_products.toFixed(2))
 
-				var total_weight = (item.quantity * item.product.weight) + state.cart.total_weight
+				var total_weight = item.subtotal_weight + state.cart.total_weight
 				total_weight = parseFloat(total_weight.toFixed(2))
 
 				state.cart.item_quantity += parseInt(item.quantity)
-				state.cart.total_price = total_price
-				state.cart.price_with_discount = total_price
+				state.cart.price_products = price_products
+				state.cart.price_discount = price_products
 				state.cart.total_weight = total_weight
 
 				payload.notify({
@@ -164,42 +179,56 @@ export default {
 					message: item.quantity + ' unidade(s) de ' + item.product.name + ' adicionada(s) com sucesso!',
 					type: 'success'
 				})
-			}
-			
-		}
+			}}
 	},
 
 	'remove-item-to-cart' (state, item) {
-		let index = state.cart.items.indexOf(item)
-		state.cart.items.splice(index, 1);
+		var index = state.cart.items.indexOf(item)
 
-		var total_price = state.cart.total_price - (item.quantity * item.product.unit_price) 
-		total_price = parseFloat(total_price.toFixed(2))
+		var price_products = state.cart.price_products - item.subtotal_price
+		price_products = parseFloat(price_products.toFixed(2))
 
-		var total_weight = state.cart.total_weight - (item.quantity * item.product.weight)
+		var total_weight = state.cart.total_weight - item.subtotal_weight
 		total_weight = parseFloat(total_weight.toFixed(2))
 
 		state.cart.item_quantity -= parseInt(item.quantity)
-		state.cart.total_price = total_price
-		state.cart.price_with_discount = total_price
+		state.cart.price_products = price_products
+		state.cart.price_discount = price_products
 		state.cart.total_weight = total_weight
+
+		state.cart.items.splice(index, 1)
 	},
 
 	'clear-cart' (state) {
 		state.cart = {
+			/*Dados relativos ao cliente*/
+			client: {},
+			
+			/*Dados relativos aos produtos*/
 			product_quantity: 0,
 			item_quantity: 0,
-			total_price: 0,
-			total_weight: 0,
 			items: [],
-			client: {},
-			discount: {},
-			parcels: {},
-			address: {},
-			itemRequest: {
-				status: null,
-				message: null
-			}
+			
+			/*Dados relativos a entrega*/
+			total_weight: 0,
+			delivery: {},
+
+			/*Dados relativos a forma de pagamento*/		
+			payment_form: '',
+			parcels: [],
+			checks: [],
+			
+			/*Dados relativos ao desconto*/
+			discounts: {
+				items: [],
+				total: 0,
+			},
+
+			/*Dados relativos aos preços*/
+			price_products: 0,
+			price_discount: 0,
+			price_delivery: 0,
+			price_final: 0,
 		}
 	},
 
@@ -208,11 +237,30 @@ export default {
 	},
 
 	'add-discount-to-cart' (state, payload) {
-		state.cart.discount = payload.data
-		state.cart.price_with_discount = payload.data.price_with_discount
+
+		state.cart.discounts.total = parseFloat(payload.data.price)
+		state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
+		state.cart.price_discount = parseFloat(state.cart.price_products - state.cart.discounts.total)
+		state.cart.price_discount = state.cart.price_discount.toFixed(2)
+
 		payload.notify({
 			showClose: true,
-			message: 'Disconto adicionado com sucesso! ' + payload.data.discount,
+			message: 'Disconto adicionado com sucesso! ' + payload.data.price,
+			type: 'success'
+		})
+	},
+
+	'remove-discount-to-cart' (state, payload) {
+
+		state.cart.price_discount = parseFloat(state.cart.price_products + state.cart.discounts.total)
+		state.cart.price_discount = state.cart.price_discount.toFixed(2)
+
+		state.cart.discounts.total = state.cart.discounts.total - parseFloat(payload.data.price)
+		state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
+
+		payload.notify({
+			showClose: true,
+			message: 'Disconto adicionado com sucesso! ' + payload.data.price,
 			type: 'success'
 		})
 	},
@@ -230,7 +278,13 @@ export default {
 	},
 
 	'add-delivery-to-cart' (state, payload) {
-		state.cart.delivery = payload.data
+		var delivery = payload.data
+		console.log(delivery)
+		state.cart.price_delivery = 0
+		state.cart.price_delivery = parseFloat(state.cart.price_discount) + parseFloat(delivery.price)
+		state.cart.price_delivery = state.cart.price_delivery.toFixed(2)
+		state.cart.delivery = delivery
+
 		payload.notify({
 			showClose: true,
 			message: 'Frete adicionado com sucesso!',

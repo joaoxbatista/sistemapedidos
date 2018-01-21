@@ -15,16 +15,18 @@ class CreateBusinessSettingsTable extends Migration
     {
         Schema::create('business_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('logo');
-            $table->string('cnpj');
-            $table->string('city');
-            $table->string('state');
-            $table->string('street');
-            $table->string('district');
-            $table->string('cep');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('cnpj')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('street')->nullable();
+            $table->string('district')->nullable();
+
+            $table->integer('user_id')->nullable()->unsigned();
+
+            $table->float('kilometer_value', 10, 2)->nullable();
+            $table->string('cep')->nullable();
             $table->timestamps();
         });
     }

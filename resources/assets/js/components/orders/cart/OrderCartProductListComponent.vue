@@ -22,16 +22,29 @@
 
 				<el-table-column
 					label="Ações"
-					width="80">
+					width="145px">
 
-					<template scope="scope">
-						<a v-on:click="removeToCart(scope.row)" class="icon"><i class="fa fa-trash"></i></a>
+					<template scope="scope" id="button-actions">
+						<div class="btn-group btn-group-justified">
+							<a v-on:click="removeToCart(scope.row)" class="btn btn-fill btn-small btn-danger"><i class="fa fa-trash"></i></a>
+							<a v-on:click="discountModal
+							.status = true" class="btn btn-fill btn-small btn-warning"><i class="fa fa-tag"></i></a>
+						</div>
 					</template>
 				</el-table-column>
 
 				<p slot="append">table slot</p>
 			</data-tables>
 		</div>
+
+		<el-dialog title="Adicionar desconto ao produto" :visible.sync="discountModal.status">
+		  <div class="col-md-4">
+		  	<div class="form-group">
+		  		<label>Valor do desconto</label>
+		  		<input type="text" v-model="discountModal.item.discount" class="form-control">
+		  	</div>
+		  </div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -55,7 +68,13 @@
 				{ 'label': 'Preço', 'prop': 'product.unit_price'},
 				{ 'label': 'Peso', 'prop': 'product.weight'},
 				{ 'label': 'Quantidade', 'prop': 'quantity'},
+				{ 'label': 'Subtotal', 'prop': 'subtotal_price'},
 				],
+
+				discountModal: {
+					item: {},
+					status: false
+				}
 
 			}
 		},
@@ -64,6 +83,11 @@
 			removeToCart(item) {
 				this.$store.commit('remove-item-to-cart', item)
 			},
+
+			addItemDiscount(item) {
+				this.discountModal.status = true
+				this.discountModal.item = item
+			}
 		},
 
 		computed: {
@@ -104,4 +128,10 @@
 			margin-bottom: 10px;
 		}
 	}
+
+	.el-table_1_column_7 > .cell
+	{
+		padding: 0px !important;
+	}
+
 </style>

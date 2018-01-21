@@ -6,106 +6,12 @@
 
 		<div class="content">
 			<div class="row">
-				<div class="col-md-12">
-					<h4>Informações do local de envio</h4>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Estado</label>
-						<input type="text" v-model="origin.state" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Cidade</label>
-						<input type="text" v-model="origin.city" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Bairro</label>
-						<input type="text" v-model="origin.district" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Rua</label>
-						<input type="text" v-model="origin.street" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Número</label>
-						<input type="text" v-model="origin.number" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Complemento</label>
-						<input type="text" v-model="origin.complement" class="form-control">
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<h4>Informações do destino</h4>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Estado</label>
-						<input type="text" v-model="destiny.state" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Cidade</label>
-						<input type="text" v-model="destiny.city" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Bairro</label>
-						<input type="text" v-model="destiny.district" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Rua</label>
-						<input type="text" v-model="destiny.street" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Número</label>
-						<input type="text" v-model="destiny.number" class="form-control">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Complemento</label>
-						<input type="text" v-model="destiny.complement" class="form-control">
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-4">
-					<button class="btn btn-success btn-fill" @click="deliveryCalculation"> 
+				<div class="col-md-2">
+					<button class="btn btn-success btn-fill btn-block" @click="deliveryCalculation"> 
 						<i class="fa fa-calculator"></i> Calcular Frete
 					</button>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -115,30 +21,14 @@
 	export default {
 		data () {
 			return {
-				destiny: {
-					state: null,
-					city: null,
-					district: null,
-					street: null,
-					number: null,
-					complement: null
-				},
-
-				origin: {
-					state: null,
-					city: null,
-					district: null,
-					street: null,
-					number: null,
-					complement: null
-				}
+				
 			}
 		},
 
 		methods: {
 			deliveryCalculation () {
 				var payload = {
-					data: { origin: this.origin, destiny: this.destiny},
+					data: this.cart.client,
 					notify: this.$message
 				}
 
@@ -150,7 +40,7 @@
 		computed: {
 			cart () {
 				return this.$store.getters.getCart;
-			}
+			},
 		}
 	}
 </script>

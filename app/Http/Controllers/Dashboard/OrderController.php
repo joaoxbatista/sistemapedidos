@@ -9,6 +9,7 @@ use App\Models\Seller;
 use App\Models\Cart;
 use App\Models\Parcel;
 use Session;
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use Valerian\GoogleDistanceMatrix\GoogleDistanceMatrix;
@@ -34,13 +35,29 @@ class OrderController extends Controller {
 
     public function deliveryCalculation(Request $request)
     {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
 
-        $origin = $request->get('origin');
+        $origin = [
+            'state' => $user->business_setting->state,
+            'city' => $user->business_setting->city,
+            'street' => $user->business_setting->street,
+            'district' => $user->business_setting->district,
+            'number' => $user->business_setting->number,
+            'complement' => $user->business_setting->complement,
+            'cep' => $user->business_setting->cep
+        ];
+
+
+        $kilometer_value = $user->business_setting != null ? $user->business_setting->kilometer_value : 0;
+
         $destiny = $request->get('destiny');
+        
 
         $address_origin = "{$origin['city']} - {$origin['state']}, {$origin['district']}, {$origin['street']}, {$origin['number']}, {$origin['complement']}";
 
-        $address_destiny = "{$destiny['city']} - {$destiny['state']}, {$destiny['district']}, {$destiny['street']}, {$destiny['number']}, {$origin['complement']}";
+        $address_destiny = "{$destiny['city']} - {$destiny['state']}, {$destiny['district']}, {$destiny['street']}}";
+        
 
         $distanceMatrix = new GoogleDistanceMatrix(getenv('GOOGLE_MATRIX_KEY'));
         $distance = $distanceMatrix->setLanguage('pt-br')
@@ -56,13 +73,17 @@ class OrderController extends Controller {
         
         if($distance->rows[0]->elements[0]->status == 'OK')
         {
+            
+            $price = $kilometer_value * ($distance->rows[0]->elements[0]->distance->value / 1000);
+            $price = number_format($price, 2);
             $result = [
                 'distance' => $distance->rows[0]->elements[0]->distance->value,
                 'duration' => $distance->rows[0]->elements[0]->duration->value,
+                'price' => $price,
                 'status' => 200
             ];
         }
-
+        
         return response()->json($result);
         
     }

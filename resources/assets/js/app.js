@@ -49,6 +49,9 @@ import HBProductView from './components/products/ProductViewComponent.vue'
 //Components para Pedidos
 import HBOrder from './components/orders/OrderComponent.vue'
 
+//Component para Configuração do Negócio
+import HBBusinessSetting from './components/business-setting/BusinessSettingComponent.vue'
+
 import store from './store/store'
 
 $.ajaxSetup({
@@ -75,6 +78,8 @@ const app = new Vue({
  		'hb-product-create': HBProductCreate,
  		'hb-product-view': HBProductView,
 
- 		'hb-order': HBOrder
+ 		'hb-order': HBOrder,
+
+ 		'hb-business-setting': HBBusinessSetting
     }
 });

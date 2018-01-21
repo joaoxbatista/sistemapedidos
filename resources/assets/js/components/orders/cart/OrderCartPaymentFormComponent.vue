@@ -82,27 +82,30 @@
 <style lang="scss">
 	#hb-order-cart-payment-form
 	{
-		.header
+		box-shadow: 2px 2px 4px rgba(190, 190, 190, .8);
+	    background: #F5F5F5;
+	    padding: 10px;
+	    border-radius: 6px;
+	    margin-top: 10px;
+
+	    .header
 	    {
-	    	position: relative;
-	    	padding: 5px 0px;
-	    	box-sizing: border-box;
-			
+	    	width: 100%;
+	    	padding: 5px 10px;
+			border-bottom: 1px solid #e9e9e9;
 
 	    	.title
 	    	{
 				color: #757575;
 				text-transform: uppercase;
-				font-size: 14px;
+				font-size: 16px;
 	    	}
 		}
 
 		.content
 		{
 			width: 100%;
-			padding: 0px;
 			margin-bottom: 10px;
-			margin-top: 10px;
 		}
 	}
 </style>

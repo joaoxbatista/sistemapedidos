@@ -15,7 +15,7 @@
 								</el-step>
 								<el-step title="Cliente"></el-step>
 								<el-step title="Desconto"></el-step>
-								<el-step title="Parcelamento"></el-step>
+								<el-step title="Pagamento"></el-step>
 								<el-step title="Entrega"></el-step>
 							</el-steps>
 						</div>
