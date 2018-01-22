@@ -6,32 +6,37 @@
 		</div>
 
 		<div class="content">
-			<div class="box-info" v-show="cart.client.name">
-				<span class="value">{{ cart.client.limit_credit }} R$</span>
-				<span class="title">limite de crédito</span>
+			<div class="box-info" v-show="cart.price_final > 0">
+				<span class="value">{{ cart.price_final }} R$</span>
+				<span class="title">valor a ser pago </span>
 			</div>
-			
-			<div class="box-info">
+
+			<div class="box-info" v-show="cart.client.name">
+				<span class="value">{{ cart.client.name }}</span>
+				<span class="title">possui o limite de {{ cart.client.limit_credit }} R$</span>
+			</div>
+
+			<div class="box-info" v-show="cart.price_products > 0">
 				<span class="value">{{ cart.price_products }} R$</span>
 				<span class="title">preço dos produtos</span>
 			</div>
 
-			<div class="box-info">
+			<div class="box-info" v-show="cart.discounts.total > 0">
 				<span class="value">{{ cart.discounts.total }} R$</span>
 				<span class="title">valor do desconto </span>
 			</div>
-			
+
 			<div class="box-info" v-show="cart.delivery.status == 200">
 				<span class="value">{{ cart.delivery.price }} R$</span>
 				<span class="title">preço do frete</span>
 			</div>
 
-			<div class="box-info">
+			<div class="box-info" v-show="cart.item_quantity > 0">
 				<span class="value">{{ cart.item_quantity }}</span>
 				<span class="title">quantidade de itens</span>
 			</div>
 
-			<div class="box-info">
+			<div class="box-info" v-show="cart.total_weight > 0">
 				<span class="value">{{ cart.total_weight }} Kg</span>
 				<span class="title">peso da compra</span>
 			</div>

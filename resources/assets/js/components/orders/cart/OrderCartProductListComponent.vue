@@ -27,8 +27,7 @@
 					<template scope="scope" id="button-actions">
 						<div class="btn-group btn-group-justified">
 							<a v-on:click="removeToCart(scope.row)" class="btn btn-fill btn-small btn-danger"><i class="fa fa-trash"></i></a>
-							<a v-on:click="discountModal
-							.status = true" class="btn btn-fill btn-small btn-warning"><i class="fa fa-tag"></i></a>
+							<a v-on:click="showModalDiscount(scope.row)" class="btn btn-fill btn-small btn-warning"><i class="fa fa-tag"></i></a>
 						</div>
 					</template>
 				</el-table-column>
@@ -37,14 +36,50 @@
 			</data-tables>
 		</div>
 
-		<el-dialog title="Adicionar desconto ao produto" :visible.sync="discountModal.status">
-		  <div class="col-md-4">
-		  	<div class="form-group">
-		  		<label>Valor do desconto</label>
-		  		<input type="text" v-model="discountModal.item.discount" class="form-control">
-		  	</div>
-		  </div>
-		</el-dialog>
+		<div id="modal-add-discount" v-show="discountModal.status">
+			
+			<div class="container">
+
+				<div class="modal-content col-md-8 col-md-offset-2">
+					<div class="modal-header">
+						<h4 class="title">Adição de desconto em {{ discountModal.item.product.name }} </h4>
+					</div>
+					
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<p class="alert alert-info">
+									subtotal do item {{ discountModal.item.subtotal_price }} R$
+									<br>
+								 	valor do desconto {{ discountModal.discount }} R$
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="">Valor do desconto</label>
+									<input v-model="discountModal.discount" type="text" class="form-control" v-on:keyup="verifyDiscount">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="btn-group">
+									<button class="btn btn-fill btn-success" @click="addItemDiscount">
+									<i class="fa fa-plus"></i> Adicionar
+									</button>
+									<button class="btn btn-fill btn-danger" @click="discountModal.status = false">
+										<i class="fa fa-times"></i> Fechar
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -63,16 +98,23 @@
 				},
 
 				titles: [
-				{ 'label': 'Código', 'prop': 'id'},
+				{ 'label': 'Cod.', 'prop': 'id'},
 				{ 'label': 'Nome', 'prop': 'product.name'},
 				{ 'label': 'Preço', 'prop': 'product.unit_price'},
 				{ 'label': 'Peso', 'prop': 'product.weight'},
-				{ 'label': 'Quantidade', 'prop': 'quantity'},
+				{ 'label': 'Qtd.', 'prop': 'quantity'},
+				{ 'label': 'Desconto', 'prop': 'discount'},
 				{ 'label': 'Subtotal', 'prop': 'subtotal_price'},
+				{ 'label': 'Total', 'prop': 'total_price'}
 				],
 
 				discountModal: {
-					item: {},
+					item: {
+						product: {
+							name: ''
+						}
+					},
+					discount: 0,
 					status: false
 				}
 
@@ -84,9 +126,35 @@
 				this.$store.commit('remove-item-to-cart', item)
 			},
 
-			addItemDiscount(item) {
+			showModalDiscount(item)
+			{
 				this.discountModal.status = true
 				this.discountModal.item = item
+			},
+
+			addItemDiscount() {
+				this.$store.commit('add-discount-item-to-cart', this.discountModal)
+				this.discountModal =  {
+					item: {
+						product: {
+							name: ''
+						}
+					},
+					discount: 0,
+					status: false
+				}
+			},
+
+			verifyDiscount() {
+				if(this.discountModal.discount > this.discountModal.item.total_price)
+				{
+					this.discountModal.discount = this.discountModal.item.subtotal_price.toFixed(2)
+				}
+
+				else if(this.discountModal.discount < 0)
+				{
+					this.discountModal.discount = 0
+				}
 			}
 		},
 
@@ -129,9 +197,50 @@
 		}
 	}
 
-	.el-table_1_column_7 > .cell
+	.el-table_1_column_9 > .cell
 	{
 		padding: 0px !important;
+	}
+
+	#modal-add-discount
+	{
+		background: rgba(0, 0, 0, .7);
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		z-index: 1000;
+		top: 0;
+		left: 0;
+
+		.modal-content
+		{
+			background: #fff;
+			margin-top: 25vh;
+			border-radius: 4px;
+			
+
+			.modal-header
+			{
+				width: 100%;
+				height: 30px;
+				padding: 15px 4px;
+				margin-bottom: 20px;
+				
+				.title
+				{
+					color: #757575;
+					font-size: 14px;
+					text-transform: uppercase;
+				}
+			}
+
+			.modal-body
+			{
+				width: 100%;
+				padding: 10px 5px;
+				display: block;
+			}
+		}
 	}
 
 </style>

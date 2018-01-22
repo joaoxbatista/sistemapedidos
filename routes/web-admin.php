@@ -223,6 +223,8 @@ Route::group(
 
             Route::post('delivery/calculation', 'Dashboard\OrderController@deliveryCalculation')->name('delivery.calculation');
 
+            Route::post('finish', 'Dashboard\OrderController@finish');
+
             // /* Página Inicial */
             // Route::get('orders', 'Dashboard\OrderController@index')->name('index')->middleware('hasitems');
 

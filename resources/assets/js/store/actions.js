@@ -183,40 +183,7 @@ export default
 		)
 	},
 
-	'delivery-calculation' (context, payload)
-	{
-		
-		axios.post('/admin-dashboard/orders/delivery/calculation', {destiny: payload.data})
-		.then(
-			response => {
-
-				
-				if(response.data.status != 200)
-				{
-					console.log(response.data)
-					payload.notify({
-					message: 'Ops, o endereço do cliente selecionado está incorreto!',
-					type: 'error'
-				});	
-				}
-				else
-				{
-					context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify} )			
-				}
-				
-			}
-		)
-		.catch(
-			erro => {
-				payload.notify({
-					message: 'Ops, ocorreu algum problema na execução desta tarefa',
-					type: 'error'
-				});
-			}
-		)
-
-	},
-
+	
 	'find-has-product' (context, payload) 
 	{	
 		axios.post('/admin-dashboard/products/find', payload.data)
@@ -268,7 +235,7 @@ export default
 	},
 
 
-	//Produtos
+	//Clientes
 
 	'update-clients' (context)
 	{
@@ -348,6 +315,61 @@ export default
 				
 			}
 		)
+	},
+
+
+	//Pedidos
+
+	'finish-order' (context, cart)
+	{
+		
+		axios.post('/admin-dashboard/orders/finish', {data: cart})
+		.then(
+			response => {
+				console.log(response.data)			
+			}
+		)
+		.catch(
+			erro => {
+				console.log(response.erro)	
+			}
+		)
+
+	},
+
+
+	'delivery-calculation' (context, payload)
+	{
+		
+		axios.post('/admin-dashboard/orders/delivery/calculation', {destiny: payload.data})
+		.then(
+			response => {
+
+				
+				if(response.data.status != 200)
+				{
+					console.log(response.data)
+					payload.notify({
+					message: 'Ops, o endereço do cliente selecionado está incorreto!',
+					type: 'error'
+				});	
+				}
+				else
+				{
+					context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify} )			
+				}
+				
+			}
+		)
+		.catch(
+			erro => {
+				payload.notify({
+					message: 'Ops, ocorreu algum problema na execução desta tarefa',
+					type: 'error'
+				});
+			}
+		)
+
 	},
 
 	//Bancos

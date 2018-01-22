@@ -15,7 +15,7 @@
 						name="product_id"
 						class="form-control" 
 						v-model="item.product_id" 
-						v-validate data-vv-rules="required|numeric">
+						v-validate data-vv-rules="numeric">
 
 						<span v-show="errors.has('product_id')" class="text-danger">
 							{{ errors.first('product_id') }}
@@ -37,12 +37,12 @@
 						</span>
 					</div>
 				</div>
-				<div class="col-md-2">
-					<button style="margin-top: 22px;" class="btn btn-block btn-success btn-fill" @click="addToCart"><i class="fa fa-plus"></i> Adicionar</button>
-				</div>
-
-				<div class="col-md-2">
-					<button style="margin-top: 22px;" class="btn btn-block btn-danger btn-fill" @click="clearCart"><i class="fa fa-trash"></i> Limpar</button>
+				<div class="col-md-4">
+					<div class="btn-group">
+						<button :disabled="item.product_id == null || item.quantity == null" style="margin-top: 22px;" class="btn btn-success btn-fill" @click="addToCart"><i class="fa fa-plus"></i> Adicionar</button>
+					
+						<!-- <button style="margin-top: 22px;" class="btn btn-danger btn-fill" @click="clearCart"><i class="fa fa-trash"></i> Limpar</button> -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -55,8 +55,8 @@
 		data () {
 			return {
 				item: {
-					product_id: '',
-					quantity: 1
+					product_id: null,
+					quantity: null
 				}
 			}
 		}, 
@@ -106,8 +106,8 @@
 
 			clearItem () {
 				this.item = {
-					id: '',
-					quantity: 1
+					id: null,
+					quantity: null
 				}
 			}
 		},

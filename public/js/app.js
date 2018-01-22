@@ -33927,6 +33927,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__cart_OrderCartPaymentFormComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__cart_OrderCartPaymentFormComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__cart_OrderCartDeliveryComponent_vue__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__cart_OrderCartDeliveryComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__cart_OrderCartDeliveryComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__cart_OrderCartFinishComponent_vue__ = __webpack_require__(419);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__cart_OrderCartFinishComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__cart_OrderCartFinishComponent_vue__);
 //
 //
 //
@@ -33974,6 +33976,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -33991,7 +33998,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		'hb-order-cart-client': __WEBPACK_IMPORTED_MODULE_3__cart_OrderCartClientComponent_vue___default.a,
 		'hb-order-cart-discount': __WEBPACK_IMPORTED_MODULE_4__cart_OrderCartDiscountComponent_vue___default.a,
 		'hb-order-cart-payment-form': __WEBPACK_IMPORTED_MODULE_5__cart_OrderCartPaymentFormComponent_vue___default.a,
-		'hb-order-cart-delivery': __WEBPACK_IMPORTED_MODULE_6__cart_OrderCartDeliveryComponent_vue___default.a
+		'hb-order-cart-delivery': __WEBPACK_IMPORTED_MODULE_6__cart_OrderCartDeliveryComponent_vue___default.a,
+		'hb-order-cart-finish': __WEBPACK_IMPORTED_MODULE_7__cart_OrderCartFinishComponent_vue___default.a
 	},
 
 	data: function data() {
@@ -34077,6 +34085,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -34305,6 +34318,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -34327,6 +34345,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__payment_forms_OrderCartPaymentFormInstallmentComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__payment_forms_OrderCartPaymentFormInstallmentComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__payment_forms_OderCartPaymentFormCheckComponent_vue__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__payment_forms_OderCartPaymentFormCheckComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__payment_forms_OderCartPaymentFormCheckComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_forms_OrderCartPaymentFormMoneyComponent_vue__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_forms_OrderCartPaymentFormMoneyComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__payment_forms_OrderCartPaymentFormMoneyComponent_vue__);
 //
 //
 //
@@ -34361,6 +34381,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -34370,14 +34401,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	components: {
 		'hb-order-cart-payment-form-installment': __WEBPACK_IMPORTED_MODULE_0__payment_forms_OrderCartPaymentFormInstallmentComponent_vue___default.a,
-		'hb-order-cart-payment-form-check': __WEBPACK_IMPORTED_MODULE_1__payment_forms_OderCartPaymentFormCheckComponent_vue___default.a
+		'hb-order-cart-payment-form-check': __WEBPACK_IMPORTED_MODULE_1__payment_forms_OderCartPaymentFormCheckComponent_vue___default.a,
+		'hb-order-cart-payment-form-money': __WEBPACK_IMPORTED_MODULE_2__payment_forms_OrderCartPaymentFormMoneyComponent_vue___default.a
 	},
 
 	data: function data() {
 		return {
 			payment_form: '',
 
-			payment_forms: [{ label: 'Dinheiro', value: 'money' }, { label: 'Cartão', value: 'credit_cart' }, { label: 'Parcelado', value: 'installment' }, { label: 'Cheque', value: 'check' }]
+			payment_forms: [{ label: 'Dinheiro', value: 'money' }, { label: 'Parcelado', value: 'installment' }, { label: 'Cheque', value: 'check' }]
 
 		};
 	},
@@ -34464,8 +34496,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			item: {
-				product_id: '',
-				quantity: 1
+				product_id: null,
+				quantity: null
 			}
 		};
 	},
@@ -34508,8 +34540,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		clearItem: function clearItem() {
 			this.item = {
-				id: '',
-				quantity: 1
+				id: null,
+				quantity: null
 			};
 		}
 	},
@@ -34577,6 +34609,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -34591,10 +34658,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				currentPage: 1
 			},
 
-			titles: [{ 'label': 'Código', 'prop': 'id' }, { 'label': 'Nome', 'prop': 'product.name' }, { 'label': 'Preço', 'prop': 'product.unit_price' }, { 'label': 'Peso', 'prop': 'product.weight' }, { 'label': 'Quantidade', 'prop': 'quantity' }, { 'label': 'Subtotal', 'prop': 'subtotal_price' }],
+			titles: [{ 'label': 'Cod.', 'prop': 'id' }, { 'label': 'Nome', 'prop': 'product.name' }, { 'label': 'Preço', 'prop': 'product.unit_price' }, { 'label': 'Peso', 'prop': 'product.weight' }, { 'label': 'Qtd.', 'prop': 'quantity' }, { 'label': 'Desconto', 'prop': 'discount' }, { 'label': 'Subtotal', 'prop': 'subtotal_price' }, { 'label': 'Total', 'prop': 'total_price' }],
 
 			discountModal: {
-				item: {},
+				item: {
+					product: {
+						name: ''
+					}
+				},
+				discount: 0,
 				status: false
 			}
 
@@ -34606,9 +34678,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		removeToCart: function removeToCart(item) {
 			this.$store.commit('remove-item-to-cart', item);
 		},
-		addItemDiscount: function addItemDiscount(item) {
+		showModalDiscount: function showModalDiscount(item) {
 			this.discountModal.status = true;
 			this.discountModal.item = item;
+		},
+		addItemDiscount: function addItemDiscount() {
+			this.$store.commit('add-discount-item-to-cart', this.discountModal);
+			this.discountModal = {
+				item: {
+					product: {
+						name: ''
+					}
+				},
+				discount: 0,
+				status: false
+			};
+		},
+		verifyDiscount: function verifyDiscount() {
+			if (this.discountModal.discount > this.discountModal.item.total_price) {
+				this.discountModal.discount = this.discountModal.item.subtotal_price.toFixed(2);
+			} else if (this.discountModal.discount < 0) {
+				this.discountModal.discount = 0;
+			}
 		}
 	},
 
@@ -36247,26 +36338,6 @@ if (token) {
 	'update-product': function updateProduct(context, product) {
 		axios.post('/admin-dashboard/products', product).then(function (response) {}).catch(function (erro) {});
 	},
-	'delivery-calculation': function deliveryCalculation(context, payload) {
-
-		axios.post('/admin-dashboard/orders/delivery/calculation', { destiny: payload.data }).then(function (response) {
-
-			if (response.data.status != 200) {
-				console.log(response.data);
-				payload.notify({
-					message: 'Ops, o endereço do cliente selecionado está incorreto!',
-					type: 'error'
-				});
-			} else {
-				context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify });
-			}
-		}).catch(function (erro) {
-			payload.notify({
-				message: 'Ops, ocorreu algum problema na execução desta tarefa',
-				type: 'error'
-			});
-		});
-	},
 	'find-has-product': function findHasProduct(context, payload) {
 		axios.post('/admin-dashboard/products/find', payload.data).then(function (response) {
 			if (response.data != null) {
@@ -36297,7 +36368,7 @@ if (token) {
 	},
 
 
-	//Produtos
+	//Clientes
 
 	'update-clients': function updateClients(context) {
 		axios.get('/admin-dashboard/clients/json').then(function (response) {
@@ -36325,6 +36396,38 @@ if (token) {
 	'remove-client': function removeClient(context, client_id) {
 		console.log(product_id);
 		axios.post('/admin-dashboard/clients/delete', { id: client_id }).then(function (response) {}).catch(function (erro) {});
+	},
+
+
+	//Pedidos
+
+	'finish-order': function finishOrder(context, cart) {
+
+		axios.post('/admin-dashboard/orders/finish', { data: cart }).then(function (response) {
+			console.log(response.data);
+		}).catch(function (erro) {
+			console.log(response.erro);
+		});
+	},
+	'delivery-calculation': function deliveryCalculation(context, payload) {
+
+		axios.post('/admin-dashboard/orders/delivery/calculation', { destiny: payload.data }).then(function (response) {
+
+			if (response.data.status != 200) {
+				console.log(response.data);
+				payload.notify({
+					message: 'Ops, o endereço do cliente selecionado está incorreto!',
+					type: 'error'
+				});
+			} else {
+				context.commit('add-delivery-to-cart', { data: response.data, notify: payload.notify });
+			}
+		}).catch(function (erro) {
+			payload.notify({
+				message: 'Ops, ocorreu algum problema na execução desta tarefa',
+				type: 'error'
+			});
+		});
 	},
 
 
@@ -36502,6 +36605,8 @@ if (token) {
 						var total_weight = item.quantity * item.product.weight + state.cart.total_weight;
 						total_weight = parseFloat(total_weight.toFixed(2));
 
+						element.total_price = element.subtotal_price;
+
 						//Atualiza a quantidade dos items do carrinho
 						state.cart.item_quantity += parseInt(item.quantity);
 						//Atualiza o valor dos items no carrinho
@@ -36540,6 +36645,9 @@ if (token) {
 
 					item.subtotal_weight = item.quantity * item.product.weight;
 					item.subtotal_weight = parseFloat(item.subtotal_weight.toFixed(2));
+
+					item.discount = 0;
+					item.total_price = item.subtotal_price;
 
 					state.cart.items.push(item);
 					state.cart.product_quantity += 1;
@@ -36627,6 +36735,40 @@ if (token) {
 			type: 'success'
 		});
 	},
+	'add-discount-item-to-cart': function addDiscountItemToCart(state, data) {
+		var status = false;
+		var item = data.item;
+
+		state.cart.discounts.items.filter(function (itemCart) {
+			if (itemCart.product.id == item.product.id) {
+
+				state.cart.discounts.total = parseFloat(state.cart.discounts.total) - parseFloat(itemCart.discount);
+				state.cart.discounts.total = state.cart.discounts.total.toFixed(2);
+
+				itemCart.discount = parseFloat(data.discount);
+
+				state.cart.discounts.total = parseFloat(state.cart.discounts.total) + parseFloat(itemCart.discount);
+				state.cart.discounts.total = state.cart.discounts.total.toFixed(2);
+
+				itemCart.total_price = parseFloat(itemCart.subtotal_price) - parseFloat(itemCart.discount);
+				itemCart.total_price = itemCart.total_price.toFixed(2);
+
+				status = true;
+			}
+		});
+
+		if (!status) {
+			item.discount = data.discount;
+
+			item.total_price = parseFloat(item.subtotal_price) - parseFloat(item.discount);
+			item.total_price = item.total_price.toFixed(2);
+
+			state.cart.discounts.total = parseFloat(state.cart.discounts.total) + parseFloat(item.discount);
+			state.cart.discounts.total.toFixed(2);
+
+			state.cart.discounts.items.push(item);
+		}
+	},
 	'remove-discount-to-cart': function removeDiscountToCart(state, payload) {
 
 		state.cart.price_discount = parseFloat(state.cart.price_products + state.cart.discounts.total);
@@ -36637,7 +36779,7 @@ if (token) {
 
 		payload.notify({
 			showClose: true,
-			message: 'Disconto adicionado com sucesso! ' + payload.data.price,
+			message: 'Disconto removido com sucesso! ' + payload.data.price,
 			type: 'success'
 		});
 	},
@@ -36760,6 +36902,7 @@ if (token) {
 
 		/*Dados relativos a forma de pagamento*/
 		payment_form: '',
+		money: 0,
 		parcels: [],
 		checks: [],
 
@@ -37638,7 +37781,7 @@ exports.push([module.i, "\n#hb-order-cart-information {\n  box-shadow: 2px 2px 4
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)();
-exports.push([module.i, "\n#hb-order-cart-delivery {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n}\n#hb-order-cart-delivery .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#hb-order-cart-delivery .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#hb-order-cart-delivery .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n#hb-order-cart-delivery .content .box-info {\n      display: inline-block;\n      max-width: 24.5%;\n      min-width: 24.5%;\n      color: #757575;\n      margin-bottom: 10px;\n      font-size: 26px;\n      border: 1px solid #e9e9e9;\n      padding: 10px;\n}\n#hb-order-cart-delivery .content .box-info .value {\n        text-align: center;\n        display: block;\n}\n#hb-order-cart-delivery .content .box-info .title {\n        font-size: 14px;\n        margin-left: 10px;\n        display: block;\n        text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n#hb-order-cart-delivery {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n  margin-top: 20px;\n}\n#hb-order-cart-delivery .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#hb-order-cart-delivery .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#hb-order-cart-delivery .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n#hb-order-cart-delivery .content .box-info {\n      display: inline-block;\n      max-width: 24.5%;\n      min-width: 24.5%;\n      color: #757575;\n      margin-bottom: 10px;\n      font-size: 26px;\n      border: 1px solid #e9e9e9;\n      padding: 10px;\n}\n#hb-order-cart-delivery .content .box-info .value {\n        text-align: center;\n        display: block;\n}\n#hb-order-cart-delivery .content .box-info .title {\n        font-size: 14px;\n        margin-left: 10px;\n        display: block;\n        text-align: center;\n}\n", ""]);
 
 /***/ }),
 /* 310 */
@@ -37659,14 +37802,14 @@ exports.push([module.i, "\n.admin-login-component {\n  color: #888;\n}\n.admin-l
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)();
-exports.push([module.i, "\n#oder-cart-product-list {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n  margin-top: 10px;\n}\n#oder-cart-product-list .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#oder-cart-product-list .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#oder-cart-product-list .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n.el-table_1_column_7 > .cell {\n  padding: 0px !important;\n}\n", ""]);
+exports.push([module.i, "\n#oder-cart-product-list {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n  margin-top: 10px;\n}\n#oder-cart-product-list .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#oder-cart-product-list .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#oder-cart-product-list .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n.el-table_1_column_9 > .cell {\n  padding: 0px !important;\n}\n#modal-add-discount {\n  background: rgba(0, 0, 0, 0.7);\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  z-index: 1000;\n  top: 0;\n  left: 0;\n}\n#modal-add-discount .modal-content {\n    background: #fff;\n    margin-top: 25vh;\n    border-radius: 4px;\n}\n#modal-add-discount .modal-content .modal-header {\n      width: 100%;\n      height: 30px;\n      padding: 15px 4px;\n      margin-bottom: 20px;\n}\n#modal-add-discount .modal-content .modal-header .title {\n        color: #757575;\n        font-size: 14px;\n        text-transform: uppercase;\n}\n#modal-add-discount .modal-content .modal-body {\n      width: 100%;\n      padding: 10px 5px;\n      display: block;\n}\n", ""]);
 
 /***/ }),
 /* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)();
-exports.push([module.i, "\n#hb-order-cart-payment-form {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n  margin-top: 10px;\n}\n#hb-order-cart-payment-form .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#hb-order-cart-payment-form .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#hb-order-cart-payment-form .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "\n#hb-order-cart-finish {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n  margin-top: 10px;\n}\n#hb-order-cart-finish .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#hb-order-cart-finish .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#hb-order-cart-finish .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n", ""]);
 
 /***/ }),
 /* 314 */
@@ -95449,7 +95592,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "text",
       "name": "product_id",
-      "data-vv-rules": "required|numeric"
+      "data-vv-rules": "numeric"
     },
     domProps: {
       "value": (_vm.item.product_id)
@@ -95510,30 +95653,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "text-danger"
   }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.errors.first('quantity')) + "\n\t\t\t\t\t")])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2"
+    staticClass: "col-md-4"
+  }, [_c('div', {
+    staticClass: "btn-group"
   }, [_c('button', {
-    staticClass: "btn btn-block btn-success btn-fill",
+    staticClass: "btn btn-success btn-fill",
     staticStyle: {
       "margin-top": "22px"
+    },
+    attrs: {
+      "disabled": _vm.item.product_id == null || _vm.item.quantity == null
     },
     on: {
       "click": _vm.addToCart
     }
   }, [_c('i', {
     staticClass: "fa fa-plus"
-  }), _vm._v(" Adicionar")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2"
-  }, [_c('button', {
-    staticClass: "btn btn-block btn-danger btn-fill",
-    staticStyle: {
-      "margin-top": "22px"
-    },
-    on: {
-      "click": _vm.clearCart
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-trash"
-  }), _vm._v(" Limpar")])])])])])
+  }), _vm._v(" Adicionar")])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "header"
@@ -95721,6 +95857,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "fase > 0"
     }],
     staticClass: "btn btn-info btn-block",
+    attrs: {
+      "accesskey": "k"
+    },
     on: {
       "click": _vm.backStep
     }
@@ -95750,11 +95889,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('el-step', {
     attrs: {
+      "title": "Entrega"
+    }
+  }), _vm._v(" "), _c('el-step', {
+    attrs: {
       "title": "Pagamento"
     }
   }), _vm._v(" "), _c('el-step', {
     attrs: {
-      "title": "Entrega"
+      "title": "Finalizar"
     }
   })], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "col-md-3 col-sm-12"
@@ -95766,6 +95909,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "fase < 5 && cart.item_quantity > 0"
     }],
     staticClass: "btn btn-fill btn-info btn-block",
+    attrs: {
+      "accesskey": "l"
+    },
     on: {
       "click": _vm.nextStep
     }
@@ -95799,19 +95945,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.fase == 2),
       expression: "fase == 2"
     }]
-  }), _vm._v(" "), _c('hb-order-cart-payment-form', {
+  }), _vm._v(" "), _c('hb-order-cart-delivery', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (_vm.fase == 3),
       expression: "fase == 3"
     }]
-  }), _vm._v(" "), _c('hb-order-cart-delivery', {
+  }), _vm._v(" "), (_vm.fase == 4) ? _c('hb-order-cart-payment-form') : _vm._e(), _vm._v(" "), _c('hb-order-cart-finish', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.fase == 4),
-      expression: "fase == 4"
+      value: (_vm.fase == 5),
+      expression: "fase == 5"
     }]
   })], 1)])])
 },staticRenderFns: []}
@@ -96096,21 +96242,45 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "show",
       rawName: "v-show",
+      value: (_vm.cart.price_final > 0),
+      expression: "cart.price_final > 0"
+    }],
+    staticClass: "box-info"
+  }, [_c('span', {
+    staticClass: "value"
+  }, [_vm._v(_vm._s(_vm.cart.price_final) + " R$")]), _vm._v(" "), _c('span', {
+    staticClass: "title"
+  }, [_vm._v("valor a ser pago ")])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
       value: (_vm.cart.client.name),
       expression: "cart.client.name"
     }],
     staticClass: "box-info"
   }, [_c('span', {
     staticClass: "value"
-  }, [_vm._v(_vm._s(_vm.cart.client.limit_credit) + " R$")]), _vm._v(" "), _c('span', {
+  }, [_vm._v(_vm._s(_vm.cart.client.name))]), _vm._v(" "), _c('span', {
     staticClass: "title"
-  }, [_vm._v("limite de crédito")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("possui o limite de " + _vm._s(_vm.cart.client.limit_credit) + " R$")])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.price_products > 0),
+      expression: "cart.price_products > 0"
+    }],
     staticClass: "box-info"
   }, [_c('span', {
     staticClass: "value"
   }, [_vm._v(_vm._s(_vm.cart.price_products) + " R$")]), _vm._v(" "), _c('span', {
     staticClass: "title"
   }, [_vm._v("preço dos produtos")])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.discounts.total > 0),
+      expression: "cart.discounts.total > 0"
+    }],
     staticClass: "box-info"
   }, [_c('span', {
     staticClass: "value"
@@ -96129,12 +96299,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.cart.delivery.price) + " R$")]), _vm._v(" "), _c('span', {
     staticClass: "title"
   }, [_vm._v("preço do frete")])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.item_quantity > 0),
+      expression: "cart.item_quantity > 0"
+    }],
     staticClass: "box-info"
   }, [_c('span', {
     staticClass: "value"
   }, [_vm._v(_vm._s(_vm.cart.item_quantity))]), _vm._v(" "), _c('span', {
     staticClass: "title"
   }, [_vm._v("quantidade de itens")])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.total_weight > 0),
+      expression: "cart.total_weight > 0"
+    }],
     staticClass: "box-info"
   }, [_c('span', {
     staticClass: "value"
@@ -96736,9 +96918,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.client.id == null),
+      expression: "cart.client.id == null"
+    }],
+    staticClass: "col-md-12"
+  }, [_c('div', {
+    staticClass: "alert alert-warning"
+  }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-2"
   }, [_c('button', {
     staticClass: "btn btn-success btn-fill btn-block",
+    attrs: {
+      "disabled": _vm.cart.client.id == null
+    },
     on: {
       "click": _vm.deliveryCalculation
     }
@@ -96952,8 +97147,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "btn btn-fill btn-small btn-warning",
           on: {
             "click": function($event) {
-              _vm.discountModal
-                .status = true
+              _vm.showModalDiscount(scope.row)
             }
           }
         }, [_c('i', {
@@ -96963,41 +97157,86 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }])
   }), _vm._v(" "), _c('p', {
     slot: "append"
-  }, [_vm._v("table slot")])], 2)], 1), _vm._v(" "), _c('el-dialog', {
+  }, [_vm._v("table slot")])], 2)], 1), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.discountModal.status),
+      expression: "discountModal.status"
+    }],
     attrs: {
-      "title": "Adicionar desconto ao produto",
-      "visible": _vm.discountModal.status
-    },
-    on: {
-      "update:visible": function($event) {
-        _vm.discountModal.status = $event
-      }
+      "id": "modal-add-discount"
     }
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "modal-content col-md-8 col-md-offset-2"
+  }, [_c('div', {
+    staticClass: "modal-header"
+  }, [_c('h4', {
+    staticClass: "title"
+  }, [_vm._v("Adição de desconto em " + _vm._s(_vm.discountModal.item.product.name) + " ")])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('p', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("\n\t\t\t\t\t\t\t\tsubtotal do item " + _vm._s(_vm.discountModal.item.subtotal_price) + " R$\n\t\t\t\t\t\t\t\t"), _c('br'), _vm._v("\n\t\t\t\t\t\t\t \tvalor do desconto " + _vm._s(_vm.discountModal.discount) + " R$\n\t\t\t\t\t\t\t")])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_c('label', [_vm._v("Valor do desconto")]), _vm._v(" "), _c('input', {
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Valor do desconto")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.discountModal.item.discount),
-      expression: "discountModal.item.discount"
+      value: (_vm.discountModal.discount),
+      expression: "discountModal.discount"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.discountModal.item.discount)
+      "value": (_vm.discountModal.discount)
     },
     on: {
+      "keyup": _vm.verifyDiscount,
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.discountModal.item.discount = $event.target.value
+        _vm.discountModal.discount = $event.target.value
       }
     }
-  })])])])], 1)
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-6"
+  }, [_c('div', {
+    staticClass: "btn-group"
+  }, [_c('button', {
+    staticClass: "btn btn-fill btn-success",
+    on: {
+      "click": _vm.addItemDiscount
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  }), _vm._v(" Adicionar\n\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-fill btn-danger",
+    on: {
+      "click": function($event) {
+        _vm.discountModal.status = false
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-times"
+  }), _vm._v(" Fechar\n\t\t\t\t\t\t\t\t")])])])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "header"
@@ -97020,14 +97259,24 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
-      "id": "hb-order-cart-payment-form"
+      "id": "hb-order-cart-finish"
     }
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-6"
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.client.id == null),
+      expression: "cart.client.id == null"
+    }],
+    staticClass: "col-md-12"
+  }, [_c('div', {
+    staticClass: "alert alert-warning"
+  }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -97046,6 +97295,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "payment_form"
     }],
     staticClass: "form-control",
+    attrs: {
+      "disabled": _vm.cart.client.id == null
+    },
     on: {
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
@@ -97064,24 +97316,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v(_vm._s(payment_form.label))])
   }))])])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('hb-order-cart-payment-form-installment', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.payment_form == 'installment'),
-      expression: "payment_form == 'installment'"
-    }]
-  })], 1), _vm._v(" "), _c('div', {
+      value: (_vm.payment_form == 'installment' && _vm.cart.client.id != null),
+      expression: "payment_form == 'installment' && cart.client.id != null"
+    }],
     staticClass: "col-md-12"
-  }, [_c('hb-order-cart-payment-form-check', {
+  }, [_c('hb-order-cart-payment-form-installment')], 1), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.payment_form == 'check'),
-      expression: "payment_form == 'check'"
-    }]
-  })], 1)])])])
+      value: (_vm.payment_form == 'check' && _vm.cart.client.id != null),
+      expression: "payment_form == 'check' && cart.client.id != null"
+    }],
+    staticClass: "col-md-12"
+  }, [_c('hb-order-cart-payment-form-check')], 1), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.payment_form == 'money' && _vm.cart.client.id != null),
+      expression: "payment_form == 'money' && cart.client.id != null"
+    }],
+    staticClass: "col-md-12"
+  }, [_c('hb-order-cart-payment-form-money')], 1)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "header"
@@ -112041,6 +112299,345 @@ return jQuery;
 __webpack_require__(199);
 module.exports = __webpack_require__(200);
 
+
+/***/ }),
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {};
+	},
+
+
+	methods: {
+		finishOrder: function finishOrder() {
+			alert('Finalizar pedido');
+			this.$store.dispatch('finish-order', this.cart);
+		},
+		pendingOrder: function pendingOrder() {
+			alert('Deixar pedido pendente');
+		}
+	},
+
+	computed: {
+		cart: function cart() {
+			return this.$store.getters.getCart;
+		}
+	}
+});
+
+/***/ }),
+/* 418 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)();
+exports.push([module.i, "\n#hb-order-cart-delivery {\n  box-shadow: 2px 2px 4px rgba(190, 190, 190, 0.8);\n  background: #F5F5F5;\n  padding: 10px;\n  border-radius: 6px;\n}\n#hb-order-cart-delivery .header {\n    width: 100%;\n    padding: 5px 10px;\n    border-bottom: 1px solid #e9e9e9;\n}\n#hb-order-cart-delivery .header .title {\n      color: #757575;\n      text-transform: uppercase;\n      font-size: 16px;\n}\n#hb-order-cart-delivery .content {\n    width: 100%;\n    margin-bottom: 10px;\n}\n#hb-order-cart-delivery .content .box-info {\n      display: inline-block;\n      max-width: 24.5%;\n      min-width: 24.5%;\n      color: #757575;\n      margin-bottom: 10px;\n      font-size: 26px;\n      border: 1px solid #e9e9e9;\n      padding: 10px;\n}\n#hb-order-cart-delivery .content .box-info .value {\n        text-align: center;\n        display: block;\n}\n#hb-order-cart-delivery .content .box-info .title {\n        font-size: 14px;\n        margin-left: 10px;\n        display: block;\n        text-align: center;\n}\n", ""]);
+
+/***/ }),
+/* 419 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(421)
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(417),
+  /* template */
+  __webpack_require__(420),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/sistemapedidos/resources/assets/js/components/orders/cart/OrderCartFinishComponent.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] OrderCartFinishComponent.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-588bbd3e", Component.options)
+  } else {
+    hotAPI.reload("data-v-588bbd3e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 420 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "hb-order-cart-finish"
+    }
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-2"
+  }, [_c('button', {
+    staticClass: "btn btn-success btn-fill btn-block",
+    on: {
+      "click": function($event) {
+        _vm.finishOrder()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-calculator"
+  }), _vm._v(" Finalizar pedido\n\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-2"
+  }, [_c('button', {
+    staticClass: "btn btn-primary btn-fill btn-block",
+    on: {
+      "click": _vm.pendingOrder
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-hourglass"
+  }), _vm._v(" Deixar pendente\n\t\t\t\t")])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "header"
+  }, [_c('h4', {
+    staticClass: "title"
+  }, [_vm._v("Finalização do pedido")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-588bbd3e", module.exports)
+  }
+}
+
+/***/ }),
+/* 421 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(418);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("26675a18", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-588bbd3e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OrderCartFinishComponent.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-588bbd3e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OrderCartFinishComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 422 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			money: 0
+		};
+	}
+});
+
+/***/ }),
+/* 423 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)();
+exports.push([module.i, "\n#order-cart-payment-form-money .header {\n  position: relative;\n  padding: 5px 0px;\n  box-sizing: border-box;\n}\n#order-cart-payment-form-money .header .title {\n    color: #757575;\n    text-transform: uppercase;\n    font-size: 14px;\n}\n#order-cart-payment-form-money .content {\n  width: 100%;\n  padding: 0px;\n  margin-bottom: 10px;\n  margin-top: 10px;\n}\n", ""]);
+
+/***/ }),
+/* 424 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(426)
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(422),
+  /* template */
+  __webpack_require__(425),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/sistemapedidos/resources/assets/js/components/orders/cart/payment_forms/OrderCartPaymentFormMoneyComponent.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] OrderCartPaymentFormMoneyComponent.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e54ff452", Component.options)
+  } else {
+    hotAPI.reload("data-v-e54ff452", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 425 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "order-cart-payment-form-money"
+    }
+  }, [_c('div', {
+    staticClass: "header"
+  }, [_vm._v("\n\t\tDinheiro\n\t")]), _vm._v(" "), _c('div', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-4"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.money),
+      expression: "money"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.money)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.money = $event.target.value
+      }
+    }
+  })])])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-e54ff452", module.exports)
+  }
+}
+
+/***/ }),
+/* 426 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(423);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("0f819a9b", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-e54ff452\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OrderCartPaymentFormMoneyComponent.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-e54ff452\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OrderCartPaymentFormMoneyComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

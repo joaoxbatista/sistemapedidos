@@ -117,6 +117,8 @@ export default {
 					var total_weight = (item.quantity * item.product.weight) + state.cart.total_weight
 					total_weight = parseFloat(total_weight.toFixed(2))
 
+					element.total_price = element.subtotal_price
+
 					//Atualiza a quantidade dos items do carrinho
 					state.cart.item_quantity += parseInt(item.quantity)
 					//Atualiza o valor dos items no carrinho
@@ -159,6 +161,9 @@ export default {
 
 				item.subtotal_weight = item.quantity * item.product.weight
 				item.subtotal_weight = parseFloat(item.subtotal_weight.toFixed(2))
+
+				item.discount = 0
+				item.total_price = item.subtotal_price
 
 				state.cart.items.push(item)
 				state.cart.product_quantity +=  1
@@ -250,6 +255,45 @@ export default {
 		})
 	},
 
+	'add-discount-item-to-cart' (state, data) {
+		var status = false
+		var item = data.item
+
+		state.cart.discounts.items.filter( itemCart => {
+			if(itemCart.product.id == item.product.id)
+			{	
+
+				state.cart.discounts.total = parseFloat(state.cart.discounts.total) - parseFloat(itemCart.discount)
+				state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
+
+				itemCart.discount = parseFloat(data.discount)
+
+				state.cart.discounts.total = parseFloat(state.cart.discounts.total) + parseFloat(itemCart.discount)
+				state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
+
+				itemCart.total_price = parseFloat(itemCart.subtotal_price) - parseFloat(itemCart.discount)
+				itemCart.total_price = itemCart.total_price.toFixed(2)
+
+				status = true
+			}	
+		})
+
+		if(!status)
+		{	
+			item.discount = data.discount
+
+			item.total_price = parseFloat(item.subtotal_price) - parseFloat(item.discount)
+			item.total_price = item.total_price.toFixed(2)
+
+			state.cart.discounts.total = parseFloat(state.cart.discounts.total) + parseFloat(item.discount)
+			state.cart.discounts.total.toFixed(2)
+
+			state.cart.discounts.items.push(item)
+		}
+
+
+	},
+
 	'remove-discount-to-cart' (state, payload) {
 
 		state.cart.price_discount = parseFloat(state.cart.price_products + state.cart.discounts.total)
@@ -260,7 +304,7 @@ export default {
 
 		payload.notify({
 			showClose: true,
-			message: 'Disconto adicionado com sucesso! ' + payload.data.price,
+			message: 'Disconto removido com sucesso! ' + payload.data.price,
 			type: 'success'
 		})
 	},

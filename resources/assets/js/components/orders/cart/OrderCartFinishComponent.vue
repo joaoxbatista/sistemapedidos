@@ -1,24 +1,26 @@
 <template>
-	<div id="hb-order-cart-delivery">
+	<div id="hb-order-cart-finish">
 		<div class="header">
-			<h4 class="title">Informações da entrega</h4>
+			<h4 class="title">Finalização do pedido</h4>
 		</div>
 
 		<div class="content">
 			<div class="row">
-
-				<div class="col-md-12" v-show="cart.client.id == null">
-					<div class="alert alert-warning">Algumas opções serão bloqueadas caso não selecione um cliente</div>
+				<div class="col-md-2">
+					<button class="btn btn-success btn-fill btn-block" @click="finishOrder()"> 
+						<i class="fa fa-calculator"></i> Finalizar pedido
+					</button>
+					
 				</div>
 
 				<div class="col-md-2">
-					<button :disabled="cart.client.id == null" class="btn btn-success btn-fill btn-block" @click="deliveryCalculation"> 
-						<i class="fa fa-calculator"></i> Calcular Frete
+					<button class="btn btn-primary btn-fill btn-block" @click="pendingOrder"> 
+						<i class="fa fa-hourglass"></i> Deixar pendente
 					</button>
 				</div>
-
 			</div>
 		</div>
+		
 	</div>
 </template>
 
@@ -31,15 +33,14 @@
 		},
 
 		methods: {
-			deliveryCalculation () {
-				var payload = {
-					data: this.cart.client,
-					notify: this.$message
-				}
+			finishOrder () {
+				alert('Finalizar pedido')
+				this.$store.dispatch('finish-order', this.cart)
+			},
 
-				this.$store.dispatch('delivery-calculation', payload)
+			pendingOrder () {
+				alert('Deixar pedido pendente')
 			}
-
 		},
 
 		computed: {
@@ -56,7 +57,6 @@
     background: #F5F5F5;
     padding: 10px;
     border-radius: 6px;
-    margin-top: 20px;
 
     .header
     {

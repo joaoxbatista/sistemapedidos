@@ -73,6 +73,7 @@ export default {
 
 		/*Dados relativos a forma de pagamento*/		
 		payment_form: '',
+		money: 0,
 		parcels: [],
 		checks: [],
 		
