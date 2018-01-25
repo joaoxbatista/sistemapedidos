@@ -20,5 +20,15 @@ class UserSeeder extends Seeder
             'phone' => '082981413960',
             'password' => bcrypt('admin'),
         ]);
+
+        BusinessSettings::create([
+            'name' => 'versatil',
+            'cnpj' => '000000000', 
+            'city' => 'Garanhuns', 
+            'state' => 'Pernanbuco', 
+            'kilometer_value' => 1.5,
+            'user_id' => 1,
+        ]);
+
     }
 }

@@ -8,6 +8,12 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
+						<label>Número do cheque</label>
+						<el-input v-model="check.number"></el-input>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
 						<label>Nome do titular</label>
 						<el-input v-model="check.holder_name"></el-input>
 					</div>
@@ -87,6 +93,9 @@
 						<li v-for="checkItem in cart.checks" class="list-group-item">
 							<div class="row">
 								<p class="col-md-4">
+									<i class="fa fa-user"></i> <strong>Número:</strong> {{ checkItem.number}}
+								</p>
+								<p class="col-md-4">
 									<i class="fa fa-user"></i> <strong>Titular:</strong> {{ checkItem.holder_name}}
 								</p>
 								<p class="col-md-4">
@@ -125,6 +134,7 @@
 		data () {
 			return {
 				check: { 
+					number: null,
 					bank_id: null,
 					expiration_date: null,
 					holder_name: null,

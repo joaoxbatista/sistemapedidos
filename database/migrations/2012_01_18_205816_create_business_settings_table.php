@@ -22,9 +22,7 @@ class CreateBusinessSettingsTable extends Migration
             $table->string('state')->nullable();
             $table->string('street')->nullable();
             $table->string('district')->nullable();
-
             $table->integer('user_id')->nullable()->unsigned();
-
             $table->float('kilometer_value', 10, 2)->nullable();
             $table->string('cep')->nullable();
             $table->timestamps();

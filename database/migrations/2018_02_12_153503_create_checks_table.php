@@ -14,19 +14,24 @@ class CreateChecksTable extends Migration
     public function up()
     {
         Schema::create('checks', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->string('bank');
-            $table->boolean('status');
-            $table->date('due_date');
-            $table->string('agency');
-            $table->string('acount_number');
-            $table->decimal('value');
+            $table->integer('number');
             $table->string('holder_name');
             $table->string('cnpj')->nullable();
             $table->string('cpf')->nullable();
-            $table->integer('parcel_id')->unsigned();
-            $table->foreign('parcel_id')->references('id')->on('parcels')->onDelete('no action')->onUpdate('cascade');
-            $table->timestamps();
+            $table->string('agency');
+            $table->string('acount_number');
+            $table->date('due_date');
+            $table->decimal('value');
+            $table->boolean('status');
+            
+            $table->integer('bank_id')->nullable()->unsigned();
+            $table->integer('order_id')->nullable()->unsigned();
+            
+            $table->foreign('bank_id')->references('id')->on('banks')->onDelete('set null')->onUpdate('cascade');
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

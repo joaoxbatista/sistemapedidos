@@ -125,6 +125,8 @@ export default {
 					state.cart.price_products = price_products
 					//Atualiza o valor do disconto no carrinho
 					state.cart.price_discount = price_products
+					//Atualiza o valor total a ser pago no carrinho
+					state.cart.price_final = price_products
 					//Atualiza o peso total no carrinho
 					state.cart.total_weight = total_weight
 
@@ -177,6 +179,7 @@ export default {
 				state.cart.item_quantity += parseInt(item.quantity)
 				state.cart.price_products = price_products
 				state.cart.price_discount = price_products
+				state.cart.price_final = price_products
 				state.cart.total_weight = total_weight
 
 				payload.notify({
@@ -199,6 +202,8 @@ export default {
 		state.cart.item_quantity -= parseInt(item.quantity)
 		state.cart.price_products = price_products
 		state.cart.price_discount = price_products
+		state.cart.price_final = price_products
+
 		state.cart.total_weight = total_weight
 
 		state.cart.items.splice(index, 1)
@@ -237,6 +242,16 @@ export default {
 		}
 	},
 
+	'set-cart-payment-form' (state, payment_form)
+	{
+		state.cart.payment_form = payment_form
+	},
+
+	'set-cart-parcels' (state, parcels)
+	{
+		state.cart.parcels = parcels
+	},
+
 	'add-client-to-cart' (state, client) {
 		state.cart.client = client
 	},
@@ -245,12 +260,13 @@ export default {
 
 		state.cart.discounts.total = parseFloat(payload.data.price)
 		state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
-		state.cart.price_discount = parseFloat(state.cart.price_products - state.cart.discounts.total)
-		state.cart.price_discount = state.cart.price_discount.toFixed(2)
+				
+		state.cart.price_final = parseFloat(state.cart.price_final) - parseFloat(state.cart.discounts.total)
+		state.cart.price_final = state.cart.price_final.toFixed(2)
 
 		payload.notify({
 			showClose: true,
-			message: 'Disconto adicionado com sucesso! ' + payload.data.price,
+			message: 'Disconto adicionado com sucesso! ',
 			type: 'success'
 		})
 	},
@@ -271,6 +287,9 @@ export default {
 				state.cart.discounts.total = parseFloat(state.cart.discounts.total) + parseFloat(itemCart.discount)
 				state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
 
+				state.cart.price_final = parseFloat(state.cart.price_final) -  parseFloat(state.cart.discounts.total)
+				state.cart.price_final.toFixed(2)
+				
 				itemCart.total_price = parseFloat(itemCart.subtotal_price) - parseFloat(itemCart.discount)
 				itemCart.total_price = itemCart.total_price.toFixed(2)
 
@@ -288,23 +307,23 @@ export default {
 			state.cart.discounts.total = parseFloat(state.cart.discounts.total) + parseFloat(item.discount)
 			state.cart.discounts.total.toFixed(2)
 
+			state.cart.price_final = parseFloat(state.cart.price_final) -  parseFloat(state.cart.discounts.total)
+			state.cart.price_final.toFixed(2)
+
 			state.cart.discounts.items.push(item)
 		}
-
-
 	},
 
 	'remove-discount-to-cart' (state, payload) {
 
-		state.cart.price_discount = parseFloat(state.cart.price_products + state.cart.discounts.total)
-		state.cart.price_discount = state.cart.price_discount.toFixed(2)
+		state.cart.price_final = parseFloat(state.cart.price_final) +  parseFloat(state.cart.discounts.total)
+		state.cart.price_final.toFixed(2)
 
-		state.cart.discounts.total = state.cart.discounts.total - parseFloat(payload.data.price)
-		state.cart.discounts.total = state.cart.discounts.total.toFixed(2)
+		state.cart.discounts.total = 0
 
 		payload.notify({
 			showClose: true,
-			message: 'Disconto removido com sucesso! ' + payload.data.price,
+			message: 'Disconto removido com sucesso! ',
 			type: 'success'
 		})
 	},
@@ -323,10 +342,17 @@ export default {
 
 	'add-delivery-to-cart' (state, payload) {
 		var delivery = payload.data
-		console.log(delivery)
+
+		state.cart.price_final = parseFloat(state.cart.price_final) - parseFloat(state.cart.price_delivery)
+		state.cart.price_final = state.cart.price_final.toFixed(2)
+
 		state.cart.price_delivery = 0
-		state.cart.price_delivery = parseFloat(state.cart.price_discount) + parseFloat(delivery.price)
+		state.cart.price_delivery = parseFloat(delivery.price)
 		state.cart.price_delivery = state.cart.price_delivery.toFixed(2)
+
+		state.cart.price_final = parseFloat(state.cart.price_final) + parseFloat(state.cart.price_delivery)
+		state.cart.price_final = state.cart.price_final.toFixed(2)
+
 		state.cart.delivery = delivery
 
 		payload.notify({

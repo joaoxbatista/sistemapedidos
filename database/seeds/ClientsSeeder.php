@@ -19,10 +19,10 @@ class ClientsSeeder extends Seeder
              'limit_credit' => 0, 
              'email' => $faker->email, 
              'phone'=> '00000000000', 
-             'city' => $faker->name, 
-             'state' => $faker->name, 
-             'street' => $faker->name, 
-             'district' => $faker->name,  
+             'city' => 'Arapiraca', 
+             'state' => 'Alagoas', 
+             'street' => 'Praça Luiz Pereira Lima', 
+             'district' => 'São Luiz',  
              'cep' => $faker->randomFloat(6)
             ];
 

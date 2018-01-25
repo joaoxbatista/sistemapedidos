@@ -5,7 +5,18 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	class Order extends Model{
-		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'seller_id', 'status', 'type'];
+		protected $fillable = [
+            'buy_date',
+            'due_date',
+            'status',
+            'payment_form',
+            'price_products',
+            'price_discounts',
+            'price_final',
+            'seller_id',
+            'client_id',
+        ];
+
 		public $timestamps = false;
 
         public function getStatusAttribute()
@@ -64,7 +75,7 @@
 
         public static function balance()
         {
-            return Order::all()->sum('total');
+            return Order::all()->sum('price_final');
         }
 
         public function items()

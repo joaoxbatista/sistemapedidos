@@ -33,7 +33,7 @@
 						<h4 class="title">Lista de Parcelas</h4>
 					</div>
 					<ul class="list-group">
-						<li v-for="parcel in installment.parcels" class="list-group-item">
+						<li v-for="parcel in installment.parcels = cart.parcels" class="list-group-item">
 							<span> Data: {{ parcel.date }} <i class="fa fa-calendar"></i></span>
 							<span> Valor: {{ parcel.value }} R$</span>
 						</li>
@@ -64,12 +64,13 @@
 
 		methods: {
 			addDays (dateNow, days) {
-				return this.$moment(dateNow).add(days, 'days').format("DD/MM/YYYY")
+				return this.$moment(dateNow).add(days, 'days').format('YYYY-MM-DD HH:MM:SS')
 			},
 
 			addInstallmentToCart () {
 				this.installment.parcels = []
-				var price = this.cart.price_discount / this.installment.quantity
+				
+				var price = this.cart.price_final / this.installment.quantity
 				price = price.toFixed(2)
 				var dateNow = new Date()
 
@@ -78,6 +79,8 @@
 					var dateParcel = this.addDays(dateNow, this.installment.interval * i)
 					this.installment.parcels.push({ date: dateParcel, value: price })
 				}
+
+				this.$store.commit('set-cart-parcels', this.installment.parcels)
 			},
 		},
 

@@ -16,8 +16,12 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="">Selecione uma forma de pagamento</label>
-								<select :disabled="cart.client.id == null" v-model="payment_form" class="form-control">
-									<option :value="payment_form.value" v-for="payment_form in payment_forms">{{payment_form.label}}</option>
+								<select 
+									:disabled="cart.client.id == null" 
+									v-model="payment_form = cart.payment_form" 
+									class="form-control"
+									v-on:change="updatePaymentForm">
+									<option :value="form.value" v-for="form in payment_forms">{{ form.label }}</option>
 								</select>
 							</div>
 						</div>
@@ -70,7 +74,9 @@
 		}, 
 
 		methods: {
-			
+			updatePaymentForm () {
+				this.$store.commit('set-cart-payment-form', this.payment_form);
+			}
 		},
 
 		created () {

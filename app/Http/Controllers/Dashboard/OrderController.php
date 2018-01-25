@@ -32,6 +32,74 @@ class OrderController extends Controller {
 
         return view('dashboard.order.create', compact(['products', 'clients', 'cart']));
     }
+    
+    /*
+    * Descrição: Método para terminar pedido e salvar no banco de dados
+    * Entradas: Objeto contedo o carrinho de compras
+    * Saída: Objeto contendo o pedido e o status
+    */
+    public function finish(Request $request)
+    {
+    
+        $data = $request->get('data');
+        // $timenow = Carbon::now();
+                
+        // $order = new Order();
+
+        // $order->buy_date =  $timenow->toDateTimeString();
+        // $order->due_date =  $timenow->toDateTimeString();
+        
+        // $order->price_products = $data['price_products'];
+        // $order->price_discount = $data['discounts']['total'];
+        // $order->price_final = $data['price_final'];
+        // $order->payment_form = $data['payment_form'];
+        // $order->status = true;
+        // $order->client_id = $data['client']['id'];
+        // $order->save();
+
+
+        // if($data['payment_form'] == 'installment')
+        // {
+        //     $parcels = $data['parcels'];
+
+        //     foreach ($parcels as $parcel) {
+        //         $parcelSave = new Parcel();
+        //         $parcelSave->pay_date = $parcel['date'];
+        //         $parcelSave->value = $parcel['value'];
+        //         $parcelSave->status = false;
+        //         $parcelSave->order_id = $order->id;
+        //         $parcelSave->save();
+        //     }
+        // }
+
+        // if($data['payment_form'] == 'check')
+        // {
+        //     
+
+
+        // agency
+        // bank_id
+        // cnpj
+        // count_number
+        // cpf
+        // expiration_date
+        // holder_name
+        // value
+
+        // $checks = $data['check'];
+
+        //     foreach ($checks as $check) {
+        //         $checkSave = new Check();
+        //         $checkSave->pay_date = $parcel['date'];
+        //         $checkSave->value = $parcel['value'];
+        //         $checkSave->status = false;
+        //         $checkSave->order_id = $order->id;
+        //         $checkSave->save();
+        //     }
+        // }
+
+        return response()->json($data);
+    }
 
     /*
     * Descrição: Método para calcular o valor do frete
@@ -92,15 +160,7 @@ class OrderController extends Controller {
         return response()->json($result);        
     }
 
-    /*
-    * Descrição: Método para terminar pedido e salvar no banco de dados
-    * Entradas: Objeto contedo o carrinho de compras
-    * Saída: Objeto contendo o pedido e o status
-    */
-    public function finish(Request $request)
-    {
-        return response()->json($request->all());
-    }
+   
     // public function store(Request $request)
     // {
 

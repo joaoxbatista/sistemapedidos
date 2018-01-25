@@ -15,10 +15,16 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+
             $table->dateTime('buy_date');
-            $table->decimal('total', 10, 2);
             $table->date('due_date')->nullable();
-            $table->enum('type', ['cash', 'parcels']);
+
+            $table->decimal('price_products', 10, 2);
+            $table->decimal('price_discount', 10, 2);
+            $table->decimal('price_final', 10, 2);
+
+            $table->enum('payment_form', ['money', 'installment', 'check']);
+            
             $table->boolean('status');
             
             $table->integer('seller_id')->nullable()->unsigned();

@@ -23,4 +23,5 @@ class Parcel extends Model
 	{
 		return 'R$ '.$this->attributes['value'];
 	}
+    
 }

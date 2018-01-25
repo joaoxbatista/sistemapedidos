@@ -48,11 +48,11 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-12">
-								<p class="alert alert-info">
-									subtotal do item {{ discountModal.item.subtotal_price }} R$
+								
+									subtotal do item {{ discountModal.item.total }} R$
 									<br>
 								 	valor do desconto {{ discountModal.discount }} R$
-								</p>
+								
 							</div>
 						</div>
 						<div class="row">
@@ -146,9 +146,10 @@
 			},
 
 			verifyDiscount() {
-				if(this.discountModal.discount > this.discountModal.item.total_price)
+				if(this.discountModal.discount > this.discountModal.item.subtotal_price)
 				{
-					this.discountModal.discount = this.discountModal.item.subtotal_price.toFixed(2)
+
+					this.discountModal.discount = this.discountModal.item.subtotal_price
 				}
 
 				else if(this.discountModal.discount < 0)
