@@ -10,7 +10,11 @@
 				<div class="col-md-12" v-show="cart.client.id == null">
 					<div class="alert alert-warning">Algumas opções serão bloqueadas caso não selecione um cliente</div>
 				</div>
-
+				
+				<div class="col-md-12">
+					<h3>Primeria forma de pagamento</h3>					
+				</div>
+				
 				<div class="col-md-4">
 					<div class="row">
 						<div class="col-md-12">
@@ -27,7 +31,6 @@
 						</div>
 					</div>
 				</div>
-				
 				
 				<div class="col-md-12" v-show="payment_form == 'installment' && cart.client.id != null">
 					<hb-order-cart-payment-form-installment></hb-order-cart-payment-form-installment >

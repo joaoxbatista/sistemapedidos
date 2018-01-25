@@ -34452,6 +34452,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -97563,7 +97566,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('div', {
     staticClass: "alert alert-warning"
-  }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "row"
@@ -97634,6 +97637,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h4', {
     staticClass: "title"
   }, [_vm._v("Forma de pagamento")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-12"
+  }, [_c('h3', [_vm._v("Primeria forma de pagamento")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
