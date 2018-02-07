@@ -6,52 +6,81 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Provider;
+use App\Models\Category;
 use Image;
+use Datatables;
+use Auth;
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('dashboard.product.index', compact('products'));
+        return view('admin-dashboard.stock.product.index');
     }
     
+    public function find(Request $request)
+    {
+        $product = Product::find($request->get('product_id'));
+        echo json_encode($product);
+        
+        // try
+        // {
+        //     $product = Product::findOrFail($request->get('product_id'));
+        //     if($product->quantity >= $request->get('quantity'))
+        //     {
+        //         return response()->json($product);
+        //     }
+
+        //     else
+        //     {
+        //         $result = [
+        //         'message' => 'Quantidade insuficiente do produto',
+        //         'code' => '444'
+        //         ];
+        //         return response()->json($result);
+        //     }
+        // }
+
+        // catch(Illuminate\Database\Eloquent\ModelNotFoundException $e)
+        // {
+        //     return response()->json($e);    
+        // }
+
+
+    }   
+
     public function create()
     {
         $providers = Provider::all();
         $providers = array_pluck($providers, 'name', 'id');
 
-        return view('dashboard.product.create', compact('providers'));
+        $categories = Category::all();
+        $categories = array_pluck($categories, 'name', 'id');
+
+        return view('dashboard.product.create', compact(['providers', 'categories']));
     }
 
     public function store(Request $request)
     {
-        
-        if(is_null($request->get('quantity'))){
-            $request['quantity'] = 0;
-        }
-        //Realiazr validação dos produtos
-        $this->validate($request, [
-            'name' => 'required|min:3|max:255',
-            'unit_price' => 'required|numeric',
-            'provider_id' => 'required|numeric',
-            'file' => 'image'
-        ]);
 
-        //Validar imagem
-        if($request->file('file') != null)
-        {
-            $dir = DIRECTORY_SEPARATOR;
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $name = time().$request->get('name').'.'.$extension;
-            $file = $request->file('file');
-
-            Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'products'.$dir.$name));
-            $request['image'] = $name;
+        try {
+            Product::create($request->except('_token'));
+            
+        } catch (Exception $e) {
+            return response()->json($e);
         }
 
-        //Criar produto
-        Product::create($request->except('_token'));
-        return redirect()->back()->with('success-message', 'Fornecedor cadastrado com sucesso!');
+        // //Validar imagem
+        // if($request->file('file') != null)
+        // {
+        //     $dir = DIRECTORY_SEPARATOR;
+        //     $extension = $request->file('file')->getClientOriginalExtension();
+        //     $name = time().$request->get('name').'.'.$extension;
+        //     $file = $request->file('file');
+
+        //     Image::make($file)->resize(240, 240)->save(public_path('uploads'.$dir.'images'.$dir.'products'.$dir.$name));
+        //     $request['image'] = $name;
+        // }
+
     }
 
     public function show($id)
@@ -81,7 +110,7 @@ class ProductController extends Controller
             'provider_id' => 'required|numeric',
             'desc' => 'required|min:50',
             'file' => 'image'
-        ]);
+            ]);
 
 
         if($request->file('file') != null)
@@ -110,7 +139,6 @@ class ProductController extends Controller
     {
         $product = Product::find($request->get('id'));
         $product->delete();
-        return redirect()->route('products')->with('success-message', 'Fornecedor removido com sucesso!');
     }
 
     public function addQuantity(Request $request)
@@ -126,5 +154,11 @@ class ProductController extends Controller
             $product->update();
             return redirect()->back()->with('success-message', $quantity.' do produto '.$product->name.'adicionada ao estoque.');
         }
+    }
+
+    public function json()
+    {
+        $products = Product::orderBy('id', 'desc')->get();
+        return response()->json($products, 200);
     }
 }

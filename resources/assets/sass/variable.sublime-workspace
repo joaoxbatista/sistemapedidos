@@ -1,0 +1,550 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"parcels",
+				"parcelsQuantity"
+			],
+			[
+				"getTotal",
+				"getTotalPriceWithDiscount"
+			],
+			[
+				"add",
+				"addDiscount"
+			],
+			[
+				"click",
+				"clickButtonRemoveItem"
+			],
+			[
+				"clic",
+				"clickButtonAddItem"
+			],
+			[
+				"op",
+				"opacity"
+			],
+			[
+				"tran",
+				"transition"
+			],
+			[
+				"show",
+				"showCreate"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"prod",
+				"product_id"
+			],
+			[
+				"data",
+				"dataTableProdutcs"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"form",
+				"form-group"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "variable.sublime-workspace",
+			"settings":
+			{
+				"buffer_size": 2,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "variable.sass",
+			"settings":
+			{
+				"buffer_size": 249,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 342.0,
+		"last_filter": "css",
+		"selected_items":
+		[
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"re",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 398.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": true,
+		"side_bar_visible": false,
+		"status_bar_visible": true
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/biblioteca/src/css/header.css",
+		"/C/xampp/htdocs/biblioteca/dist/app.js",
+		"/C/xampp/htdocs/biblioteca/index.js",
+		"/C/xampp/htdocs/biblioteca/index.html",
+		"/C/xampp/htdocs/sistemapedidos/app/Http/Controllers/Dashboard/OrderController.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Http/Controllers/Dashboard/ParcelController.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/parcels.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/discount.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/routes/admin.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Models/Cart.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Http/Controllers/Dashboard/CartController.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/parcels.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/view.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/menu.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/cart.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/clients.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/finish.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/create.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/discont.blade.php",
+		"/C/Users/João Batista/Desktop/jquery/js/app.js",
+		"/C/Users/João Batista/Desktop/jquery/js/main.js",
+		"/C/Users/João Batista/Desktop/jquery/sass/variables.sass",
+		"/C/Users/João Batista/Desktop/jquery/sass/app.sass",
+		"/C/xampp/htdocs/sistemapedidos/database/seeds/SellerSeeder.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/clients.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Models/Client.php",
+		"/C/xampp/htdocs/sistemapedidos/database/seeds/ClientSeeder.php",
+		"/C/xampp/htdocs/sistemapedidos/database/seeds/DatabaseSeeder.php",
+		"/C/xampp/htdocs/sistemapedidos/database/seeds/ProductSeeder.php",
+		"/C/xampp/htdocs/sistemapedidos/database/seeds/ProviderSeeder.php",
+		"/C/xampp/htdocs/sistemapedidos/database/migrations/2017_06_20_134151_create_order_product.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/fenish.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/client.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/template/dashboard.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/cart/cart.blade.php",
+		"/C/xampp/htdocs/crudajax/data.json",
+		"/C/xampp/htdocs/crudajax/app/items.php",
+		"/C/xampp/htdocs/crudajax/index.php",
+		"/C/xampp/htdocs/crudajax/js/main.js",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/datatable.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/products.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/routes/web.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/cart.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/vendor/imagine/imagine/lib/Imagine/Image/Profile.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/delete.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/order.old.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Models/Order.php",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/xampp/apache/conf/extra/httpd-vhosts.conf",
+		"/C/xampp/htdocs/sistemapedidos/app/Models/Parcel.php",
+		"/C/xampp/htdocs/sistemapedidos/database/migrations/2017_07_24_174308_create_parcels_table.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Parcel.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/order/tabs/parcel.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/database/migrations/2017_05_11_115657_create_orders_table.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Models/Category.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Http/Controllers/Dashboard/ProductController.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/category/create.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Http/Controllers/Dashboard/CategoryController.php",
+		"/C/xampp/htdocs/sistemapedidos/resources/views/dashboard/product/create.blade.php",
+		"/C/xampp/htdocs/sistemapedidos/.gitignore",
+		"/C/xampp/htdocs/sistemapedidos/database/migrations/2017_07_14_232601_create_categories_table.php",
+		"/C/xampp/htdocs/sistemapedidos/database/migrations/2017_05_11_115640_create_products_table.php",
+		"/C/xampp/htdocs/sistemapedidos/app/Category.php",
+		"/C/xampp/htdocs/sistemapedidos/database/database.sqlite",
+		"/C/xampp/htdocs/sistemapedidos/.env",
+		"/C/xampp/htdocs/sistemapedidos/env"
+	],
+	"find":
+	{
+		"height": 31.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"discount",
+			"Parcels",
+			"getTotalPrice",
+			"orders.cli",
+			"client",
+			"hide",
+			"grupo-input",
+			"parcels",
+			"parcerls",
+			"$('.active').hide();",
+			") ?",
+			"isset($",
+			"!is_null",
+			">\n",
+			"}}\n",
+			"><",
+			"categoriesController",
+			"category",
+			"egory"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "variable.sublime-workspace",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "variable.sass",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 249,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "variable.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"seller/create",
+				"resources\\views\\dashboard\\seller\\create.blade.php"
+			],
+			[
+				"admin",
+				"routes\\admin.php"
+			],
+			[
+				"cartcontr",
+				"app\\Http\\Controllers\\Dashboard\\CartController.php"
+			],
+			[
+				"cart",
+				"app\\Models\\Cart.php"
+			],
+			[
+				"parcels",
+				"resources\\views\\dashboard\\order\\parcels.blade.php"
+			],
+			[
+				"discount",
+				"resources\\views\\dashboard\\order\\discount.blade.php"
+			],
+			[
+				"order",
+				"app\\Http\\Controllers\\Dashboard\\OrderController.php"
+			],
+			[
+				"parcel",
+				"app\\Http\\Controllers\\Dashboard\\ParcelController.php"
+			],
+			[
+				"parce",
+				"app\\Http\\Controllers\\Dashboard\\ParcelController.php"
+			],
+			[
+				"cartcon",
+				"app\\Http\\Controllers\\Dashboard\\CartController.php"
+			],
+			[
+				"discou",
+				"resources\\views\\dashboard\\order\\discount.blade.php"
+			],
+			[
+				"ordercontr",
+				"app\\Http\\Controllers\\Dashboard\\OrderController.php"
+			],
+			[
+				"cart.php",
+				"app\\Models\\Cart.php"
+			],
+			[
+				"ordercon",
+				"app\\Http\\Controllers\\Dashboard\\OrderController.php"
+			],
+			[
+				"",
+				"index.html"
+			],
+			[
+				"discout",
+				"resources\\views\\dashboard\\order\\discount.blade.php"
+			],
+			[
+				"sellerse",
+				"database\\seeds\\SellerSeeder.php"
+			],
+			[
+				"productsee",
+				"database\\seeds\\ProductSeeder.php"
+			],
+			[
+				"seeder",
+				"database\\seeds\\SellerSeeder.php"
+			],
+			[
+				"provider",
+				"database\\seeds\\ProviderSeeder.php"
+			],
+			[
+				"app/model/cli",
+				"app\\Models\\Client.php"
+			],
+			[
+				"client.php",
+				"resources\\views\\dashboard\\order\\tabs\\clients.blade.php"
+			],
+			[
+				"data",
+				"database\\seeds\\DatabaseSeeder.php"
+			],
+			[
+				"productse",
+				"database\\seeds\\ProductSeeder.php"
+			],
+			[
+				"databasese",
+				"database\\seeds\\DatabaseSeeder.php"
+			],
+			[
+				"order_",
+				"database\\migrations\\2017_06_20_134151_create_order_product.php"
+			],
+			[
+				"create",
+				"resources\\views\\dashboard\\order\\create.blade.php"
+			],
+			[
+				"create.blade.",
+				"resources\\views\\dashboard\\order\\create.blade.php"
+			],
+			[
+				"cart.p",
+				"app\\Models\\Cart.php"
+			],
+			[
+				"parcelcontro",
+				"app\\Http\\Controllers\\Dashboard\\ParcelController.php"
+			],
+			[
+				"products",
+				"resources\\views\\dashboard\\order\\tabs\\products.blade.php"
+			],
+			[
+				"cartcontro",
+				"app\\Http\\Controllers\\Dashboard\\CartController.php"
+			],
+			[
+				"client.blade.",
+				"resources\\views\\dashboard\\order\\tabs\\clients.blade.php"
+			],
+			[
+				"fenish",
+				"resources\\views\\dashboard\\order\\tabs\\fenish.blade.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 311.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

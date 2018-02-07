@@ -16,9 +16,9 @@ class SellerSeeder extends Seeder
 
         $seller1 = [
             'name' => $faker->name,
-            'email' => 'admin@admin.com',
+            'email' => 'seller@seller.com',
             'cpf' => $faker->creditCardNumber,
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('seller'),
             'payment' => $faker->numberBetween(700, 1200),
             'sales' => $faker->numberBetween(0, 100),
             'user_id' => 1,

@@ -1,11 +1,18 @@
-@extends('template.simple')
-
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-@endsection
+@extends('templates.simple')
 @section('content')
 
-<div class="conatiner">
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+        <hb-admin-login 
+            action="{{ route('login') }}" 
+            method="post"
+            token="{{ csrf_token() }}"
+        >
+        </hb-admin-login>
+    </div>    
+</div>
+
+<!-- <div class="conatiner">
     <div class="col-md-4 col-md-offset-4" id="form-login">
         <h3>Área administrativa</h3>
         {{ Form::open(['route' => 'login']) }}
@@ -24,5 +31,6 @@
 
         {{ Form::close() }}
     </div>
-</div>
+</div> -->
+
 @endsection

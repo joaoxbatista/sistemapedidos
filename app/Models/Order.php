@@ -5,8 +5,41 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	class Order extends Model{
-		protected $fillable = ['client_id', 'buy_date', 'due_date', 'total', 'seller_id', 'status'];
+		protected $fillable = [
+            'buy_date',
+            'due_date',
+            'status',
+            'payment_form',
+            'price_products',
+            'price_discounts',
+            'price_final',
+            'seller_id',
+            'client_id',
+        ];
+
 		public $timestamps = false;
+
+        public function getStatusAttribute()
+        {
+            $parcels = $this->parcels;
+            if(is_null($parcels))
+            {
+                $this->attributes['status'];
+            }
+            else
+            {
+               
+                foreach($parcels as $parcel)
+                {
+                    if(!$parcel->status)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
 
 		public function client()
         {
@@ -42,7 +75,7 @@
 
         public static function balance()
         {
-            return Order::all()->sum('total');
+            return Order::all()->sum('price_final');
         }
 
         public function items()
@@ -50,5 +83,10 @@
 			return $this->belongsToMany('App\Models\Product', 'order_product', 'order_id', 'product_id')
 			->withPivot('total', 'qtd_itens');
 		}
+
+        public function parcels()
+        {
+            return $this->hasMany('App\Models\Parcel');
+        }
 
 	}

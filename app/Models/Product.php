@@ -10,11 +10,11 @@
 		    'name',
             'unit_price',
             'weight',
-            'desc',
-            'user_id',
+            'description',
             'provider_id',
             'image',
-            'quantity'
+            'quantity',
+            'category_id'
         ];
 
 		public function provider()
@@ -25,6 +25,11 @@
 		public function order()
         {
 			return $this->belongsToMany('App\Models\Product', 'order_product', 'product_id', 'order_id');
+		}
+
+		public function category()
+		{
+			return $this->belongsTo('App\Models\Category');
 		}
 
 

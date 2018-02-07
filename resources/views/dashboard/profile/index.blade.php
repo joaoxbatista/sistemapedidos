@@ -1,68 +1,56 @@
-@extends('template.dashboard')
-@section('title') Dashboard | Perfil @endsection
+@extends('templates.admin-dashboard')
+@section('title') Perfil @endsection
 @section('content')
 
-    <a href="{{ route('dashboard.home') }}" class="btn btn-default">Voltar</a><br><br>
 
-    {{ Form::open(['method' => 'post', 'route' => 'profile.update', 'files' => true])}}
-    {{ Form::hidden('user_id', Auth::user()->id)}}
-    {{ Form::hidden('id', $user->id)}}
+{{ Form::open(['method' => 'post', 'route' => 'admin-dashboard.profile.update', 'files' => true])}}
+{{ Form::hidden('user_id', Auth::user()->id)}}
+{{ Form::hidden('id', $user->id)}}
 
-    <!-- Informações Pessoais e Documentos -->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>Informações pessoais e documentos</h4>
-        </div>
-
-        <div class="panel-body">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        {{Form::label('name', 'Nome')}}
-                        {{Form::text('name', $user->name , ['class' => 'form-control', 'required'])}}
-                    </div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Atualizar Perfil</h4>
                 </div>
-                @if($user->image)
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img class="img-rounded" width="180px" src="{{ asset('uploads/images/users/'.$user->image)  }}" alt="">
+                <div class="content">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    {{Form::label('name', 'Nome')}}
+                                    {{Form::text('name', $user->name , ['class' => 'form-control', 'required'])}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{Form::label('email', 'E-mail')}}
+                                    {{Form::text('email', $user->email , ['class' => 'form-control'])}}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                @else
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img class="img-rounded" width="180px" src="{{ asset('imgs/no-image.png')  }}" alt="">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ Form::label('file', 'Fotografia') }}
+                                    {{ Form::file('file', ['class' => 'form-file']) }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                @endif
 
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        {{ Form::label('file', 'Fotografia') }}
-                        {{ Form::file('file', ['class' => 'form-file']) }}
-                    </div>
-
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Atualizar Perfil</button>
+                        <div class="clearfix"></div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div><!--/ Informações Pessoais e Documentos -->
+        <div class="col-md-4">
 
-    <!-- Informaçoes de Acesso -->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>Informações de acesso</h4>
+            <hb-profile :user="{{$user}}"></hb-profile>
         </div>
 
-        <div class="panel-body">
-            <div class="form-group col-md-4">
-                {{Form::label('email', 'E-mail')}}
-                {{Form::text('email', $user->email , ['class' => 'form-control'])}}
-            </div>
-        </div>
-    </div><!--/ Informaçoes de Acesso -->
-
-    {{ Form::submit('Atualizar', ['class' => 'btn btn-success'])}}
-    {{ Form::close()}}
-
+    </div>
+</div>
 @endsection

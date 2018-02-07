@@ -10,19 +10,37 @@ use App\Models\Cart;
 use App\Models\Item;
 use App\Models\Seller;
 use Session;
+use Carbon\Carbon;
+class CartController extends Controller 
+{
 
-class CartController extends Controller {
-
-    public function index(Request $request) {
-        
+    public function index(Request $request)
+    {
+      $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
+      return view('dashboard.order.cart', compact('cart'));
     }
 
-    public function add(Request $request) {
-        //Definição das variaveis
+    public function getItems(Request $request)
+    {
+        $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
+        return response()->json(['data' => $cart->getJson()]);
+    }
+
+    public function add(Request $request) 
+    {
+        
         $product_id = $request->get('product_id');
         $quantity = $request->get('quantity');
+        $product = !is_null(Product::find($product_id)) ? Product::find($product_id) : null;
+        if(is_null($product))
+        {
+            return 'Produto inexistente';
+        }
+
+
+
         $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
-        $product = Product::find($product_id);
+
         $item_quantity = isset($cart->getItems()[$product_id]) ? $cart->getItems()[$product_id]->quantity : 0;
 
         //Verificar se exitesm produtos
@@ -39,21 +57,25 @@ class CartController extends Controller {
                     $item = new Item($product, $request->get('quantity'));
                     $cart->addItem($item);
                     $request->session()->put('cart', $cart);
-                    return redirect()->back();
+                    // return redirect()->back();
+                    return 'Adicionado com sucesso';
                 }
                 else
                 {
-                    return redirect()->back()->withErrors('A quantidade informada é superior a do estoque. Quantidade do estoque: '.$product->quantity.'.');
+                    //return redirect()->back()->withErrors('A quantidade informada é superior a do estoque. Quantidade do estoque: '.$product->quantity.'.');
+                    return 'A quantidade informada é superior a do estoque. Quantidade do estoque: '.$product->quantity.'.';
                 }
             }
             else
             {
-                return redirect()->back()->withErrors('O valor informado não pode ser negativo.');
+                // return redirect()->back()->withErrors('O valor informado não pode ser negativo.');
+                return 'Quantidade inválida';
             }
         }
         else
         {
-            return redirect()->back()->withErrors('Não existem produtos no estoque');
+            // return redirect()->back()->withErrors('Não existem produtos no estoque');
+            return 'Não existem produtos no estoque';
         }
 
         
@@ -76,6 +98,7 @@ class CartController extends Controller {
             return redirect()->back()->withErrors('O cliente referente ao código não existe.');
         }
     }
+    
     public function addSeller(Request $request)
     {
 
@@ -102,12 +125,13 @@ class CartController extends Controller {
         return redirect()->back()->with('success-message', 'Produto removido com sucesso!');
     }
 
-    public function clear(Request $request){
+    public function clear(Request $request)
+    {
         $request->session()->put('cart', null);
         return redirect()->back();
     }
 
-     public function removeClient(Request $request)
+    public function removeClient(Request $request)
     {
         $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
         $cart->setClient(null);
@@ -115,5 +139,13 @@ class CartController extends Controller {
         return redirect()->back();
     }
 
+    public function removeDiscount(Request $request)
+    {
+        $cart = $request->session()->has('cart') ? new Cart($request->session()->get('cart')) : new Cart();
+        $cart->setDiscount(null);
+        $request->session()->put('cart', $cart);
+        return redirect()->back();
+    }
 
+    
 }

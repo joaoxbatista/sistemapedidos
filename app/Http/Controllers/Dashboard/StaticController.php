@@ -11,6 +11,6 @@
 	class StaticController extends Controller{
 		
 		public function home(){
-			return view('dashboard.home');
+			return view('admin-dashboard.index');
 		}
 	}

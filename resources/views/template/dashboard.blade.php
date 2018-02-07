@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/perfect-scrollbar.min.css')}}">
+
 
     @yield('styles')
 </head>
@@ -65,6 +67,8 @@
     <div id="content">
 
         <div id="alert-area">
+            @yield('alerts')
+
             @if(session()->has('success-message'))
                 <div class="alert alert-success">
                     {{ session()->get('success-message') }}
@@ -92,6 +96,7 @@
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/perfect-scrollbar.jquery.min.js')}}"></script>
 <script src="{{ asset('js/menu.js')}}"></script>
+
 <script>
     $(document).ready(function(){
         $('#content').perfectScrollbar({

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Auth;
 use App\Models\Client;
 
 class ClientController extends Controller
@@ -12,16 +12,35 @@ class ClientController extends Controller
    
     public function index()
     {
-    	$clients = Client::all();
-        return view('dashboard.client.index', compact('clients'));
+        return view('admin-dashboard.client.index');
     }
     
-    public function create(Request $request)
+    public function find(Request $request)
     {
-        $type = $request->get('type');
-        return view('dashboard.client.create', compact('type'));
+        $cpf = $request->get('cpf') ? $request->get('cpf') : null;
+        $id = $request->get('id') ? $request->get('id') : null;
+
+        $client = null;
+
+        if($cpf)
+        {
+            $client = Client::where('cpf', $cpf)->first();
+        } 
+        
+        if($id and $client == null)
+        {
+            $client = Client::find($id);
+        }
+
+        return response()->json($client);
     }
 
+    public function json()
+    {   
+        $clients = Client::all();
+        return response()->json($clients);
+    }    
+    
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -30,9 +49,11 @@ class ClientController extends Controller
         	'email' => 'required|email|max:255|unique:clients',
         ]);
 
-        Client::create($request->except('_token'));
+        $user_id = Auth::user()->id;
+        $data  = $request->except('_token');
+        $data['user_id'] = $user_id;
 
-        return redirect()->back()->with('success-message', 'Cliente cadastrado com sucesso!');
+        Client::create($data);
     }
 
     public function show($id)

@@ -20,9 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable()->unique();
             $table->string('password');
             $table->string('image')->nullable();
+            
+            $table->integer('business_setting_id')->nullable()->unsigned();
+            $table->foreign('business_setting_id')->references('id')->on('business_settings')->onDelete('set null')->onUpdate('cascade');
 
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('business_settings', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

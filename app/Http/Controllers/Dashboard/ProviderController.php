@@ -3,35 +3,32 @@
 	namespace App\Http\Controllers\Dashboard;
 
 	use Illuminate\Http\Request;
-	use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
-	use App\Models\Provider;
+use App\Models\Provider;
 	
-	class ProviderController extends Controller{
+class ProviderController extends Controller{
 
-		public function index()
+	public function index()
     {
     	$providers = Provider::all();
-        return view('dashboard.provider.index', compact('providers'));
+        return view('admin-dashboard.stock.provider.index', compact('providers'));
     }
     
     public function create()
     {
-        return view('dashboard.provider.create');
+        return view('admin-dashboard.stock.provider.create');
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-        	'name' => 'required|max:255',
-        	'cnpj' => 'required|max:12',
-        	'phone' => 'required|max:12',
-        	'email' => 'required|max:255'
-        ]);
-
-        Provider::create($request->except('_token'));
-
-        return redirect()->back()->with('success-message', 'Fornecedor cadastrado com sucesso!');
+        
+        try {
+            Provider::create($request->except('_token'));
+            
+        } catch (Exception $e) {
+            return response()-json($e);
+        }
     }
 
     public function show($id)
@@ -50,16 +47,8 @@
     public function update(Request $request)
     {
         $provider = Provider::find($request->get('id'));
-
-        $this->validate($request, [
-        	'name' => 'required|max:255',
-        	'cnpj' => 'required|max:12',
-        	'phone' => 'required|max:12',
-        	'email' => 'required|max:255'
-        ]);
-
-        $provider->update($request->except('_token'));
-        return redirect()->back()->with('success-message', 'Fornecedor atualizado com sucesso!');
+        $provider->update($request->except(['_token', 'id']));
+        return response()->json($provider, 200);        
     }
 
     public function delete($id)
@@ -67,10 +56,17 @@
         $provider = Provider::find($id);
         return view('dashboard.provider.delete', compact('provider'));
     }
+    
     public function destroy(Request $request)
     {
         $provider = Provider::find($request->get('id'));
         $provider->delete();
-        return redirect()->route('providers')->with('success-message', 'Fornecedor removido com sucesso!');
     }
-	}
+
+    public function json()
+    {
+        $providers = Provider::orderBy('id', 'desc')->get();
+
+        return response()->json($providers, 200);
+    }
+}
