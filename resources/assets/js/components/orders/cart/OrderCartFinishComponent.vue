@@ -6,14 +6,14 @@
 
 		<div class="content">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<button class="btn btn-success btn-fill btn-block" @click="finishOrder()"> 
 						<i class="fa fa-calculator"></i> Finalizar pedido
 					</button>
 					
 				</div>
 
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<button class="btn btn-primary btn-fill btn-block" @click="pendingOrder"> 
 						<i class="fa fa-hourglass"></i> Deixar pendente
 					</button>

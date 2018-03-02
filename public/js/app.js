@@ -32941,7 +32941,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		remove: function remove(event) {
 			this.$store.dispatch('remove-client', this.client.id);
-			this.$store.dispatch('update-products');
+			this.$store.dispatch('update-clients');
 			this.$store.commit('set-show-client-status', false);
 			this.$message({
 				showClose: true,
@@ -33182,6 +33182,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -33193,7 +33209,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		addClientToCart: function addClientToCart() {
-			this.$store.dispatch('find-has-client', this.client_id);
+			this.$store.dispatch('find-has-client', { data: { cpf: this.client_id, id: this.client_id }, notify: this.$message });
+			this.client_id = '';
+		},
+		removeClientToCart: function removeClientToCart() {
+			this.$store.commit('remove-client-to-cart', this.$message);
+			this.client_id = '';
+		}
+	},
+
+	computed: {
+		cart: function cart() {
+			return this.$store.getters.getCart;
 		}
 	}
 
@@ -33575,6 +33602,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -33591,6 +33664,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	data: function data() {
 		return {
+			form: {},
+
 			payment_form: '',
 
 			payment_forms: [{ label: 'Dinheiro', value: 'money' }, { label: 'Parcelado', value: 'installment' }, { label: 'Cheque', value: 'check' }]
@@ -33600,8 +33675,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 	methods: {
-		updatePaymentForm: function updatePaymentForm() {
-			this.$store.commit('set-cart-payment-form', this.payment_form);
+		filterForm: function filterForm(form) {
+			var data = {
+				selected: form,
+				value: 0
+			};
+
+			if (form == 'money') {
+				data.value = this.cart.money;
+			} else if (form == 'installment') {
+				data.value = this.cart.installment.total;
+			} else if (form == 'check') {
+				data.value = this.cart.checks.total;
+			}
+
+			return data;
+		},
+		clearFirstForm: function clearFirstForm() {
+			this.$store.commit('clear-cart-payment-form-first');
+		},
+		clearSecondForm: function clearSecondForm() {
+			this.$store.commit('clear-cart-payment-form-second');
+		},
+		addPrimaryForm: function addPrimaryForm() {
+			this.$store.commit('set-cart-payment-form-first', this.filterForm(this.payment_form));
+			this.payment_form = '';
+		},
+		addSecondaryForm: function addSecondaryForm() {
+			this.$store.commit('set-cart-payment-form-secondary', this.filterForm(this.payment_form));
+			this.payment_form = '';
 		}
 	},
 
@@ -34135,15 +34237,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			parcels_interval: [{ label: '15 Dias', value: 15 }, { label: '30 Dias', value: 30 }, { label: '45 Dias', value: 45 }],
-
+			parcels_interval: [{ label: '15 Dias', value: 15, selected: true }, { label: '30 Dias', value: 30, selected: false }, { label: '45 Dias', value: 45, selected: false }],
+			parcels_quantity: [{ label: '1', value: 1 }, { label: '2', value: 2 }, { label: '3', value: 3 }, { label: '4', value: 4 }, { label: '5', value: 5 }, { label: '6', value: 6 }, { label: '7', value: 7 }, { label: '8', value: 8 }, { label: '9', value: 9 }, { label: '10', value: 10 }, { label: '11', value: 11 }, { label: '12', value: 12 }],
 			installment: {
-				interval: 1,
-				quantity: 1,
+				interval: 0,
+				quantity: 0,
+				value: 0,
 				parcels: []
 			}
 		};
@@ -34166,7 +34289,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.installment.parcels.push({ date: dateParcel, value: price });
 			}
 
-			this.$store.commit('set-cart-parcels', this.installment.parcels);
+			this.$store.commit('set-cart-parcels', this.installment);
 		}
 	},
 
@@ -34206,6 +34329,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			money: 0
 		};
+	},
+
+
+	methods: {
+		updateValue: function updateValue() {
+			this.$store.commit('set-cart-payment-form-money', this.money);
+		}
 	}
 });
 
@@ -35618,16 +35748,25 @@ if (token) {
 	'update-client': function updateClient(context, client) {
 		axios.post('/admin-dashboard/clients', client).then(function (response) {}).catch(function (erro) {});
 	},
-	'find-has-client': function findHasClient(context, code) {
+	'find-has-client': function findHasClient(context, payload) {
 
-		axios.post('/admin-dashboard/clients/find', { cpf: code, id: code }).then(function (response, result) {
-			context.commit('add-client-to-cart', response.data);
+		axios.post('/admin-dashboard/clients/find', payload.data).then(function (response, result) {
+			if (JSON.stringify(response.data) == JSON.stringify({})) {
+				payload.notify({
+					message: 'Ops, não existe nenhum cliente associado a este código!',
+					type: 'error'
+				});
+			} else {
+				context.commit('add-client-to-cart', { data: response.data, notify: payload.notify });
+			}
 		}).catch(function (erro) {
-			return erro;
+			payload.notify({
+				message: 'Ops, ocorreu algum problema na execução desta tarefa',
+				type: 'error'
+			});
 		});
 	},
 	'remove-client': function removeClient(context, client_id) {
-		console.log(product_id);
 		axios.post('/admin-dashboard/clients/delete', { id: client_id }).then(function (response) {}).catch(function (erro) {});
 	},
 
@@ -35791,6 +35930,16 @@ if (token) {
 
 	//Produtos
 
+	'set-cart-payment-form-first': function setCartPaymentFormFirst(state, data) {
+		state.cart.payment_forms.first = data;
+		//Remover o valor anterior
+		//Adicionar o novo valor ao total
+	},
+	'set-cart-payment-form-secondary': function setCartPaymentFormSecondary(state, payment_form) {
+		state.cart.payment_forms.second = payment_form;
+		//Remover o valor anterior
+		//Adicionar o novo valor ao total
+	},
 	'set-products': function setProducts(state, products) {
 		state.products.data = products;
 	},
@@ -35807,6 +35956,9 @@ if (token) {
 
 	//Pedidos
 
+	'set-cart-payment-form-money': function setCartPaymentFormMoney(state, money) {
+		state.cart.money = money;
+	},
 	'add-item-to-cart': function addItemToCart(state, payload) {
 		//Status para verificar se o produto existe ou não no carrinho
 		var item = payload.data;
@@ -35966,11 +36118,24 @@ if (token) {
 	'set-cart-payment-form': function setCartPaymentForm(state, payment_form) {
 		state.cart.payment_form = payment_form;
 	},
-	'set-cart-parcels': function setCartParcels(state, parcels) {
-		state.cart.parcels = parcels;
+	'set-cart-parcels': function setCartParcels(state, installment) {
+		alert('Instancia do parcelamento: ' + JSON.stringify(installment));
+		state.cart.installment.parcels = installment.parcels;
+		state.cart.installment.total = installment.value;
 	},
-	'add-client-to-cart': function addClientToCart(state, client) {
-		state.cart.client = client;
+	'add-client-to-cart': function addClientToCart(state, payload) {
+		state.cart.client = payload.data;
+		payload.notify({
+			message: 'Cliente selecionado com sucesso!',
+			type: 'success'
+		});
+	},
+	'remove-client-to-cart': function removeClientToCart(state, notify) {
+		state.cart.client = {};
+		notify({
+			message: 'Cliente removido com sucesso!',
+			type: 'success'
+		});
 	},
 	'add-discount-to-cart': function addDiscountToCart(state, payload) {
 
@@ -36042,7 +36207,7 @@ if (token) {
 	'add-check-to-cart': function addCheckToCart(state, payload) {
 
 		var check = payload.data;
-		state.cart.checks.push(check);
+		state.cart.checks.checks.push(check);
 
 		payload.notify({
 			showClose: true,
@@ -36077,6 +36242,16 @@ if (token) {
 			status: '',
 			message: ''
 		};
+	},
+	'clear-cart-payment-form-first': function clearCartPaymentFormFirst(state) {
+		state.cart.payment_forms.total_input = parseFloat(state.cart.payment_forms.total_input) - parseFloat(state.cart.payment_forms.first.total);
+		state.cart.payment_forms.total_input = state.cart.payment_forms.total_input.toFixed(2);
+		state.cart.payment_forms.first = { selected: null, total: 0 };
+	},
+	'clear-cart-payment-form-second': function clearCartPaymentFormSecond(state) {
+		state.cart.payment_forms.total_input = parseFloat(state.cart.payment_forms.total_input) - parseFloat(state.cart.payment_forms.second.total);
+		state.cart.payment_forms.total_input = state.cart.payment_forms.total_input.toFixed(2);
+		state.cart.payment_forms.second = { selected: null, total: 0 };
 	},
 
 
@@ -36164,18 +36339,44 @@ if (token) {
 		delivery: {},
 
 		/*Dados relativos a forma de pagamento*/
-		payment_form: '',
-		money: 0,
-		parcels: [],
-		checks: [],
+		payment_forms: {
+			//Primeira forma de pagamentos
+			first: {
+				selected: null,
+				total: 0
+			},
+			//Segunda forma de pagamentos
+			second: {
+				selected: null,
+				total: 0
+			},
+			total_input: 0, //Valor total das formas de pagamento 
+			total_debet: 0, //Valor que falta par acompletar o pagamento
+			quantity: 0 //Quantidade das formas de pagamento
+		},
 
-		/*Dados relativos ao desconto*/
+		// Dados relativos ao dinheiro
+		money: 0,
+
+		// Dados relativos ao parcelamento
+		installment: {
+			parcels: [],
+			total: 0
+		},
+
+		// Dados relativos aos cheques
+		checks: {
+			checks: [],
+			total: 0
+		},
+
+		// Dados relativos ao desconto
 		discounts: {
 			items: [],
 			total: 0
 		},
 
-		/*Dados relativos aos preços*/
+		// Dados relativos aos preços
 		price_products: 0,
 		price_discount: 0,
 		price_delivery: 0,
@@ -96681,7 +96882,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-2"
+    staticClass: "col-md-3"
   }, [_c('button', {
     staticClass: "btn btn-success btn-fill btn-block",
     on: {
@@ -96692,7 +96893,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "fa fa-calculator"
   }), _vm._v(" Finalizar pedido\n\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2"
+    staticClass: "col-md-3"
   }, [_c('button', {
     staticClass: "btn btn-primary btn-fill btn-block",
     on: {
@@ -96946,7 +97147,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._m(1), _vm._v(" "), _c('ul', {
     staticClass: "list-group"
-  }, _vm._l((_vm.cart.checks), function(checkItem) {
+  }, _vm._l((_vm.cart.checks.checks), function(checkItem) {
     return _c('li', {
       staticClass: "list-group-item"
     }, [_c('div', {
@@ -97066,7 +97267,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "alert alert-warning"
   }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2"
+    staticClass: "col-md-3"
   }, [_c('button', {
     staticClass: "btn btn-success btn-fill btn-block",
     attrs: {
@@ -97107,6 +97308,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (this.cart.client.id == null),
+      expression: "this.cart.client.id == null"
+    }],
     staticClass: "col-md-3"
   }, [_c('div', {
     staticClass: "form-group"
@@ -97137,6 +97344,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-2"
   }, [_c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (this.cart.client.id == null),
+      expression: "this.cart.client.id == null"
+    }],
     staticClass: "btn btn-block btn-success btn-fill",
     staticStyle: {
       "margin-top": "22px"
@@ -97146,7 +97359,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-plus"
-  }), _vm._v(" Adicionar")])])])])])
+  }), _vm._v(" \n\t\t\t\t\t\tAdicionar\n\t\t\t\t")]), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (this.cart.client.id),
+      expression: "this.cart.client.id"
+    }],
+    staticClass: "btn btn-block btn-danger btn-fill",
+    staticStyle: {
+      "margin-top": "22px"
+    },
+    on: {
+      "click": _vm.removeClientToCart
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-times"
+  }), _vm._v(" \n\t\t\t\t\t\tRemover\n\t\t\t\t")])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "header"
@@ -97410,46 +97639,72 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('div', {
     staticClass: "alert alert-warning"
-  }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._v("Algumas opções serão bloqueadas caso não selecione um cliente")])]), _vm._v(" "), _c('div', {
+    staticClass: "col col-md-12"
+  }, [_c('h5', [_vm._v("Formas selecionadas")]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.payment_forms.first.selected != null),
+      expression: "cart.payment_forms.first.selected != null"
+    }],
+    staticClass: "payment-form-first"
+  }, [_vm._v("\n\t\t\t\t\t\n\t\t\t\t\t" + _vm._s(_vm.cart.payment_forms.first.selected) + "\n\t\t\t\t\t" + _vm._s(_vm.cart.payment_forms.first.total) + "\n\n\t\t\t\t\t"), _c('button', {
+    staticClass: "btn btn-fill btn-danger",
+    on: {
+      "click": _vm.clearFirstForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-times"
+  }), _vm._v("\n\t\t\t\t\t\tCancelar\n\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.payment_forms.second.selected != null),
+      expression: "cart.payment_forms.second.selected != null"
+    }],
+    staticClass: "payment-form-second"
+  }, [_vm._v("\n\n\t\t\t\t\t" + _vm._s(_vm.cart.payment_forms.second.selected) + "\n\t\t\t\t\t" + _vm._s(_vm.cart.payment_forms.second.total) + "\n\n\t\t\t\t\t"), _c('button', {
+    staticClass: "btn btn-fill btn-danger",
+    on: {
+      "click": _vm.clearSecondForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-times"
+  }), _vm._v("\n\t\t\t\t\t\tCancelar\n\t\t\t\t\t")])])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Selecione uma forma de pagamento")]), _vm._v(" "), _c('select', {
+  }, [_c('el-select', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.payment_form = _vm.cart.payment_form),
-      expression: "payment_form = cart.payment_form"
+      value: (_vm.payment_form),
+      expression: "payment_form"
     }],
-    staticClass: "form-control",
     attrs: {
-      "disabled": _vm.cart.client.id == null
+      "placeholder": "Alguma coisa aqui"
+    },
+    domProps: {
+      "value": (_vm.payment_form)
     },
     on: {
-      "change": [function($event) {
-        _vm.payment_form = _vm.cart.payment_form = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        })[0]
-      }, _vm.updatePaymentForm]
+      "input": function($event) {
+        _vm.payment_form = $event
+      }
     }
   }, _vm._l((_vm.payment_forms), function(form) {
-    return _c('option', {
-      domProps: {
-        "value": form.value
+    return _c('el-option', {
+      key: form.value,
+      attrs: {
+        "label": form.label,
+        "value": form.value,
+        "disabled": _vm.cart.client.id == null
       }
-    }, [_vm._v(_vm._s(form.label))])
-  }))])])])]), _vm._v(" "), _c('div', {
+    })
+  }))], 1)])]), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -97473,17 +97728,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "payment_form == 'money' && cart.client.id != null"
     }],
     staticClass: "col-md-12"
-  }, [_c('hb-order-cart-payment-form-money')], 1)])])])
+  }, [_c('hb-order-cart-payment-form-money')], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-md-12"
+  }, [_c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.payment_forms.first.selected == null),
+      expression: "cart.payment_forms.first.selected == null"
+    }],
+    staticClass: "btn btn-success btn-fill",
+    on: {
+      "click": _vm.addPrimaryForm
+    }
+  }, [_vm._v("\n\t\t\t\t\tPrimeira forma \n\t\t\t\t")]), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.cart.payment_forms.second.selected == null && _vm.cart.payment_forms.first.selected != null),
+      expression: "cart.payment_forms.second.selected == null && cart.payment_forms.first.selected != null"
+    }],
+    staticClass: "btn btn-success btn-fill",
+    on: {
+      "click": _vm.addSecondaryForm
+    }
+  }, [_vm._v("\n\t\t\t\t\tSegunda forma\n\t\t\t\t")])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "header"
   }, [_c('h4', {
     staticClass: "title"
   }, [_vm._v("Forma de pagamento")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('h3', [_vm._v("Primeria forma de pagamento")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -97525,20 +97800,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.client.user_id),
-      expression: "client.user_id"
+      value: (_vm.client.id = _vm.clientData.id),
+      expression: "client.id = clientData.id"
     }],
     attrs: {
-      "type": "hidden",
-      "value": ""
+      "type": "hidden"
     },
     domProps: {
-      "value": _vm._s(_vm.client.user_id)
+      "value": _vm._s(_vm.client.id = _vm.clientData.id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.client.user_id = $event.target.value
+        _vm.client.id = _vm.clientData.id = $event.target.value
       }
     }
   }), _vm._v(" "), _c('div', {
@@ -98538,7 +98812,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "header"
-  }, [_vm._v("\n\t\tDinheiro\n\t")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n\t\tValor em espécie\n\t")]), _vm._v(" "), _c('div', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "row"
@@ -98561,6 +98835,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": _vm._s(_vm.money)
     },
     on: {
+      "change": _vm.updateValue,
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.money = $event.target.value
@@ -98677,7 +98952,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": ""
     }
-  }, [_vm._v("Quantidade de parcelas")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Valor")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.installment.value),
+      expression: "installment.value"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.installment.value)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.installment.value = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Quantidade de parcelas")]), _vm._v(" "), _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -98685,19 +98988,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "installment.quantity"
     }],
     staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": _vm._s(_vm.installment.quantity)
-    },
     on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.installment.quantity = $event.target.value
-      }
+      "change": [function($event) {
+        _vm.installment.quantity = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        })[0]
+      }, _vm.addInstallmentToCart]
     }
-  })])]), _vm._v(" "), _c('div', {
+  }, _vm._l((_vm.parcels_quantity), function(quantity) {
+    return _c('option', {
+      domProps: {
+        "value": quantity.value
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(quantity.label) + "\n\t\t\t\t\t\t")])
+  }))])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-3"
   }, [_c('div', {
     staticClass: "form-group"
@@ -98714,34 +99021,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     on: {
-      "change": function($event) {
+      "change": [function($event) {
         _vm.installment.interval = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
         }).map(function(o) {
           var val = "_value" in o ? o._value : o.value;
           return val
         })[0]
-      }
+      }, _vm.addInstallmentToCart]
     }
   }, _vm._l((_vm.parcels_interval), function(interval) {
     return _c('option', {
       domProps: {
-        "value": interval.value
+        "value": interval.value,
+        "selected": interval.selected == true
       }
-    }, [_vm._v(_vm._s(interval.label))])
-  }))])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2"
-  }, [_c('button', {
-    staticClass: "btn btn-block btn-success btn-fill",
-    staticStyle: {
-      "margin-top": "22px"
-    },
-    on: {
-      "click": _vm.addInstallmentToCart
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-plus"
-  }), _vm._v(" Adicionar")])])]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(interval.label) + "\n\t\t\t\t\t\t")])
+  }))])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     directives: [{
@@ -98756,7 +99052,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._m(1), _vm._v(" "), _c('ul', {
     staticClass: "list-group"
-  }, _vm._l((_vm.installment.parcels = _vm.cart.parcels), function(parcel) {
+  }, _vm._l((_vm.installment.parcels = _vm.cart.installment.parcels), function(parcel) {
     return _c('li', {
       staticClass: "list-group-item"
     }, [_c('span', [_vm._v(" Data: " + _vm._s(parcel.date) + " "), _c('i', {
@@ -99154,32 +99450,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-md-6"
   }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Selecione uma porcentagem")]), _vm._v(" "), _c('el-slider', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.discount.percentage.slider),
-      expression: "discount.percentage.slider"
-    }],
-    attrs: {
-      "format-tooltip": _vm.formatTooltip,
-      "disabled": _vm.cart.discounts.total > 0
-    },
-    domProps: {
-      "value": (_vm.discount.percentage.slider)
-    },
-    on: {
-      "change": _vm.updateInputPercentage,
-      "input": function($event) {
-        _vm.discount.percentage.slider = $event
-      }
-    }
-  })], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"

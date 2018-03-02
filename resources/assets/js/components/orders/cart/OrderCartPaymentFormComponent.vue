@@ -11,23 +11,52 @@
 					<div class="alert alert-warning">Algumas opções serão bloqueadas caso não selecione um cliente</div>
 				</div>
 				
-				<div class="col-md-12">
-					<h3>Primeria forma de pagamento</h3>					
+				<div class="col col-md-12">
+					<h5>Formas selecionadas</h5>
+					
+					<div class="payment-form-first" v-show="cart.payment_forms.first.selected != null">
+						
+						{{ cart.payment_forms.first.selected }}
+						{{ cart.payment_forms.first.total }}
+
+						<button 
+							class="btn btn-fill btn-danger"
+							@click="clearFirstForm">
+							<i class="fa fa-times"></i>
+							Cancelar
+						</button>
+					</div>
+					
+					<div class="payment-form-second" v-show="cart.payment_forms.second.selected != null">
+
+						{{ cart.payment_forms.second.selected }}
+						{{ cart.payment_forms.second.total }}
+
+						<button 
+							
+							class="btn btn-fill btn-danger"
+							@click="clearSecondForm">
+							<i class="fa fa-times"></i>
+							Cancelar
+						</button>
+					</div>
+					
 				</div>
-				
+
 				<div class="col-md-4">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="form-group">
-								<label for="">Selecione uma forma de pagamento</label>
-								<select 
-									:disabled="cart.client.id == null" 
-									v-model="payment_form = cart.payment_form" 
-									class="form-control"
-									v-on:change="updatePaymentForm">
-									<option :value="form.value" v-for="form in payment_forms">{{ form.label }}</option>
-								</select>
-							</div>
+							
+							<el-select v-model="payment_form" placeholder="Alguma coisa aqui">
+							    <el-option
+							      v-for="form in payment_forms"
+							      :key="form.value"
+							      :label="form.label"
+							      :value="form.value"
+							      :disabled="cart.client.id == null" >
+							    </el-option>
+							</el-select>
+							
 						</div>
 					</div>
 				</div>
@@ -43,6 +72,23 @@
 				<div class="col-md-12" v-show="payment_form == 'money' && cart.client.id != null">
 					<hb-order-cart-payment-form-money></hb-order-cart-payment-form-money>
 				</div>
+
+				<div class="col-md-12">
+					<button 
+						class="btn btn-success btn-fill" 
+						@click="addPrimaryForm"
+						v-show="cart.payment_forms.first.selected == null"
+						>
+						Primeira forma 
+					</button>
+					<button 
+						class="btn btn-success btn-fill" 
+						@click="addSecondaryForm"
+						v-show="cart.payment_forms.second.selected == null && cart.payment_forms.first.selected != null">
+						Segunda forma
+					</button>
+				</div>
+				
 
 			</div>
 		</div>
@@ -65,6 +111,10 @@
 
 		data () {
 			return {
+				form: {
+
+				},
+
 				payment_form: '',
 
 				payment_forms: [
@@ -77,8 +127,46 @@
 		}, 
 
 		methods: {
-			updatePaymentForm () {
-				this.$store.commit('set-cart-payment-form', this.payment_form);
+
+			filterForm (form) {
+				let data = {
+					selected: form,
+					value: 0
+				}
+
+				if(form == 'money')
+				{
+					data.value = this.cart.money
+				}
+				else if(form == 'installment')
+				{
+					data.value = this.cart.installment.total
+				}
+				else if(form == 'check')
+				{
+					data.value = this.cart.checks.total
+				}
+
+				return data
+			},
+
+			clearFirstForm () {
+				this.$store.commit('clear-cart-payment-form-first')
+			},
+
+			clearSecondForm () {
+				this.$store.commit('clear-cart-payment-form-second')
+			},
+
+			addPrimaryForm () {
+				this.$store.commit('set-cart-payment-form-first', this.filterForm(this.payment_form))
+				this.payment_form = ''
+
+			},
+
+			addSecondaryForm () {
+				this.$store.commit('set-cart-payment-form-secondary', this.filterForm(this.payment_form))
+				this.payment_form = ''
 			}
 		},
 

@@ -6,7 +6,7 @@
 
 		<div class="content">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-3" v-show="this.cart.client.id == null">
 					<div class="form-group">
 						<label for="">Código ou cpf do Cliente</label>
 						<input type="text" class="form-control" v-model="client_id">
@@ -14,7 +14,23 @@
 				</div>
 
 				<div class="col-md-2">
-					<button style="margin-top: 22px;" class="btn btn-block btn-success btn-fill" @click="addClientToCart"><i class="fa fa-plus"></i> Adicionar</button>
+					<button 
+						style="margin-top: 22px;" 
+						class="btn btn-block btn-success btn-fill" 
+						@click="addClientToCart"
+						v-show="this.cart.client.id == null">
+							<i class="fa fa-plus"></i> 
+							Adicionar
+					</button>
+
+					<button 
+						style="margin-top: 22px;" 
+						class="btn btn-block btn-danger btn-fill" 
+						v-show="this.cart.client.id"
+						@click="removeClientToCart">
+							<i class="fa fa-times"></i> 
+							Remover
+					</button>
 				</div>
 			</div>
 		</div>
@@ -32,9 +48,20 @@
 
 		methods: {
 			addClientToCart () {
-				this.$store.dispatch('find-has-client', this.client_id)
+				this.$store.dispatch('find-has-client', { data: { cpf: this.client_id, id: this.client_id},notify: this.$message})
+				this.client_id = ''
+			},
+			removeClientToCart () {
+				this.$store.commit('remove-client-to-cart', this.$message)
+				this.client_id = ''
 			},
 		},
+
+		computed: {
+			cart() {
+				return this.$store.getters.getCart
+			}
+		}
 
 	}
 </script>

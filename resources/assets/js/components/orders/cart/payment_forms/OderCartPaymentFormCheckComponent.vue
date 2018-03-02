@@ -90,7 +90,7 @@
 						<h4 class="title">Lista de Cheques</h4>
 					</div>
 					<ul class="list-group">
-						<li v-for="checkItem in cart.checks" class="list-group-item">
+						<li v-for="checkItem in cart.checks.checks" class="list-group-item">
 							<div class="row">
 								<p class="col-md-4">
 									<i class="fa fa-user"></i> <strong>Número:</strong> {{ checkItem.number}}

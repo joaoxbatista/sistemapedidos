@@ -1,13 +1,13 @@
 <template>
 	<div id="order-cart-payment-form-money">
 		<div class="header">
-			Dinheiro
+			Valor em espécie
 		</div>
 		<div class="content">
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
-						<input type="text" class="form-control" v-model="money">
+						<input type="text" class="form-control" v-model="money" @change="updateValue">
 					</div>
 				</div>
 			</div>
@@ -20,6 +20,12 @@
 		data () {
 			return {
 				money: 0
+			}
+		},
+
+		methods: {
+			updateValue () {
+				this.$store.commit('set-cart-payment-form-money', this.money)
 			}
 		}
 	}

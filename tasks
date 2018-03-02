@@ -1,0 +1,10 @@
+1 - Trocar el-select por select normal
+
+2 - Exibir informações das formas de pagamento acima do select
+
+3 - Caso as duas formas de pagemnto estejam selecionadas não exibir o select
+
+4 - Validar informações do cheque
+
+5 - Verificar se o valor das formas de pagamento é suficiente para pagar o total do pedido
+

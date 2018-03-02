@@ -11,7 +11,7 @@
 					<div class="alert alert-warning">Algumas opções serão bloqueadas caso não selecione um cliente</div>
 				</div>
 
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<button :disabled="cart.client.id == null" class="btn btn-success btn-fill btn-block" @click="deliveryCalculation"> 
 						<i class="fa fa-calculator"></i> Calcular Frete
 					</button>

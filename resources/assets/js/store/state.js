@@ -72,18 +72,44 @@ export default {
 		delivery: {},
 
 		/*Dados relativos a forma de pagamento*/		
-		payment_form: '',
+		payment_forms: {
+			//Primeira forma de pagamentos
+			first: {
+				selected: null,
+				total: 0
+			},
+			//Segunda forma de pagamentos
+			second: { 
+				selected: null,
+				total: 0
+			},
+			total_input: 0, //Valor total das formas de pagamento 
+			total_debet: 0, //Valor que falta par acompletar o pagamento
+			quantity: 0, //Quantidade das formas de pagamento
+		},
+
+		// Dados relativos ao dinheiro
 		money: 0,
-		parcels: [],
-		checks: [],
+
+		// Dados relativos ao parcelamento
+		installment: {
+			parcels: [],
+			total: 0
+		},
+
+		// Dados relativos aos cheques
+		checks: {
+			checks: [],
+			total: 0
+		},
 		
-		/*Dados relativos ao desconto*/
+		// Dados relativos ao desconto
 		discounts: {
 			items: [],
 			total: 0,
 		},
 
-		/*Dados relativos aos preços*/
+		// Dados relativos aos preços
 		price_products: 0,
 		price_discount: 0,
 		price_delivery: 0,

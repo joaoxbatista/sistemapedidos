@@ -14,7 +14,7 @@
 				</div>
 
 				<div class="row">
-					<input type="hidden" v-model="client.user_id" value="">
+					<input type="hidden" v-model="client.id = clientData.id">
 					<div class="form-group col-md-4">
 						<label>Nome</label>
 						<input 
@@ -220,7 +220,7 @@ export default {
 
 		remove: function (event) {
 			this.$store.dispatch('remove-client', this.client.id)
-			this.$store.dispatch('update-products')
+			this.$store.dispatch('update-clients')
 			this.$store.commit('set-show-client-status', false)
 			this.$message
 			(

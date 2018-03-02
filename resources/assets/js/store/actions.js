@@ -285,25 +285,37 @@ export default
 		)
 	},
 
-	'find-has-client' (context, code) 
+		'find-has-client' (context, payload) 
 	{
 		
-		axios.post('/admin-dashboard/clients/find', {cpf: code, id: code})
+		axios.post('/admin-dashboard/clients/find', payload.data)
 		.then(
 			(response, result) => {
-				context.commit('add-client-to-cart', response.data)
+				if(JSON.stringify(response.data) == JSON.stringify({}))
+				{
+					payload.notify({
+						message: 'Ops, não existe nenhum cliente associado a este código!',
+						type: 'error'
+					});	
+				}
+				else
+				{
+					context.commit('add-client-to-cart', { data: response.data, notify: payload.notify})
+				}
 			}
 		)
 		.catch(
 			erro => {
-				return erro
+				payload.notify({
+					message: 'Ops, ocorreu algum problema na execução desta tarefa',
+					type: 'error'
+				});
 			}
 		)
 	},
 	
 	'remove-client' (context, client_id)
 	{
-		console.log(product_id)
 		axios.post('/admin-dashboard/clients/delete', {id: client_id})
 		.then(
 			response => {

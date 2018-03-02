@@ -57,6 +57,7 @@ Route::group(
             /* Deletar */
             Route::get('{id}/delete', 'Dashboard\ClientController@destroy')->name('destroy');
 
+            Route::post('delete', 'Dashboard\ClientController@destroy')->name('destroy');
 
         }
     );
@@ -220,7 +221,8 @@ Route::group(
 
             Route::get('', 'Dashboard\OrderController@index')->name('index');
 
-
+            Route::get('create', 'Dashboard\OrderController@create')->name('create');
+            
             Route::post('delivery/calculation', 'Dashboard\OrderController@deliveryCalculation')->name('delivery.calculation');
 
             Route::post('finish', 'Dashboard\OrderController@finish');

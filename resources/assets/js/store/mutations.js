@@ -56,6 +56,20 @@ export default {
 
 	//Produtos
 
+	'set-cart-payment-form-first' (state, data)
+	{
+		state.cart.payment_forms.first = data
+		//Remover o valor anterior
+		//Adicionar o novo valor ao total
+	},
+
+	'set-cart-payment-form-secondary' (state, payment_form)
+	{
+		state.cart.payment_forms.second = payment_form
+		//Remover o valor anterior
+		//Adicionar o novo valor ao total
+	},
+
 	'set-products' (state, products) {
 		state.products.data = products
 	},
@@ -73,6 +87,11 @@ export default {
 	},
 
 	//Pedidos
+
+	'set-cart-payment-form-money' (state, money)
+	{
+		state.cart.money = money
+	},
 
 	'add-item-to-cart' (state, payload) {
 		//Status para verificar se o produto existe ou não no carrinho
@@ -244,13 +263,29 @@ export default {
 		state.cart.payment_form = payment_form
 	},
 
-	'set-cart-parcels' (state, parcels)
+	'set-cart-parcels' (state, installment)
 	{
-		state.cart.parcels = parcels
+		alert('Instancia do parcelamento: ' + JSON.stringify(installment))
+		state.cart.installment.parcels = installment.parcels
+		state.cart.installment.total = installment.value
 	},
 
-	'add-client-to-cart' (state, client) {
-		state.cart.client = client
+	'add-client-to-cart' (state, payload) {
+		state.cart.client = payload.data
+		payload.notify({
+			message: 'Cliente selecionado com sucesso!',
+			type: 'success'
+		});	
+
+	},
+
+	'remove-client-to-cart' (state, notify) {
+		state.cart.client = {}
+		notify({
+			message: 'Cliente removido com sucesso!',
+			type: 'success'
+		});	
+
 	},
 
 	'add-discount-to-cart' (state, payload) {
@@ -328,7 +363,7 @@ export default {
 	'add-check-to-cart' (state, payload) {
 
 		var check = payload.data
-		state.cart.checks.push(check)
+		state.cart.checks.checks.push(check)
 
 		payload.notify({
 			showClose: true,
@@ -366,6 +401,18 @@ export default {
 			message: ''
 		}
 	},
+
+	'clear-cart-payment-form-first' (state) {
+		state.cart.payment_forms.total_input = parseFloat(state.cart.payment_forms.total_input) - parseFloat(state.cart.payment_forms.first.total)
+		state.cart.payment_forms.total_input = state.cart.payment_forms.total_input.toFixed(2)
+		state.cart.payment_forms.first = { selected: null, total: 0 }
+	} ,
+
+	'clear-cart-payment-form-second' (state) {
+		state.cart.payment_forms.total_input = parseFloat(state.cart.payment_forms.total_input) - parseFloat(state.cart.payment_forms.second.total)
+		state.cart.payment_forms.total_input = state.cart.payment_forms.total_input.toFixed(2)
+		state.cart.payment_forms.second = { selected: null, total: 0 }
+	} ,
 
 	//Bancos
 	'set-banks' (state, banks) {
