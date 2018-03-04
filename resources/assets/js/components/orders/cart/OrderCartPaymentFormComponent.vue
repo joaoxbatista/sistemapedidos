@@ -10,38 +10,6 @@
 				<div class="col-md-12" v-show="cart.client.id == null">
 					<div class="alert alert-warning">Algumas opções serão bloqueadas caso não selecione um cliente</div>
 				</div>
-				
-				<div class="col col-md-12">
-					<h5>Formas selecionadas</h5>
-					
-					<div class="payment-form-first" v-show="cart.payment_forms.first.selected != null">
-						
-						{{ cart.payment_forms.first.selected }}
-						{{ cart.payment_forms.first.total }}
-
-						<button 
-							class="btn btn-fill btn-danger"
-							@click="clearFirstForm">
-							<i class="fa fa-times"></i>
-							Cancelar
-						</button>
-					</div>
-					
-					<div class="payment-form-second" v-show="cart.payment_forms.second.selected != null">
-
-						{{ cart.payment_forms.second.selected }}
-						{{ cart.payment_forms.second.total }}
-
-						<button 
-							
-							class="btn btn-fill btn-danger"
-							@click="clearSecondForm">
-							<i class="fa fa-times"></i>
-							Cancelar
-						</button>
-					</div>
-					
-				</div>
 
 				<div class="col-md-4">
 					<div class="row">
@@ -60,7 +28,34 @@
 						</div>
 					</div>
 				</div>
-				
+				<div class="col col-md-6">
+					<h5>Formas selecionadas</h5>
+					
+					<div class="payment-form-first">
+						
+						<div class="alert alert-info">
+							Primeira forma de pagamento {{ cart.payment_forms.first.selected }}: {{ cart.payment_forms.first.total }} R$.
+
+							<button type="button" class="close" aria-label="Close" @click="clearFirstForm">
+    							<span aria-hidden="true">&times;</span>
+  							</button>
+						</div>
+					</div>
+
+					<div class="payment-form-second">
+						<div class="alert alert-info">
+							Segunda forma de pagamento {{ cart.payment_forms.second.selected }}: {{ cart.payment_forms.second.total }} R$.
+
+							<button type="button" class="close" aria-label="Close" @click="clearSecondForm">
+    							<span aria-hidden="true">&times;</span>
+  							</button>
+						</div>
+					</div>
+				</div>			
+			
+			<div/>
+
+			<div class="row">
 				<div class="col-md-12" v-show="payment_form == 'installment' && cart.client.id != null">
 					<hb-order-cart-payment-form-installment></hb-order-cart-payment-form-installment >
 				</div>
@@ -74,25 +69,25 @@
 				</div>
 
 				<div class="col-md-12">
-					<button 
-						class="btn btn-success btn-fill" 
-						@click="addPrimaryForm"
-						v-show="cart.payment_forms.first.selected == null"
-						>
-						Primeira forma 
-					</button>
-					<button 
-						class="btn btn-success btn-fill" 
-						@click="addSecondaryForm"
-						v-show="cart.payment_forms.second.selected == null && cart.payment_forms.first.selected != null">
-						Segunda forma
-					</button>
+					<div class="col-md-4">
+						<button 
+							class="btn btn-success btn-fill" 
+							@click="addPrimaryForm"
+							>
+							Primeira forma 
+						</button>
+						<button 
+							class="btn btn-success btn-fill" 
+							@click="addSecondaryForm"
+							>
+							Segunda forma
+						</button>
+					</div>
 				</div>
-				
-
 			</div>
 		</div>
 	</div>
+
 </template>
 
 <script>
@@ -131,20 +126,20 @@
 			filterForm (form) {
 				let data = {
 					selected: form,
-					value: 0
+					total: 0
 				}
 
 				if(form == 'money')
 				{
-					data.value = this.cart.money
+					data.total = this.cart.money
 				}
 				else if(form == 'installment')
 				{
-					data.value = this.cart.installment.total
+					data.total = this.cart.installment.total
 				}
 				else if(form == 'check')
 				{
-					data.value = this.cart.checks.total
+					data.total = this.cart.checks.total
 				}
 
 				return data
@@ -214,6 +209,12 @@
 		{
 			width: 100%;
 			margin-bottom: 10px;
+
+			.payment-form-first, payment-form-second
+			{
+				font-size: 14px;
+				display: block;
+			}
 		}
 	}
 </style>

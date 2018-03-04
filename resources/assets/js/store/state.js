@@ -2,7 +2,20 @@ export default {
 	user: {},
 	
 	business_setting: {},
-	
+
+	orders: {
+		data: [],
+
+		show: {
+			status: false,
+			data: {}
+		},
+
+		request: {
+			message: ''
+		}
+	},
+
 	providers: {
 		data: [],
 

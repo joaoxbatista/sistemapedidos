@@ -1,5 +1,5 @@
 <template>
-	<div id="hb-order-cart-payment-form-installment">
+	<div id="hb-order-cart-payment-form-installment" class="col-md-12">
 		<div class="header">
 			<h4 class="title">Parcelamento</h4>
 		</div>

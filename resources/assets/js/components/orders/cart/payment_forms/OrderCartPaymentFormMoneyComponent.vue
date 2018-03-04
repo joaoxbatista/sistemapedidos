@@ -1,5 +1,5 @@
 <template>
-	<div id="order-cart-payment-form-money">
+	<div id="order-cart-payment-form-money" class="col-md-12">
 		<div class="header">
 			Valor em espécie
 		</div>

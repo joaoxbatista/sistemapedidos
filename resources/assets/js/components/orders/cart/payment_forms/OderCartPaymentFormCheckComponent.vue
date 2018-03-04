@@ -1,5 +1,5 @@
 <template>
-	<div id="order-cart-payment-form-check">
+	<div id="order-cart-payment-form-check" class="col-md-12">
 		<div class="header">
 			<h4 class="title">Inforamções do cheque</h4>
 		</div>

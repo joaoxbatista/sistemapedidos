@@ -34,7 +34,6 @@
 
 		methods: {
 			finishOrder () {
-				alert('Finalizar pedido')
 				this.$store.dispatch('finish-order', this.cart)
 			},
 

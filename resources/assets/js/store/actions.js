@@ -332,6 +332,21 @@ export default
 
 	//Pedidos
 
+	'update-orders' (context)
+	{
+		axios.get('/admin-dashboard/orders/json')
+		.then(
+			response => {
+				context.commit('set-orders', response.data)
+			}
+		)
+		.catch(
+			erro => {
+
+			}
+		)
+	},
+
 	'finish-order' (context, cart)
 	{
 		

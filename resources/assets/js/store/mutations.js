@@ -87,6 +87,10 @@ export default {
 	},
 
 	//Pedidos
+	'set-orders' (state, orders)
+	{
+		state.orders.data = orders
+	},
 
 	'set-cart-payment-form-money' (state, money)
 	{
@@ -405,13 +409,17 @@ export default {
 	'clear-cart-payment-form-first' (state) {
 		state.cart.payment_forms.total_input = parseFloat(state.cart.payment_forms.total_input) - parseFloat(state.cart.payment_forms.first.total)
 		state.cart.payment_forms.total_input = state.cart.payment_forms.total_input.toFixed(2)
-		state.cart.payment_forms.first = { selected: null, total: 0 }
+		state.cart.payment_forms.first.selected = null
+		state.cart.payment_forms.first.total = 0
+		console.log(JSON.stringify(state.cart.payment_forms))
 	} ,
 
 	'clear-cart-payment-form-second' (state) {
 		state.cart.payment_forms.total_input = parseFloat(state.cart.payment_forms.total_input) - parseFloat(state.cart.payment_forms.second.total)
 		state.cart.payment_forms.total_input = state.cart.payment_forms.total_input.toFixed(2)
-		state.cart.payment_forms.second = { selected: null, total: 0 }
+		state.cart.payment_forms.second.selected = null
+		state.cart.payment_forms.second.total = 0
+		console.log(JSON.stringify(state.cart.payment_forms))
 	} ,
 
 	//Bancos

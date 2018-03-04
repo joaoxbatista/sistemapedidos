@@ -37,20 +37,21 @@ class OrderController extends Controller {
     {
     
         $data = $request->get('data');
-        // $timenow = Carbon::now();
-                
-        // $order = new Order();
 
-        // $order->buy_date =  $timenow->toDateTimeString();
-        // $order->due_date =  $timenow->toDateTimeString();
+        $timenow = Carbon::now();
+                
+        $order = new Order();
+
+        $order->buy_date =  $timenow->toDateTimeString();
+        $order->due_date =  $timenow->toDateTimeString();
         
-        // $order->price_products = $data['price_products'];
-        // $order->price_discount = $data['discounts']['total'];
-        // $order->price_final = $data['price_final'];
-        // $order->payment_form = $data['payment_form'];
-        // $order->status = true;
-        // $order->client_id = $data['client']['id'];
-        // $order->save();
+        $order->price_products = number_format($data['price_products'], 2, '.', '');
+        $order->price_discount = number_format($data['discounts']['total'], 2, '.', '');
+        $order->price_final = number_format($data['price_final'], 2, '.', '');
+        $order->payment_form = $data['payment_forms']['first']['selected'];
+        $order->status = true;
+        $order->client_id = $data['client']['id'];
+        $order->save();
 
 
         // if($data['payment_form'] == 'installment')
@@ -93,7 +94,7 @@ class OrderController extends Controller {
         //     }
         // }
 
-        return response()->json($data);
+        return response()->json($order);
     }
 
     /*
@@ -153,6 +154,18 @@ class OrderController extends Controller {
         }
         
         return response()->json($result);        
+    }
+
+    /*
+    * Descrição: Método para obter json com os dados dos pedidos
+    * Entradas: 
+    * Saída: String com o json dos pedidos
+    */
+
+    public function json(Request $request)
+    {
+        $orders = Order::orderBy('buy_date', 'desc')->get();
+        return response()->json($orders);
     }
 
 }
