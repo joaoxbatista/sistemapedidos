@@ -19,7 +19,9 @@ class CreateOrderProduct extends Migration
             
             $table->integer('product_quantity');
             $table->decimal('item_discount', 10, 2)->nullable();
-            $table->decimal('item_total', 10, 2)->nullable();
+            $table->decimal('item_price', 10, 2)->nullable();
+            $table->decimal('item_total_price', 10, 2)->nullable();
+            $table->decimal('item_weight', 10, 2)->nullable();
             
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();

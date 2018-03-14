@@ -8,15 +8,15 @@
 				<h4 class="title"><i class="fa fa-table"></i> &nbsp LISTAGEM</h4>
 			</div>
 			<div class="content">
-				<data-tables 
+				<!-- <data-tables 
 					:data="providers" 
-					:table-props="settings" 
+					:table-fields="settings" 
 					:pagination-def="pagSettings">
 					
 
 					<el-table-column 
 						v-for="title in titles" 
-						:prop="title.prop" 
+						:field="title.field" 
 						:label="title.label" 
 						:key="title.label" 
 						sortable="custom">
@@ -26,14 +26,26 @@
 				      label="+"
 				      width="60">
 
-				      <template scope="scope">
+				      <template slot-scope="scope">
 				      	<a v-on:click="open(scope)"><i class="fa fa-folder"></i></a>
 				      </template>
 				      
 				    </el-table-column>
 
 					<p slot="append">table slot</p>
-				</data-tables>
+				</data-tables> -->
+
+				<vue-good-table
+			      :columns="columns"
+			      :rows="providers"
+			      :paginate="true"
+			      :lineNumbers="true">
+				    <template slot="table-row-after" slot-scope="provider">
+					  <td>
+					  	<button v-on:click="open(provider)" class="open-icon"><i class="fa fa-folder"></i></button>
+					  </td>
+					</template>
+				</vue-good-table>
 			</div>
 		</div>
 	</div>
@@ -55,7 +67,7 @@
 			'hb-provider-view': ProviderView,
 			'hb-provider-create': ProviderCreate
 		},
-		props: ['route-create', 'user_id'],
+		fields: ['route-create', 'user_id'],
 		data() {
 			return {
 				settings: {
@@ -77,12 +89,13 @@
 				    currentPage: 1
 				},
 
-				titles: [
-				{ 'label': 'Código', 'prop': 'id'},
-				{ 'label': 'Nome', 'prop': 'name'},
-				{ 'label': 'CNPJ', 'prop': 'cnpj'},
-				{ 'label': 'E-mail', 'prop': 'email'},
-				{ 'label': 'Telefone', 'prop': 'phone'},
+				columns: [
+				{ 'label': 'Código', 'field': 'id', filterable: true},
+				{ 'label': 'Nome', 'field': 'name', filterable: true},
+				{ 'label': 'CNPJ', 'field': 'cnpj', filterable: true},
+				{ 'label': 'E-mail', 'field': 'email', filterable: true},
+				{ 'label': 'Telefone', 'field': 'phone', filterable: true},
+				{ 'label': 'Ações'},
 				],
 			}
 		},

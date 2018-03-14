@@ -8,7 +8,7 @@
 				<h4 class="title"><i class="fa fa-table"></i> &nbsp LISTAGEM</h4>
 			</div>
 			<div class="content">
-				<data-tables 
+				<!-- <data-tables 
 					:data="categories" 
 					:table-props="settings" 
 					:pagination-def="pagSettings">
@@ -24,7 +24,7 @@
 					</el-table-column>
 
 					<el-table-column  label="Cor" width="120">
-				      <template scope="scope">
+				      <template slot-scope="scope">
 				      	<div class="box" :style="{background: scope.row.color}">
 				      	</div>
 				      </template>
@@ -34,14 +34,26 @@
 				      label="+"
 				      width="60">
 
-				      <template scope="scope">
+				      <template slot-scope="scope">
 				      	<a v-on:click="open(scope)"><i class="fa fa-folder"></i></a>
 				      </template>
 				      
 				    </el-table-column>
 
 					<p slot="append">table slot</p>
-				</data-tables>
+				</data-tables> -->
+
+				<vue-good-table
+			      :columns="columns"
+			      :rows="categories"
+			      :paginate="true"
+			      :lineNumbers="true">
+				    <template slot="table-row-after" slot-scope="category">
+					  <td>
+					  	<button v-on:click="open(category)"><i class="fa fa-folder"></i></button>
+					  </td>
+					</template>
+				</vue-good-table>
 			</div>
 		</div>
 
@@ -84,9 +96,10 @@
 				    currentPage: 1
 				},
 
-				titles: [
-					{ 'label': 'Código', 'prop': 'id', 'width': 100},
-					{ 'label': 'Nome', 'prop': 'name'},
+				columns: [
+					{ 'label': 'Código', 'field': 'id', 'filtered': true},
+					{ 'label': 'Nome', 'field': 'name', 'filtered': true},
+					{ 'label': 'Ações'},
 					
 				],
 			}

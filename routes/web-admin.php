@@ -295,7 +295,8 @@ Route::group(
         ],
         function () {
             Route::get('', 'Dashboard\BusinessSettingController@index')->name('index');
-            Route::post('json', 'Dashboard\BusinessSettingController@json')->name('json');        
+            Route::post('', 'Dashboard\BusinessSettingController@update')->name('update');
+            Route::post('json', 'Dashboard\BusinessSettingController@json')->name('json');
         }
     );
 

@@ -14,6 +14,18 @@ export default
 		)	
 	},
 
+	'update-business-setting' (context, payload)
+	{
+		
+		axios.post('/admin-dashboard/business/setting', payload.data).then(
+			response => {
+				console.log(response.data)
+				context.state.business_setting = response.data
+				
+			}
+		)	
+	},
+
 	// Fornecedores
 	'update-providers' (context) 
 	{

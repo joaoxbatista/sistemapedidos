@@ -81,12 +81,14 @@
         public function items()
         {
 			return $this->belongsToMany('App\Models\Product', 'order_product', 'order_id', 'product_id')
-			->withPivot('total', 'qtd_itens');
+			->withPivot('item_total_price', 'item_price', 'item_weight', 'product_quantity', 'item_discount');
 		}
 
         public function parcels()
         {
             return $this->hasMany('App\Models\Parcel');
         }
+
+        
 
 	}

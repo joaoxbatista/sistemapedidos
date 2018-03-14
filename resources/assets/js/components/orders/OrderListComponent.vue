@@ -5,30 +5,18 @@
 				<h4 class="title"><i class="fa fa-table"></i> &nbsp LISTAGEM</h4>
 			</div>
 			<div class="content">
-				<data-tables 
-				:data="orders" 
-				:table-props="settings" 
-				:pagination-def="pagSettings">
-					<el-table-column 
-						v-for="title in titles" 
-						:prop="title.prop" 
-						:label="title.label" 
-						:key="title.label" 
-						sortable="custom">
-					</el-table-column>
+				<vue-good-table
+			      :columns="columns"
+			      :rows="orders"
+			      :paginate="true"
+			      :lineNumbers="true">
 
-					<el-table-column
-						label="+"
-						width="60">
-
-						<template scope="scope">
-							<a v-on:click="open(scope)" class="open-icon"><i class="fa fa-folder"></i></a>
-						</template>
-
-					</el-table-column>
-
-					<p slot="append">table slot</p>
-				</data-tables>
+				    <template slot="table-row-after" slot-scope="order">
+					  <td>
+					  	<button v-on:click="open(order)" class="open-icon"><i class="fa fa-folder"></i></button>
+					  </td>
+					</template>
+				</vue-good-table>
 			</div>
 		</div>
 	</div>
@@ -50,14 +38,15 @@
 				    currentPage: 1
 				},
 
-				titles: [
-				{ 'label': 'Código', 'prop': 'id'},
-					{ 'label': 'Data de Pag.', 'prop': 'due_date'},
-					{ 'label': 'Data de Comp..', 'prop': 'buy_date'},
-					{ 'label': 'Codigo do Cliente', 'prop': 'client_id'},
-					{ 'label': 'Codigo do Vendedor', 'prop': 'seller_id'},
-					{ 'label': 'Preço', 'prop': 'price_final'},
-				],
+				 columns: [
+			        { 'label': 'Código', 'field': 'id', filterable: true},
+					{ 'label': 'Data de Pag.', 'field': 'due_date', filterable: true},
+					{ 'label': 'Data de Comp..', 'field': 'buy_date', filterable: true},
+					{ 'label': 'Codigo do Cliente', 'field': 'client_id', filterable: true},
+					{ 'label': 'Codigo do Vendedor', 'field': 'seller_id', filterable: true},
+					{ 'label': 'Preço', 'field': 'price_final', filterable: true},
+					{ 'label': 'Ações'},
+			     ],
 		 	}
 		 }, 
 

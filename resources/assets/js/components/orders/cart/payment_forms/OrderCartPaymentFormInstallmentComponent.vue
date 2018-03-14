@@ -8,42 +8,39 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group">
-						<label for="">Valor</label>
-						<input type="text" 
-						v-model="installment.value" 
-						class="form-control">
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="form-group">
 						<label for="">Quantidade de parcelas</label>
-						<select v-model="installment.quantity"
-						@change="addInstallmentToCart"
-						class="form-control">
-							<option 
-							v-for="quantity in parcels_quantity" 
-							:value="quantity.value"
-							>
-								{{ quantity.label }}
-							</option>
-						</select>
+						
+						<el-select v-model="installment.quantity" placeholder="Selecione uma opção">
+							<el-option 
+								v-for="quantity in parcels_quantity" 
+								:key="quantity.value"
+								:label="quantity.label"
+								:value="quantity.value"
+								>
+							</el-option>
+						</el-select>
 					</div>
 				</div>
 
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="">Selecione o intervalo</label>
-						<select v-model="installment.interval"
-						@change="addInstallmentToCart"
-						class="form-control">
-							<option 
-							v-for="interval in parcels_interval" 
-							:value="interval.value"
-							:selected="interval.selected == true">
-								{{ interval.label }}
-							</option>
-						</select>
+						<el-select v-model="installment.interval" placeholder="Selecione uma opção">
+							<el-option 
+								v-for="interval in parcels_interval" 
+								:key="interval.value"
+								:label="interval.label"
+								:value="interval.value"
+								>
+							</el-option>
+						</el-select>
 					</div>
+				</div>
+
+				<div class="col-md-3" style="margin-top: 22px;">
+					<button class="btn btn-success btn-fill" @click="calculation">
+						Calcular
+					</button>
 				</div>
 			</div>
 
@@ -101,11 +98,12 @@
 				return this.$moment(dateNow).add(days, 'days').format('YYYY-MM-DD HH:MM:SS')
 			},
 
-			addInstallmentToCart () {
+			calculation () {
 				this.installment.parcels = []
 				
 				var price = this.cart.price_final / this.installment.quantity
 				price = price.toFixed(2)
+				
 				var dateNow = new Date()
 
 				for(var i = 0; i < this.installment.quantity; i++)

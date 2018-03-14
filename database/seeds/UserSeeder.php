@@ -14,20 +14,24 @@ class UserSeeder extends Seeder
     public function run()
     {
         
+
+
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'phone' => '082981413960',
             'password' => bcrypt('admin'),
+
         ]);
 
         BusinessSettings::create([
+            'id' => 1,
             'name' => 'versatil',
             'cnpj' => '000000000', 
             'city' => 'Garanhuns', 
             'state' => 'Pernanbuco', 
             'kilometer_value' => 1.5,
-            'user_id' => 1,
+            'user_id' => 1
         ]);
 
     }

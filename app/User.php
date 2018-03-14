@@ -29,6 +29,7 @@ class User extends Authenticatable
 
     public function business_setting()
     {
-        return $this->hasOne('App\Models\BusinessSettings', 'id', 'business_setting_id');
+        return $this->belongsTo('App\Models\BusinessSettings');
     
-}}
+    }
+}

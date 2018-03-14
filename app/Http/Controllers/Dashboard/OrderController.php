@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Seller;
 use App\Models\Cart;
 use App\Models\Parcel;
+use App\Models\BusinessSettings;
 use Session;
 use App\User;
 use Auth;
@@ -37,7 +38,9 @@ class OrderController extends Controller {
     {
     
         $data = $request->get('data');
-
+        
+        
+        
         $timenow = Carbon::now();
                 
         $order = new Order();
@@ -48,10 +51,30 @@ class OrderController extends Controller {
         $order->price_products = number_format($data['price_products'], 2, '.', '');
         $order->price_discount = number_format($data['discounts']['total'], 2, '.', '');
         $order->price_final = number_format($data['price_final'], 2, '.', '');
-        $order->payment_form = $data['payment_forms']['first']['selected'];
+        $order->payment_form = $data['payment_form'];
         $order->status = true;
         $order->client_id = $data['client']['id'];
         $order->save();
+
+        $items = $data['items'];
+        foreach($items as $item)
+        {
+            $product = Product::find($item['product']['id']);
+            $order->items()->save(
+                $product,
+                [   
+                    'product_quantity' => $item['quantity'],
+                    'item_discount' => $item['discount'],
+                    'item_price' => $item['subtotal_price'],
+                    'item_weight' => $item['subtotal_weight'],
+                    'item_total_price' => $item['total_price']
+                ]
+            );
+        }
+
+        
+
+        die();
 
 
         // if($data['payment_form'] == 'installment')
@@ -104,25 +127,24 @@ class OrderController extends Controller {
     */
     public function deliveryCalculation(Request $request)
     {
-        $userId = Auth::user()->id;
-        $user = User::find($userId);
-
+        
+        $business_setting = BusinessSettings::where('user_id', Auth::user()->id)->first();        
+        
         $origin = [
-            'state' => $user->business_setting->state,
-            'city' => $user->business_setting->city,
-            'street' => $user->business_setting->street,
-            'district' => $user->business_setting->district,
-            'number' => $user->business_setting->number,
-            'complement' => $user->business_setting->complement,
-            'cep' => $user->business_setting->cep
+            'state' => $business_setting->state ?? null,
+            'city' => $business_setting->city ?? null,
+            'street' => $business_setting->street ?? null,
+            'district' => $business_setting->district ?? null,
+            'number' => $business_setting->number ?? null,
+            'complement' => $business_setting->complement ?? null,
+            'cep' => $business_setting->cep ?? null
         ];
 
 
-        $kilometer_value = $user->business_setting != null ? $user->business_setting->kilometer_value : 0;
+        $kilometer_value = $business_setting->kilometer_value;
 
         $destiny = $request->get('destiny');
         
-
         $address_origin = "{$origin['city']} - {$origin['state']}, {$origin['district']}, {$origin['street']}, {$origin['number']}, {$origin['complement']}";
 
         $address_destiny = "{$destiny['city']} - {$destiny['state']}, {$destiny['district']}, {$destiny['street']}}";

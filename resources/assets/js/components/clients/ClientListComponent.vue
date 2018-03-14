@@ -5,7 +5,7 @@
 				<h4 class="title"><i class="fa fa-table"></i> &nbsp LISTAGEM</h4>
 			</div>
 			<div class="content">
-				<data-tables 
+				<!-- <data-tables 
 				:data="clients" 
 				:table-props="settings" 
 				:pagination-def="pagSettings">
@@ -28,7 +28,21 @@
 					</el-table-column>
 
 					<p slot="append">table slot</p>
-				</data-tables>
+				</data-tables> -->
+
+				<vue-good-table
+			      :columns="columns"
+			      :rows="clients"
+			      :paginate="true"
+			      :lineNumbers="true">
+
+				    <template slot="table-row-after" slot-scope="client">
+					  <td>
+					  	<a v-on:click="open(client)" class="open-icon"><i class="fa fa-folder"></i></a>
+					  </td>
+					</template>
+				</vue-good-table>
+
 			</div>
 		</div>
 	</div>
@@ -39,26 +53,29 @@
 	export default {
 		data () {
 			return {
-				settings: {
-					bordered: true
-				},
 				
-				dialogTableVisible: false,
-
-				pagSettings: {
-				    pageSize: 5,
-				    pageSizes: [5, 10, 20],
-				    currentPage: 1
-				},
-
-				titles: [
-				{ 'label': 'Código', 'prop': 'id'},
-				{ 'label': 'Nome', 'prop': 'name'},
-				{ 'label': 'CPF', 'prop': 'cpf'},
-				{ 'label': 'CNPJ', 'prop': 'cnpj'},
-				{ 'label': 'Telefone', 'prop': 'phone'},
-				{ 'label': 'E-mail', 'prop': 'email'},
-				],
+				 columns: [
+			        {
+			          label: 'Código',
+			          field: 'id',
+			          filterable: true,
+			        },
+			        {
+			          label: 'Nome',
+			          field: 'name',
+			          filterable: true,
+			        },
+			        {
+			          label: 'CPF',
+			          field: 'cpf', 
+			          filterable: true,
+			        },
+			        {
+			        	label: 'Ações'
+			        }
+			        
+			     ],
+				
 			}
 		},
 

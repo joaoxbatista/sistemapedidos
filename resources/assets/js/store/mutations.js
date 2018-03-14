@@ -262,14 +262,17 @@ export default {
 		}
 	},
 
-	'set-cart-payment-form' (state, payment_form)
+	'set-cart-payment-form' (state, payload)
 	{
-		state.cart.payment_form = payment_form
+		state.cart.payment_form = payload.data
+		payload.notify({
+			message: 'Forma de pagamento selecionada com sucesso!',
+			type: 'success'
+		});
 	},
 
 	'set-cart-parcels' (state, installment)
 	{
-		alert('Instancia do parcelamento: ' + JSON.stringify(installment))
 		state.cart.installment.parcels = installment.parcels
 		state.cart.installment.total = installment.value
 	},

@@ -85,24 +85,7 @@ export default {
 		delivery: {},
 
 		/*Dados relativos a forma de pagamento*/		
-		payment_forms: {
-			//Primeira forma de pagamentos
-			first: {
-				selected: null,
-				total: 0
-			},
-			//Segunda forma de pagamentos
-			second: { 
-				selected: null,
-				total: 0
-			},
-			total_input: 0, //Valor total das formas de pagamento 
-			total_debet: 0, //Valor que falta par acompletar o pagamento
-			quantity: 0, //Quantidade das formas de pagamento
-		},
-
-		// Dados relativos ao dinheiro
-		money: 0,
+		payment_form: '',
 
 		// Dados relativos ao parcelamento
 		installment: {
@@ -111,10 +94,7 @@ export default {
 		},
 
 		// Dados relativos aos cheques
-		checks: {
-			checks: [],
-			total: 0
-		},
+		check: {},
 		
 		// Dados relativos ao desconto
 		discounts: {

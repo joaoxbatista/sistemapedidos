@@ -18,10 +18,17 @@ class BusinessSettingController extends Controller
     {
     	$userId = Auth::user()->id;
 
-    	$user = User::find($userId);
+        $business_setting = BusinessSettings::where('user_id', $userId)->first();
+    	return response()->json($business_setting);
+    }
 
-        $result = $user->business_setting != null ? $user->business_setting : null;
+    public function update(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $business_setting = BusinessSettings::where('user_id', $userId)->first();
 
-    	return response()->json($result);
+        $data = $request->all();
+        $business_setting->update($data);
+        return response()->json($business_setting);
     }
 }

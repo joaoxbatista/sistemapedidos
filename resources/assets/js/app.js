@@ -1,31 +1,36 @@
 require('./bootstrap')
 
-window.Vue = require('vue')
+import Vue from 'vue'
 
 //Vee Validade
 import VeeValidade from 'vee-validate'
 Vue.use(VeeValidade)
 
 //ElementUI Configuration for lang
-import lang from 'element-ui/lib/locale/lang/pt-br'
-import locale from 'element-ui/lib/locale'
+//import lang from 'element-ui/lib/locale/lang/pt-br'
+//import locale from 'element-ui/lib/locale'
 
 //Moment JS
 import moment from "moment";
-import VueMomentJS from "vue-momentjs";
-Vue.use(VueMomentJS, moment);
+import VueMomentJS from "vue-momentjs"
+Vue.use(VueMomentJS, moment)
 
-locale.use(lang)
+//locale.use(lang)
 
 //ElementUI Components
 import ElementUI from 'element-ui'
-//import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
-//Vue Datatable
-import Datatables from 'vue-data-tables'
-Vue.use(Datatables)
+//import ElementUI from 'element-ui'
+//import 'element-ui/lib/theme-default/index.css'
 
+// //Vue Datatable
+// import Datatables from 'vue-data-tables'
+// Vue.use(Datatables)
+
+import VueGoodTable from 'vue-good-table'
+Vue.use(VueGoodTable)
 
 
 //HBioss Components

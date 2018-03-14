@@ -14,7 +14,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
@@ -67,6 +66,14 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<button class="btn btn-success btn-fill" @click="saveSettings">
+							Salvar configurações
+						</button>
+					</div>
+				</div>
 			</div>	
 		</div>
 	</div>
@@ -81,6 +88,19 @@
 			}
 		},
 
+		methods: {
+			saveSettings()
+			{
+				let payload = {
+					data: this.business,
+					notify: this.$message
+				}
+
+				this.$store.dispatch('update-business-setting', payload)
+				this.$store.dispatch('get-business-setting');
+			}
+		},
+
 		created () {
 			this.$store.dispatch('get-business-setting');
 		},
@@ -88,7 +108,9 @@
 		computed: {
 			business_setting() {
 				return this.$store.getters.getBusinessSetting;
-			}
+			},
+
+			
 		}
 	}
 </script>

@@ -6,14 +6,14 @@
 		</div>
 
 		<div class="content">
-			<data-tables 
+<!-- 			<data-tables 
 			:data="cart.items" 
-			:table-props="settings" 
+			:table-fields="settings" 
 			:pagination-def="pagSettings">
 
 				<el-table-column 
 					v-for="title in titles" 
-					:prop="title.prop" 
+					:field="title.field" 
 					:label="title.label" 
 					:key="title.label" 
 					:width="title.width"
@@ -33,7 +33,21 @@
 				</el-table-column>
 
 				<p slot="append">table slot</p>
-			</data-tables>
+			</data-tables> -->
+
+		<vue-good-table
+			:columns="columns"
+			:rows="cart.items"
+			:paginate="true"
+			:lineNumbers="true">
+
+			<template slot="table-row-after" slot-scope="item">
+				<td>
+					<button v-on:click="removeToCart(item.row)"><i class="fa fa-trash"></i></button>
+					<button v-on:click="showModalDiscount(item.row)"><i class="fa fa-tag"></i></button>
+				</td>
+			</template>
+		</vue-good-table>
 		</div>
 
 		<div id="modal-add-discount" v-show="discountModal.status">
@@ -49,9 +63,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								
-									subtotal do item {{ discountModal.item.total }} R$
-									<br>
-								 	valor do desconto {{ discountModal.discount }} R$
+								subtotal do item {{ discountModal.item.total }} R$
+								<br>
+								valor do desconto {{ discountModal.discount }} R$
 								
 							</div>
 						</div>
@@ -68,7 +82,7 @@
 							<div class="col-md-6">
 								<div class="btn-group">
 									<button class="btn btn-fill btn-success" @click="addItemDiscount">
-									<i class="fa fa-plus"></i> Adicionar
+										<i class="fa fa-plus"></i> Adicionar
 									</button>
 									<button class="btn btn-fill btn-danger" @click="discountModal.status = false">
 										<i class="fa fa-times"></i> Fechar
@@ -84,164 +98,165 @@
 </template>
 
 <script>
-	export default {
-		data () {
-			return {
-				settings: {
-					bordered: true
+export default {
+	data () {
+		return {
+			settings: {
+				bordered: true
+			},
+
+			pagSettings: {
+				pageSize: 5,
+				pageSizes: [5, 10, 20],
+				currentPage: 1
+			},
+
+			columns: [
+			{ 'label': 'Código', 'field': 'id'},
+			{ 'label': 'Nome', 'field': 'product.name'},
+			{ 'label': 'Preço', 'field': 'product.unit_price'},
+			{ 'label': 'Peso', 'field': 'product.weight'},
+			{ 'label': 'Qtd.', 'field': 'quantity'},
+			{ 'label': 'Desconto', 'field': 'discount'},
+			{ 'label': 'Subtotal', 'field': 'subtotal_price'},
+			{ 'label': 'Total', 'field': 'total_price'},
+			{ 'label': 'Ações'}
+			],
+
+			discountModal: {
+				item: {
+					product: {
+						name: ''
+					}
 				},
+				discount: 0,
+				status: false
+			}
 
-				pagSettings: {
-					pageSize: 5,
-					pageSizes: [5, 10, 20],
-					currentPage: 1
+		}
+	},
+
+	methods: {
+		removeToCart(item) {
+			this.$store.commit('remove-item-to-cart', item)
+		},
+
+		showModalDiscount(item)
+		{
+			this.discountModal.status = true
+			this.discountModal.item = item
+		},
+
+		addItemDiscount() {
+			this.$store.commit('add-discount-item-to-cart', this.discountModal)
+			this.discountModal =  {
+				item: {
+					product: {
+						name: ''
+					}
 				},
-
-				titles: [
-				{ 'label': 'Cod.', 'prop': 'id'},
-				{ 'label': 'Nome', 'prop': 'product.name'},
-				{ 'label': 'Preço', 'prop': 'product.unit_price'},
-				{ 'label': 'Peso', 'prop': 'product.weight'},
-				{ 'label': 'Qtd.', 'prop': 'quantity'},
-				{ 'label': 'Desconto', 'prop': 'discount'},
-				{ 'label': 'Subtotal', 'prop': 'subtotal_price'},
-				{ 'label': 'Total', 'prop': 'total_price'}
-				],
-
-				discountModal: {
-					item: {
-						product: {
-							name: ''
-						}
-					},
-					discount: 0,
-					status: false
-				}
-
+				discount: 0,
+				status: false
 			}
 		},
 
-		methods: {
-			removeToCart(item) {
-				this.$store.commit('remove-item-to-cart', item)
-			},
-
-			showModalDiscount(item)
+		verifyDiscount() {
+			if(this.discountModal.discount > this.discountModal.item.subtotal_price)
 			{
-				this.discountModal.status = true
-				this.discountModal.item = item
-			},
 
-			addItemDiscount() {
-				this.$store.commit('add-discount-item-to-cart', this.discountModal)
-				this.discountModal =  {
-					item: {
-						product: {
-							name: ''
-						}
-					},
-					discount: 0,
-					status: false
-				}
-			},
-
-			verifyDiscount() {
-				if(this.discountModal.discount > this.discountModal.item.subtotal_price)
-				{
-
-					this.discountModal.discount = this.discountModal.item.subtotal_price
-				}
-
-				else if(this.discountModal.discount < 0)
-				{
-					this.discountModal.discount = 0
-				}
+				this.discountModal.discount = this.discountModal.item.subtotal_price
 			}
-		},
 
-		computed: {
-			cart () {
-				return this.$store.getters.getCart;
+			else if(this.discountModal.discount < 0)
+			{
+				this.discountModal.discount = 0
 			}
 		}
+	},
+
+	computed: {
+		cart () {
+			return this.$store.getters.getCart;
+		}
 	}
-	
+}
+
 </script>
 
 <style lang="scss">
-	#oder-cart-product-list	
+#oder-cart-product-list	
+{
+	box-shadow: 2px 2px 4px rgba(190, 190, 190, .8);
+	background: #F5F5F5;
+	padding: 10px;
+	border-radius: 6px;
+	margin-top: 10px;
+
+	.header
 	{
-		box-shadow: 2px 2px 4px rgba(190, 190, 190, .8);
-	    background: #F5F5F5;
-	    padding: 10px;
-	    border-radius: 6px;
-	    margin-top: 10px;
+		width: 100%;
+		padding: 5px 10px;
+		border-bottom: 1px solid #e9e9e9;
 
-	    .header
-	    {
-	    	width: 100%;
-	    	padding: 5px 10px;
-			border-bottom: 1px solid #e9e9e9;
-
-	    	.title
-	    	{
-				color: #757575;
-				text-transform: uppercase;
-				font-size: 16px;
-	    	}
+		.title
+		{
+			color: #757575;
+			text-transform: uppercase;
+			font-size: 16px;
 		}
+	}
 
-		.content
+	.content
+	{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}
+
+.el-table_1_column_9 > .cell
+{
+	padding: 0px !important;
+}
+
+#modal-add-discount
+{
+	background: rgba(0, 0, 0, .7);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+
+	.modal-content
+	{
+		background: #fff;
+		margin-top: 25vh;
+		border-radius: 4px;
+
+
+		.modal-header
 		{
 			width: 100%;
-			margin-bottom: 10px;
+			height: 30px;
+			padding: 15px 4px;
+			margin-bottom: 20px;
+
+			.title
+			{
+				color: #757575;
+				font-size: 14px;
+				text-transform: uppercase;
+			}
 		}
-	}
 
-	.el-table_1_column_9 > .cell
-	{
-		padding: 0px !important;
-	}
-
-	#modal-add-discount
-	{
-		background: rgba(0, 0, 0, .7);
-		width: 100vw;
-		height: 100vh;
-		position: fixed;
-		z-index: 1000;
-		top: 0;
-		left: 0;
-
-		.modal-content
+		.modal-body
 		{
-			background: #fff;
-			margin-top: 25vh;
-			border-radius: 4px;
-			
-
-			.modal-header
-			{
-				width: 100%;
-				height: 30px;
-				padding: 15px 4px;
-				margin-bottom: 20px;
-				
-				.title
-				{
-					color: #757575;
-					font-size: 14px;
-					text-transform: uppercase;
-				}
-			}
-
-			.modal-body
-			{
-				width: 100%;
-				padding: 10px 5px;
-				display: block;
-			}
+			width: 100%;
+			padding: 10px 5px;
+			display: block;
 		}
 	}
+}
 
 </style>
