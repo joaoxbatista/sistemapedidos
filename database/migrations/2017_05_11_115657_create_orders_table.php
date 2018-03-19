@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('price_products', 10, 2);
             $table->decimal('price_discount', 10, 2);
             $table->decimal('price_final', 10, 2);
+            $table->decimal('total_weight', 10, 2);
 
             $table->enum('payment_form', ['money', 'installment', 'check']);
             

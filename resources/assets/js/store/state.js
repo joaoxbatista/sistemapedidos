@@ -108,6 +108,8 @@ export default {
 		price_delivery: 0,
 		price_final: 0,
 
+		status: false
+
 	},
 
 

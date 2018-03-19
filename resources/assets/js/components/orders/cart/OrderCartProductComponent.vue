@@ -6,7 +6,7 @@
 
 		<div class="content">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label>código do produto</label>
 						<input 
@@ -22,7 +22,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label for="">quantidade</label>
 						<input 

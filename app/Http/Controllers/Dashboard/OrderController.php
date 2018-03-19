@@ -72,24 +72,21 @@ class OrderController extends Controller {
             );
         }
 
-        
+        if($data['payment_form'] == 'installment')
+        {
+            $parcels = $data['installment']['parcels'];
 
-        die();
+            foreach ($parcels as $parcel) {
+                $parcelSave = new Parcel();
+                $parcelSave->pay_date = $parcel['date'];
+                $parcelSave->value = $parcel['value'];
+                $parcelSave->status = false;
+                $parcelSave->order_id = $order->id;
+                $parcelSave->save();
+            }
+        }
 
-
-        // if($data['payment_form'] == 'installment')
-        // {
-        //     $parcels = $data['parcels'];
-
-        //     foreach ($parcels as $parcel) {
-        //         $parcelSave = new Parcel();
-        //         $parcelSave->pay_date = $parcel['date'];
-        //         $parcelSave->value = $parcel['value'];
-        //         $parcelSave->status = false;
-        //         $parcelSave->order_id = $order->id;
-        //         $parcelSave->save();
-        //     }
-        // }
+        // die();
 
         // if($data['payment_form'] == 'check')
         // {
@@ -188,6 +185,18 @@ class OrderController extends Controller {
     {
         $orders = Order::orderBy('buy_date', 'desc')->get();
         return response()->json($orders);
+    }
+
+    /*
+    * Descrição: Método para visualizar o pedido
+    * Entradas: id do pedido
+    * Saída: View com o componente de pedido
+    */
+    public function show($id)
+    {
+        $order = Order::find($id);
+        $order_json = json_encode($order);
+        return view('admin-dashboard.order.view', compact(['order_json']));
     }
 
 }

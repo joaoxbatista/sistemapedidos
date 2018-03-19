@@ -359,18 +359,30 @@ export default
 		)
 	},
 
-	'finish-order' (context, cart)
+	'finish-order' (context, payload)
 	{
 		
-		axios.post('/admin-dashboard/orders/finish', {data: cart})
+		axios.post('/admin-dashboard/orders/finish', payload)
 		.then(
 			response => {
-				console.log(response.data)			
+				context.commit('clear-cart')
+				// console.log(response.data)	
+				payload.notify({
+					message: 'Pedido finalizado com sucesso!',
+					type: 'success'
+				})
+
+				// window.location.href = "/admin-dashboard/orders"
 			}
 		)
 		.catch(
 			erro => {
-				console.log(response.erro)	
+				// console.log(response.erro)	
+				payload.notify({
+					message: 'Erro ao realizar pedido!',
+					type: 'erro'
+				})
+
 			}
 		)
 
@@ -387,7 +399,7 @@ export default
 				
 				if(response.data.status != 200)
 				{
-					console.log(response.data)
+					// console.log(response.data)
 					payload.notify({
 					message: 'Ops, o endereço do cliente selecionado está incorreto!',
 					type: 'error'

@@ -13,7 +13,7 @@
 
 				    <template slot="table-row-after" slot-scope="order">
 					  <td>
-					  	<button v-on:click="open(order)" class="open-icon"><i class="fa fa-folder"></i></button>
+					  	<button v-on:click="open(order.row.id)" class="open-icon"><i class="fa fa-folder"></i></button>
 					  </td>
 					</template>
 				</vue-good-table>
@@ -53,6 +53,14 @@
 		 created () {
 		 	this.$store.dispatch('update-orders')
 		 },
+
+		 methods: {
+		 	open(order) {
+
+		 		window.location.href = '/admin-dashboard/orders/'+order
+ 		 	}
+		 },
+
 
 		 computed: {
 

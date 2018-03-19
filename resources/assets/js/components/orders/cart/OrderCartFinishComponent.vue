@@ -34,11 +34,22 @@
 
 		methods: {
 			finishOrder () {
-				this.$store.dispatch('finish-order', this.cart)
+				let payload = 
+				{
+					data: JSON.parse(JSON.stringify(this.cart)),
+					notify: this.$message
+				}
+				this.$store.dispatch('finish-order', payload)
 			},
 
 			pendingOrder () {
-				alert('Deixar pedido pendente')
+				this.$store.commit('set-pendent-order')
+				let payload = 
+				{
+					data: JSON.parse(JSON.stringify(this.cart)),
+					notify: this.$message
+				}
+				this.$store.dispatch('finish-order', payload)
 			}
 		},
 

@@ -7,44 +7,25 @@
 		<div class="content">
 			<div class="row">
 				<div class="col-md-6">
-					<!-- <div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-							    <label>Selecione uma porcentagem</label>
-							    <el-slider 
-							    	v-model="discount.percentage.slider" 
-							    	:format-tooltip="formatTooltip" 
-							    	@change="updateInputPercentage"
-							    	:disabled="cart.discounts.total > 0">
-							    </el-slider>
-							</div>
-						</div>
-					</div>
- -->
-					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-8">
 							<div class="form-group">
 							    <label>Valor selecionado</label>
 							    <input 
-							    	type="number" 
 							    	class="form-control" 
 							    	v-model="discount.percentage.input" 
 							    	@keyup="updateSliderPercentage"
 							    	:disabled="cart.discounts.total > 0 ">
 							</div>
 						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-md-4" v-if="cart.discounts.total == 0">
+						<div class="col-md-4" style="margin-top: 20px;" v-if="cart.discounts.total == 0">
 							<button class="btn btn-block btn-success btn-fill"   @click="addDiscountToCart"><i class="fa fa-plus"></i> Adicionar</button>
 						</div>
-						<div class="col-md-4" v-else>
+						<div class="col-md-4" style="margin-top: 20px;" v-else>
 							<button class="btn btn-block btn-danger btn-fill" @click="removeDiscountToCart"><i class="fa fa-trash"></i> Cancelar</button>
 						</div>
-					</div>
 				</div>
-
+		
 				<div class="col-md-6" v-show="discount.price > 0">
 					<div class="box-discount">
 						<div class="header">

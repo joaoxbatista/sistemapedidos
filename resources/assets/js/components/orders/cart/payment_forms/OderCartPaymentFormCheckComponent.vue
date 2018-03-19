@@ -1,5 +1,5 @@
 <template>
-	<div id="order-cart-payment-form-check" class="col-md-12">
+	<div id="order-cart-payment-form-check" class="col-md-12" style="margin-top: 20px">
 		<div class="header">
 			<h4 class="title">Inforamções do cheque</h4>
 		</div>
@@ -19,28 +19,21 @@
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label>CNPJ</label>
 						<el-input v-model="check.cnpj"></el-input>
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label>CPF</label>
 						<el-input v-model="check.cpf"></el-input>
 					</div>
 				</div>
 
-				<div class="col-md-2">
-					<div class="form-group">
-						<label>Valor do cheque</label>
-						<el-input v-model="check.value"></el-input>
-					</div>
-				</div>
-				
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label class="demonstration">Vencimento</label>
 						<el-date-picker
@@ -50,7 +43,7 @@
 					</div>
 				</div>
 				
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label>Selecione um banco</label>
 						<el-select v-model="check.bank_id" clearable placeholder="Select">
@@ -64,14 +57,14 @@
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label>Agencia</label>
 						<el-input v-model="check.agency"></el-input>
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label>Número da conta</label>
 						<el-input v-model="check.count_number"></el-input>
@@ -85,40 +78,39 @@
 			</div>
 
 			<div class="row">
-				<div v-show="cart.checks.length > 0" class="col-md-12" id="list-checks">
+				<div v-show="cart.checks" class="col-md-12" id="list-checks">
 					<div class="header">
 						<h4 class="title">Lista de Cheques</h4>
 					</div>
 					<ul class="list-group">
-						<li v-for="checkItem in cart.checks.checks" class="list-group-item">
+						<li class="list-group-item">
 							<div class="row">
 								<p class="col-md-4">
-									<i class="fa fa-user"></i> <strong>Número:</strong> {{ checkItem.number}}
+									<i class="fa fa-user"></i> <strong>Número:</strong> {{ cart.check.number}}
 								</p>
 								<p class="col-md-4">
-									<i class="fa fa-user"></i> <strong>Titular:</strong> {{ checkItem.holder_name}}
+									<i class="fa fa-user"></i> <strong>Titular:</strong> {{ cart.check.holder_name}}
 								</p>
 								<p class="col-md-4">
-									<i class="fa fa-id-card"></i> <strong>CPF:</strong> {{ checkItem.cpf }}
+									<i class="fa fa-id-card"></i> <strong>CPF:</strong> {{ cart.check.cpf }}
 								</p>
 								<p class="col-md-4">
-									<i class="fa fa-id-card-o"></i> <strong>CNPJ:</strong> {{ checkItem.cnpj }}
+									<i class="fa fa-id-card-o"></i> <strong>CNPJ:</strong> {{ cart.check.cnpj }}
 								</p>
+								<!-- <p class="col-md-4">
+									<i class="fa fa-money"></i> <strong>Valor:</strong> {{ cart.check.value}} 
+								</p> -->
+								
 								<p class="col-md-4">
-									<i class="fa fa-money"></i> <strong>Valor:</strong> {{ checkItem.value}} 
-								</p>
-								<p class="col-md-4">
-									<i class="fa fa-university"></i> <strong>Banco:</strong> {{ getNameBank(checkItem)[0].name }}
-								<p class="col-md-4">
-									<i class="fa fa-credit-card"></i> <strong>Agencia:</strong> {{ checkItem.agency }}
-								</p>
-
-								<p class="col-md-4">
-									<i class="fa fa-credit-card-alt"></i> <strong>Número da conta:</strong> {{ checkItem.count_number }}
+									<i class="fa fa-credit-card"></i> <strong>Agencia:</strong> {{ cart.check.agency }}
 								</p>
 
 								<p class="col-md-4">
-									<i class="fa fa-calendar"></i> <strong>Data de validade:</strong> {{ $moment(checkItem.expiration_date).format('DD/MM/YYYY') }}
+									<i class="fa fa-credit-card-alt"></i> <strong>Número da conta:</strong> {{ cart.check.count_number }}
+								</p>
+
+								<p class="col-md-4">
+									<i class="fa fa-calendar"></i> <strong>Data de validade:</strong> {{ $moment(cart.check.expiration_date).format('DD/MM/YYYY') }}
 								</p>
 							</div>
 						</li>
@@ -154,7 +146,7 @@
 					notify: this.$message
 				}
 
-				this.$store.commit('add-check-to-cart', payload)
+				this.$store.commit('set-check-to-cart', payload)
 			},
 
 			getNameBank(check) {

@@ -51,8 +51,8 @@
 					</div>
 					<ul class="list-group">
 						<li v-for="parcel in installment.parcels = cart.installment.parcels" class="list-group-item">
-							<span> Data: {{ parcel.date }} <i class="fa fa-calendar"></i></span>
-							<span> Valor: {{ parcel.value }} R$</span>
+							<p> <strong>Data de pagamento:</strong> {{ $moment(parcel.date).format('DD/MM/YYYY') }} </p>
+							<p> <strong>Valor:</strong> {{ parcel.value }} R$</p>
 						</li>
 					</ul>
 				</div>
@@ -104,11 +104,12 @@
 				var price = this.cart.price_final / this.installment.quantity
 				price = price.toFixed(2)
 				
-				var dateNow = new Date()
+				let dateNow = new Date()
+				let dateParcel = null
 
 				for(var i = 0; i < this.installment.quantity; i++)
 				{
-					var dateParcel = this.addDays(dateNow, this.installment.interval * i)
+					dateParcel = this.addDays(dateNow, this.installment.interval * i)
 					this.installment.parcels.push({ date: dateParcel, value: price })
 				}
 

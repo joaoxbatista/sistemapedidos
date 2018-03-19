@@ -54,6 +54,7 @@ import HBProductView from './components/products/ProductViewComponent.vue'
 //Components para Pedidos
 import HBOrder from './components/orders/OrderComponent.vue'
 import HBOrderList from './components/orders/OrderListComponent.vue'
+import HBOrderView from './components/orders/OrderViewComponent.vue'
 
 //Component para Configuração do Negócio
 import HBBusinessSetting from './components/business-setting/BusinessSettingComponent.vue'
@@ -89,6 +90,7 @@ const app = new Vue({
 
  		'hb-order': HBOrder,
  		'hb-order-list': HBOrderList,
+ 		'hb-order-view': HBOrderView,
 
  		'hb-business-setting': HBBusinessSetting,
 

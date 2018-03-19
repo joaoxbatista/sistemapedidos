@@ -231,35 +231,43 @@ export default {
 
 	'clear-cart' (state) {
 		state.cart = {
-			/*Dados relativos ao cliente*/
-			client: {},
-			
-			/*Dados relativos aos produtos*/
-			product_quantity: 0,
-			item_quantity: 0,
-			items: [],
-			
-			/*Dados relativos a entrega*/
-			total_weight: 0,
-			delivery: {},
+		/*Dados relativos ao cliente*/
+		client: {},
+		
+		/*Dados relativos aos produtos*/
+		product_quantity: 0,
+		item_quantity: 0,
+		items: [],
+		
+		/*Dados relativos a entrega*/
+		total_weight: 0,
+		delivery: {},
 
-			/*Dados relativos a forma de pagamento*/		
-			payment_form: '',
+		/*Dados relativos a forma de pagamento*/		
+		payment_form: '',
+
+		// Dados relativos ao parcelamento
+		installment: {
 			parcels: [],
-			checks: [],
-			
-			/*Dados relativos ao desconto*/
-			discounts: {
-				items: [],
-				total: 0,
-			},
+			total: 0
+		},
 
-			/*Dados relativos aos preços*/
-			price_products: 0,
-			price_discount: 0,
-			price_delivery: 0,
-			price_final: 0,
+		// Dados relativos aos cheques
+		check: {},
+		
+		// Dados relativos ao desconto
+		discounts: {
+			items: [],
+			total: 0,
+		},
+
+		// Dados relativos aos preços
+		price_products: 0,
+		price_discount: 0,
+		price_delivery: 0,
+		price_final: 0,
 		}
+
 	},
 
 	'set-cart-payment-form' (state, payload)
@@ -379,6 +387,17 @@ export default {
 		})
 	},
 
+	'set-check-to-cart' (state, payload) {
+
+		state.cart.check = payload.data
+
+		payload.notify({
+			showClose: true,
+			message: 'Cheque adicionado com sucesso!',
+			type: 'success'
+		})
+	},
+
 	'add-delivery-to-cart' (state, payload) {
 		var delivery = payload.data
 
@@ -424,6 +443,10 @@ export default {
 		state.cart.payment_forms.second.total = 0
 		console.log(JSON.stringify(state.cart.payment_forms))
 	} ,
+
+	'set-pendent-order' (state) {
+		state.cart.status = false
+	},
 
 	//Bancos
 	'set-banks' (state, banks) {

@@ -2,8 +2,10 @@
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" style="margin-bottom: 10px;">
 			<a href="<?php echo e(route('admin-dashboard.orders.create')); ?>" class="btn btn-fill btn-success">Novo pedido</a>
+		</div>
+		<div class="col-md-12">
 			<hb-order-list></hb-order-list>
 		</div>
 	</div>

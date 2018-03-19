@@ -229,6 +229,8 @@ Route::group(
            
             Route::get('json', 'Dashboard\OrderController@json')->name('json');
 
+            Route::get('{id}', 'Dashboard\OrderController@show')->name('show');
+            
             // /* Página Inicial */
             // Route::get('orders', 'Dashboard\OrderController@index')->name('index')->middleware('hasitems');
 
